@@ -13,7 +13,7 @@
     "echarts": "^5.4.0",
     "element-ui": "^2.15.10",
     "vue": "^2.6.14",
-    "vue-router": "^4.1.6",
+    "vue-router": "^3.5.3",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
