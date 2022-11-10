@@ -9,7 +9,7 @@
       text-color="#fff"
       active-text-color="#fff"
     >
-      <sidebar-item :routes="permission_routers"></sidebar-item>
+      <sidebar-item :routes="fixedRoutes"></sidebar-item>
     </el-menu>
   </scroll-bar>
 </template>
@@ -21,6 +21,11 @@ import ScrollBar from "@/components/ScrollBar";
 
 export default {
   components: { SidebarItem, ScrollBar },
+  data() {
+    return {
+      fixedRoutes:{}
+    }
+  },
   computed: {
     ...mapGetters(["permission_routers", "sidebar"]),
     isCollapse() {
@@ -28,14 +33,8 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
-      console.log('sidebar',this.sidebar)
-    }, 2000);
-
-    setTimeout(() => {
-      console.log('使用state获取app:', this.$store.state.app)
-    }, 2000);
-    
+    console.log('sidebar里面的路由:', this.$router.options.routes)
+    this.fixedRoutes = this.$router.options.routes
   },
   methods: {
     toggleSideBar() {

@@ -1,5 +1,6 @@
 <template>
-  <div class="app-wrapper">
+  <div class="app-wrapper"
+      :class="{hideSidebar:!sidebar.opened}">
     <sidebar class="sidebar-container"
              v-show="!hideLayout||(hideLayout && !isFull)"></sidebar>
     <navbar v-show="!hideLayout||(hideLayout && !isFull)">

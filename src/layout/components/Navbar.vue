@@ -1,14 +1,9 @@
 <template>
   <el-menu class="navbar">
-    <!-- <div class="Img">
-      <img src="../../assets/Logo.png" alt="" style="width:100%;height:100%;">
-    </div> -->
+    <div class="Img">
+      <img src="../../assets/logo4-temp.png" alt="" style="width:100%;height:100%; padding: 0">
+    </div>
     <div class="flex breadcrumbAndhamburger">
-      <i class="icon iconfont iconzuzhi"
-         title="系统"
-         @click="goSystem"
-         style="margin-top: -10px;margin-right: 10px;cursor: pointer;font-size: 20px;color:#fff"
-         v-if="isProject"></i>
       <hamburger id="hamburger-container" class="hamburger-container" :toggle-click="toggleSideBar"
                  :is-active="sidebar.opened"></hamburger>
       <breadcrumb class="breadcrumb-container"></breadcrumb>
@@ -408,7 +403,7 @@
       width:14%;
       height:100%;
       position:absolute;
-      padding: 14px 20px;
+      // padding: 14px 20px;
     }
     .breadcrumbAndhamburger {
       padding: 7px 10px 0px 0px;
