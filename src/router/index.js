@@ -56,10 +56,14 @@ export const asyncRouterMap = [
   { path: '*', redirect: '/404', hidden: true }
 ]
 
+
+let tempRoute = constantRouterMap.concat(asyncRouterMap)
+
+console.log('tempRoute', tempRoute)
+
 const createRouter = () => new Router({
-  // mode: 'history', // require service support
   scrollBehavior: () => ({ y: 0 }),
-  routes: constantRouterMap
+  routes: tempRoute
 })
 
 const router = createRouter()

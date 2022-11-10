@@ -1,6 +1,5 @@
 <template>
-  <div class="app-wrapper"
-       :class="{hideSidebar:!sidebar.opened}">
+  <div class="app-wrapper">
     <sidebar class="sidebar-container"
              v-show="!hideLayout||(hideLayout && !isFull)"></sidebar>
     <navbar v-show="!hideLayout||(hideLayout && !isFull)">
@@ -41,9 +40,9 @@
         'bigSize',
         'isProject'
       ]),
-      sidebar() {
-        return this.$store.state.app.sidebar
-      }
+      // sidebar() {
+      //   return this.$store.state.app.sidebar
+      // }
     },
     mounted() {
       const me = this
@@ -55,9 +54,6 @@
           document.getElementsByClassName('app-main')[0].style.height = document.getElementById('app').clientHeight - 110 + 'px'
         }
       }
-      // 启动引导页
-      // this.$driver.defineSteps(steps)
-      // this.$driver.start()
     },
     methods: {
       turnTo(type) {
