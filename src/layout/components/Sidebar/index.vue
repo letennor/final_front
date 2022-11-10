@@ -28,7 +28,14 @@ export default {
     },
   },
   mounted() {
-    console.info(this.permission_routers);
+    setTimeout(() => {
+      console.log('sidebar',this.sidebar)
+    }, 2000);
+
+    setTimeout(() => {
+      console.log('使用state获取app:', this.$store.state.app)
+    }, 2000);
+    
   },
   methods: {
     toggleSideBar() {

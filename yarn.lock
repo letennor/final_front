@@ -3829,6 +3829,11 @@
     "@sideway/formula" "^3.0.0"
     "@sideway/pinpoint" "^2.0.0"
 
+"js-cookie@^2.2.0":
+  "integrity" "sha1-Gywnmm7s44ChIWi5JIUmWzWx7/s="
+  "resolved" "https://tech.suitbim.com/verdaccio/js-cookie/-/js-cookie-2.2.0.tgz"
+  "version" "2.2.0"
+
 "js-message@1.0.7":
   "integrity" "sha512-efJLHhLjIyKRewNS9EGZ4UpI8NguuL6fKkhRxVuMmrGV2xN/0APGdQYwLFky5w9naebSZ0OwAGp0G6/2Cg90rA=="
   "resolved" "https://registry.npmjs.org/js-message/-/js-message-1.0.7.tgz"

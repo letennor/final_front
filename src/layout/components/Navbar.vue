@@ -1,8 +1,8 @@
 <template>
   <el-menu class="navbar">
-    <div class="Img">
+    <!-- <div class="Img">
       <img src="../../assets/Logo.png" alt="" style="width:100%;height:100%;">
-    </div>
+    </div> -->
     <div class="flex breadcrumbAndhamburger">
       <i class="icon iconfont iconzuzhi"
          title="系统"

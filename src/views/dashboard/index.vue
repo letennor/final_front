@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard-container">
     <my-card title="首页">
-      <calendar />
+      <Calendar />
     </my-card>
     <div>
     </div>
@@ -11,11 +11,11 @@
 <script>
   import MyCard from '@/components/MyCard'
   import { mapGetters } from 'vuex'
-  import calendar from '@/components/calendar/index.vue'
+  import Calendar from '@/components/Calendar/index.vue'
   export default {
     name: 'Dashboard',
     components: {
-      calendar,
+      Calendar,
       MyCard
     },
     data() {

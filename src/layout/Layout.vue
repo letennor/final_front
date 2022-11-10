@@ -8,7 +8,6 @@
          style="  background: #f2f2f2;min-height: calc(100% - 50px)"
          :class="hideLayout && isFull ? 'active' : ''">
       <tags-view v-show="!hideLayout||(hideLayout && !isFull)"></tags-view>
-      <!--<right-tags v-if="isProject"></right-tags>-->
       <app-main></app-main>
     </div>
   </div>
@@ -17,7 +16,6 @@
 <script>
   import { Navbar, Sidebar, AppMain, TagsView } from './components'
   import { mapGetters } from 'vuex'
-  // import steps from '@/utils/steps'
 
   export default {
     name: 'Layout',
@@ -40,9 +38,9 @@
         'bigSize',
         'isProject'
       ]),
-      // sidebar() {
-      //   return this.$store.state.app.sidebar
-      // }
+      sidebar() {
+        return this.$store.state.app.sidebar
+      }
     },
     mounted() {
       const me = this
