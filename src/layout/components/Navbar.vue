@@ -6,7 +6,7 @@
     <div class="flex breadcrumbAndhamburger">
       <hamburger id="hamburger-container" class="hamburger-container" :toggle-click="toggleSideBar"
                  :is-active="sidebar.opened"></hamburger>
-      <breadcrumb class="breadcrumb-container"></breadcrumb>
+      <!-- <breadcrumb class="breadcrumb-container"></breadcrumb> -->
     </div>
     <div class="right-menu">
 
@@ -31,10 +31,10 @@
             <span @click="passwordFormVisible = true"
                   style="display:block;">修改密码</span>
           </el-dropdown-item>
-          <el-dropdown-item divided>
+          <!-- <el-dropdown-item divided>
             <span @click="changeFontSize"
                   style="display:block;">更改字体</span>
-          </el-dropdown-item>
+          </el-dropdown-item> -->
           <el-dropdown-item divided>
             <span @click="logout"
                   style="display:block;">登出</span>
@@ -164,7 +164,7 @@
     components: {
       Hamburger,
       ImageCropper,
-      Breadcrumb,
+      // Breadcrumb,
       CollectionDialog
     },
     directives: {

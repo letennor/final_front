@@ -10,13 +10,11 @@
           v-model="listQuery.params.name"
         >
         </el-input>
-        <el-button class="filter-item" v-waves @click="reset">重置</el-button>
         <el-button
           class="filter-item"
           type="primary"
           v-waves
           icon="el-icon-search"
-          @click="search"
           >查询</el-button
         >
         <el-button
@@ -35,7 +33,6 @@
         class="dataTable"
         :total="total"
         :page-size="listQuery.pageSize"
-        @currentChange="currentChange"
       ></table-list>
     </my-card>
     <el-dialog
@@ -158,8 +155,7 @@
           >设置为失效</el-button
         >
         <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="save" :loading="loading" v-waves
-          >提交</el-button
+        <el-button type="primary" :loading="loading" v-waves>提交</el-button
         >
       </div>
     </el-dialog>

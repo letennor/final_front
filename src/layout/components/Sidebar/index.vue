@@ -23,7 +23,7 @@ export default {
   components: { SidebarItem, ScrollBar },
   data() {
     return {
-      fixedRoutes:{}
+      fixedRoutes:[]
     }
   },
   computed: {
