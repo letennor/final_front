@@ -25,32 +25,59 @@ export const asyncRouterMap = [
       meta: { title: '首页', icon: 'iconzhuye', noCache: true }
     }]
   },
-  // 企业资料
   {
     path: '/companyData',
     component: Layout,
     redirect: 'businessLicense',
     name: 'companyData',
-    meta: { title: '企业资料', icon: 'iconcopy' },
+    meta: { title: '模块1', icon: 'iconcopy' },
     children: [
       {
         path: 'businessLicense',
         component: () => import('@/views/companyData/businessLicenses/index'),
         name: 'businessLicense',
-        meta: { title: '企业证照', icon: '', noCache: true }
+        meta: { title: '模块1-1', icon: '', noCache: true }
       },
       {
         path: 'auditReport',
         component: () => import('@/views/companyData/auditReport/index'),
         name: 'auditReport',
-        meta: { title: '审计报告', icon: '', noCache: true }
+        meta: { title: '模块1-2', icon: '', noCache: true }
       },
       {
         path: 'socialSecurity',
         component: () => import('@/views/companyData/socialSecurity/index'),
         name: 'socialSecurity',
-        meta: { title: '社保证明', icon: '', noCache: true }
+        meta: { title: '模块1-3', icon: '', noCache: true }
       }]
+  },
+  {
+    path:'/model2',
+    component: Layout,
+    redirect: 'model2-1',
+    name: 'model2',
+    meta: { title: '模块2', icon: 'iconquanxianguanli'},
+    children:[
+      {
+        path:'model2-1',
+        component: () => import('@/views/model2/model2-1/index'),
+        name:'model2-1',
+        meta:{title:'模块2-1', icon:'', noCache:true}
+      },
+      {
+        path:'model2-2',
+        component: () => import('@/views/model2/model2-2/index'),
+        name:'model2-2',
+        meta:{title:'模块2-2', icon:'', noCache:true}
+      },
+      {
+        path:'model2-3',
+        component: () => import('@/views/model2/model2-3/index'),
+        name:'model2-3',
+        meta:{title:'模块2-3', icon:'', noCache:true}
+      },
+      
+    ]
   },
 
   { path: '*', redirect: '/404', hidden: true }

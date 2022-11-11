@@ -35,3 +35,9 @@ new Vue({
   router,
   store
 }).$mount('#app')
+
+// 默认Element-ui弹框点击遮罩层不关闭
+Element.Dialog.props.closeOnClickModal.default = false
+
+// 显示弹框时，页面不能滚动
+Element.Dialog.props.lockScroll.default = false

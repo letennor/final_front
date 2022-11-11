@@ -1,11 +1,11 @@
 <template>
     <div>
-        模块1-1
+        模块2-2
     </div>
 </template>
 <script>
 export default {
-    name:'BusinessLicenses'
+    name:'Model2-2'
 }
 </script>
 <style lang="scss">
