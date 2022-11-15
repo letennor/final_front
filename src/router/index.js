@@ -105,7 +105,6 @@ export const asyncRouterMap = [
 
 let tempRoute = constantRouterMap.concat(asyncRouterMap)
 
-console.log('tempRoute', tempRoute)
 
 const createRouter = () => new Router({
   scrollBehavior: () => ({ y: 0 }),
