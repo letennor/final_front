@@ -76,10 +76,29 @@ export const asyncRouterMap = [
         name:'model2-3',
         meta:{title:'模块2-3', icon:'', noCache:true}
       },
-      
     ]
   },
-
+  {
+    path:'/echartsLearning',
+    component: Layout,
+    redirect: 'concept',
+    name:'echartsLearning',
+    meta: {title: 'Echarts学习', icon:'iconYzhou'},
+    children:[
+      {
+        path:'concept',
+        component:() => import('@/views/echartsLearning/concept/index'),
+        name:'concept',
+        meta:{title:'概念篇', icon:'', noCache:true}
+      },
+      {
+        path:'barchart',
+        component:() => import('@/views/echartsLearning/barchart/index'),
+        name:'barchart',
+        meta:{title:'柱状图', icon:'', noCache:true}
+      }
+    ]
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

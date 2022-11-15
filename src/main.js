@@ -27,6 +27,7 @@ Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
 
+
 Vue.prototype.$storage = myStroage // session存储全局化
 Vue.prototype.$echarts = echarts
 

@@ -1,7 +1,7 @@
 <template>
   <el-menu class="navbar">
     <div class="Img">
-      <img src="../../assets/logo4.png" alt="" style="width:100%;height:100%; padding: 0">
+      <!-- <img src="../../assets/logo4.png" alt="" style="width:100%;height:100%; padding: 0"> -->
     </div>
     <div class="flex breadcrumbAndhamburger">
       <hamburger id="hamburger-container" class="hamburger-container" :toggle-click="toggleSideBar"
