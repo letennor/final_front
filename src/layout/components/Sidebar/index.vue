@@ -33,7 +33,7 @@ export default {
     },
   },
   mounted() {
-    console.log('sidebar里面的路由:', this.$router.options.routes)
+    // console.log('sidebar里面的路由:', this.$router.options.routes)
     this.fixedRoutes = this.$router.options.routes
   },
   methods: {
@@ -44,14 +44,10 @@ export default {
   },
 };
 </script>
-<style>
+
+<style scoped>
 .el-menu {
   background: rgba(0, 0, 0, 0);
 }
 
-.menuBottomDiv {
-  /*background: url("../../../../assets/dashboard/bottom.png");*/
-  /*background-repeat: round;*/
-  /*background-size: 100%;*/
-}
 </style>

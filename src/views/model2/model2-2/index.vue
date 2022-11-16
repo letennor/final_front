@@ -1,7 +1,7 @@
 <template>
   <div>
     echarts测试
-    <el-button type="primary" @click="showPic">展示图形</el-button>
+    <el-button type="primary" @click="showPic" class="addButton" v-waves>展示图形</el-button>
     <template v-for="chart in chartList">
         <div v-if="chart !== undefined" :key="chart.id" style="height: 500px; width: 100%" :id="chart.domId"></div>
     </template>

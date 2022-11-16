@@ -1,25 +1,35 @@
 <template>
   <div>
-    <iframe
-      src="http://localhost:4200/#/?flag=123"
-      width="100%"
-      height="800"
-    ></iframe>
+    模块3
   </div>
 </template>
+
 <script>
-import request from "@/utils/request";
+
 export default {
   name: "Model2-3",
-  data() {
-    return {};
+  components: {
+
   },
-  methods: {
+  directives: {
+
+  },
+  data() {
+    return {
+
+    };
   },
   mounted() {
-    //将东西存进去
+
+  },
+  methods: {
+
+
   },
 };
 </script>
-<style lang="scss">
+
+
+<style rel="stylesheet/scss" lang="scss">
+
 </style>

@@ -19,7 +19,7 @@ export function ReturnArrayLength(val) {
 
 // 将表格中有嵌套关系的数据取出来显示
 export function transformBackstageDataToTableShow(val, key) {
-  console.log(val)
+  // console.log(val)
   // 判断是否是时间戳
   if (typeof (val[key]) === 'number' || val[key].toString.length === 13) {
     // 获奖证书中的时间只显示年份
@@ -252,7 +252,7 @@ export function scrollTo(element, to, duration) {
   const difference = to - element.scrollTop
   const perTick = difference / duration * 10
   setTimeout(() => {
-    console.log(new Date())
+    // console.log(new Date())
     element.scrollTop = element.scrollTop + perTick
     if (element.scrollTop === to) return
     scrollTo(element, to, duration - 10)

@@ -201,6 +201,8 @@ code {
     vertical-align: middle;
     margin-bottom: 10px;
     margin-right: 5px;
+    color: white;
+    background-color: #2c68ff;
   }
 }
 
@@ -216,7 +218,7 @@ code {
 .el-dialog {
   border-radius: 6px !important;
   .el-dialog__title {
-    color: #1890FF;
+    color: #2c68ff;
   }
   .el-dialog__header {
     border-bottom: 1px solid rgba(0, 0, 0, .1);
@@ -247,7 +249,7 @@ code {
 }
 
 .projectColor {
-  color: #409EFF !important;
+  color: #2c68ff !important;
 }
 
 .grey {
@@ -255,8 +257,8 @@ code {
 }
 
 .projectButton {
-  background: #1CADE4 !important;
-  border: 1px solid #1CADE4 !important;
+  background: #2c68ff !important;
+  border: 1px solid #2c68ff !important;
   color: #fff !important;
 }
 
@@ -265,8 +267,8 @@ code {
 }
 
 .addButton {
-  background: #409EFF !important;
-  border: 1px solid #409EFF !important;
+  background: #2c68ff !important;
+  border: 1px solid #2c68ff !important;
   color: #fff !important;
 }
 
@@ -363,7 +365,7 @@ code {
 }
 
 .color-blue {
-  color: #409EFF;
+  color: #2c68ff;
 }
 
 .color-red {
@@ -397,7 +399,7 @@ code {
 }
 
 .bg-blue {
-  background-color: #409EFF;
+  background-color: #2c68ff;
 }
 
 .bg-red {
@@ -473,10 +475,10 @@ code {
 }
 
 .hover-btn {
-  color: rgb(92, 124, 166);
+  color: #2c68ff;
 
   &:hover {
-    color: rgb(36, 95, 171);
+    color: #2c68ff;
   }
 }
 
@@ -565,19 +567,19 @@ code {
   .el-menu-item:hover,
   .el-submenu__title:hover,
   .el-submenu__title:focus {
-    background: rgba(24, 144, 255, 1);
+    background: #2c68ff;
   }
 
   .el-button--primary:hover, .el-button--primary:focus {
-    background: rgba(24, 142, 255, 1) !important;
-    border-color: rgba(24, 142, 255, 1) !important;
+    background: #2c68ff !important;
+    border-color: #2c68ff !important;
     color: #FFFFFF !important;
   }
 
   .el-button--primary {
     color: #FFFFFF !important;
-    background-color: rgba(24, 142, 255, 1) !important;
-    border-color: rgba(24, 142, 255, 1) !important;
+    background-color: #2c68ff !important;
+    border-color: #2c68ff !important;
   }
 }
 
@@ -596,7 +598,7 @@ code {
   margin-top: 0px !important;
 
   .btn {
-    background: #1CADE4 !important;
+    background: #2c68ff !important;
     color: #fff !important;
     border: 0px !important;
   }
@@ -608,7 +610,7 @@ code {
     margin-right: 10px !important;
 
     .flex1 {
-      color: #235EAA !important;
+      color: #2c68ff !important;
       font-size: 14px !important;
       font-weight: bold;
       margin-top: 15px;
@@ -620,7 +622,7 @@ code {
   }
 
   .titleLabel {
-    color: #1CADE4;
+    color: #2c68ff;
     font-size: 20px;
     margin: 10px;
     display: inline-block;

@@ -62,7 +62,7 @@ service.interceptors.request.use(
   },
   (error) => {
     // Do something with request error
-    console.log(error) // for debug
+    // console.log(error) // for debug
     Promise.reject(error)
   }
 )
@@ -107,7 +107,7 @@ service.interceptors.response.use(
   },
   (error) => {
     hideLoading()
-    console.log('err' + error) // for debug
+    // console.log('err' + error) // for debug
     Message({
       message: error.message,
       type: 'error',

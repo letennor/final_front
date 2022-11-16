@@ -25,32 +25,19 @@ export const asyncRouterMap = [
       meta: { title: '首页', icon: 'iconzhuye', noCache: true }
     }]
   },
+
   {
-    path: '/companyData',
+    path:"/iconList",
     component: Layout,
-    redirect: 'businessLicense',
-    name: 'companyData',
-    meta: { title: '模块1', icon: 'iconcopy' },
-    children: [
-      {
-        path: 'businessLicense',
-        component: () => import('@/views/companyData/businessLicenses/index'),
-        name: 'businessLicense',
-        meta: { title: '模块1-1', icon: '', noCache: true }
-      },
-      {
-        path: 'auditReport',
-        component: () => import('@/views/companyData/auditReport/index'),
-        name: 'auditReport',
-        meta: { title: '模块1-2', icon: '', noCache: true }
-      },
-      {
-        path: 'socialSecurity',
-        component: () => import('@/views/companyData/socialSecurity/index'),
-        name: 'socialSecurity',
-        meta: { title: '模块1-3', icon: '', noCache: true }
-      }]
+    redirect: 'iconList',
+    children:[{
+      path:'iconList',
+      component: () => import('@/views/iconList/index'),
+      name:'iconList',
+      meta: {title:'icon列表', icon:'iconccgl-xiangmuguanli-3', noCache: true}
+    }]
   },
+
   {
     path:'/model2',
     component: Layout,

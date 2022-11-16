@@ -75,7 +75,7 @@
     /*position: relative;*/
     height: 100%;
     // background: #245fab;
-    background: linear-gradient(0deg, #4078f2 0%, #4178f2 100%);
+    background: #2c68ff;
     width: 100%;
 
     .active {
@@ -93,7 +93,7 @@
   }
 
   .buttonActive {
-    background: linear-gradient(0deg, rgba(22, 163, 255, 1) 0%, rgba(18, 117, 252, 1) 100%) !important;
+    background: #2c68ff;
   }
 
   .topButtonDiv {
@@ -103,7 +103,7 @@
       width: 100px;
       font-size: 14px;
       margin: 3px 20px 3px 3px;
-      background: linear-gradient(0deg, #38ACFD 0%, #1CA3FC 100%);
+      background: #2c68ff;
       color: #fff;
 
       span {

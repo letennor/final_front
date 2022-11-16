@@ -20,7 +20,7 @@
                :src="defaultHead"
                v-else>
           <span style="color: #fff">您好！{{ name }}</span>
-          <i class="el-icon-caret-bottom"></i>
+          <!-- <i class="el-icon-caret-bottom"></i> -->
         </div>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
@@ -31,10 +31,6 @@
             <span @click="passwordFormVisible = true"
                   style="display:block;">修改密码</span>
           </el-dropdown-item>
-          <!-- <el-dropdown-item divided>
-            <span @click="changeFontSize"
-                  style="display:block;">更改字体</span>
-          </el-dropdown-item> -->
           <el-dropdown-item divided>
             <span @click="logout"
                   style="display:block;">登出</span>
@@ -92,7 +88,6 @@
           <el-button @click="handleClose(currentMessageInfo)">关闭</el-button>
         </div>
       </el-dialog>
-      <CollectionDialog class="collectionDialog" ref="CollectionDialog" />
       <el-dialog title="修改密码"
                  :visible.sync="passwordFormVisible">
         <el-form :rules="passwordRules"
@@ -165,7 +160,6 @@
       Hamburger,
       ImageCropper,
       // Breadcrumb,
-      CollectionDialog
     },
     directives: {
       waves
@@ -187,7 +181,6 @@
         isHidden: true,
         messageList: [],
         UnlookedMessage: 0,
-        projectName: '申铁工程管理',
         defaultHead,
         imagecropperShow: false,
         imagecropperKey: 0,
@@ -307,7 +300,7 @@
         }
         getMessageList(param).then((res) => {
           if (res.success) {
-            console.log(res.result)
+            // console.log(res.result)
             this.messageList = res.result.list
           }
         })
@@ -335,6 +328,8 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .2s;
 }
@@ -392,8 +387,8 @@
   }
   }
   .navbar {
-    height: 66px;
-    line-height: 66px;
+    height: 50px;
+    line-height: 50px;
     background: rgba(1, 50, 99, 1) !important;
     width: 100% !important;
     /*background-color: rgba(93, 109, 195, 1);*/

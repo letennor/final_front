@@ -61,6 +61,7 @@
         </template>
       </el-table-column>
       <el-table-column
+        
         :show-overflow-tooltip="true"
         :fixed="item.fixed"
         :label="item.text"
@@ -102,10 +103,11 @@
             @click="item.click ? item.click(scope.row, $event) : false"
           />
           <img
-            v-bind:src="item.getSrc(scope.row)"
+            :src="item.getSrc(scope.row)"
             :height="item.imgHeight"
             v-if="item.type === 'img'"
           />
+
           <div v-if="item.type === 'button'">
             <el-button
               v-button-privilege="key.privilege"
@@ -263,7 +265,7 @@ export default {
     }
   },
   mounted() {
-    console.log(this.$refs.multipleTable)
+    // console.log(this.$refs.multipleTable)
   },
   methods: {
     dealSortable(item) {
@@ -361,8 +363,11 @@ export default {
 }
 
 .el-table th {
-  height: 54px;
-  background: rgb(242, 242, 242);
+  height: 40px;
+  background-color: #F5F7FA !important;
+  color: #7488C9;
+  border-radius: 6px;
+  font-size:16px
 }
 
 .current-row td {

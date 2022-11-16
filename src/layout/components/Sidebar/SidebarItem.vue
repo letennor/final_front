@@ -71,3 +71,9 @@
   }
 </script>
 
+<style scoped>
+*{
+  font-size: 16px;
+}
+</style>
+

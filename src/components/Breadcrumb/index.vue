@@ -47,9 +47,10 @@
     margin-left: 20px;
     margin-top: -10px;
     width: 100%;
+    background-color: #2c68ff !important; 
 
     .no-redirect {
-      color: #409EFF;
+      color: #2c68ff;
       cursor: text;
     }
   }
