@@ -86,6 +86,34 @@ export const asyncRouterMap = [
       }
     ]
   },
+  {
+    path:'/baiduMap',
+    component: Layout,
+    redirect: 'baiduMap',
+    name:'baiduMap',
+    meta: {title: '百度地图', icon:'iconmanyou'},
+    children:[
+      {
+        path:'test1',
+        component:() => import('@/views/baiduMap/test1/index'),
+        name:'test1',
+        meta:{title:'百度地图基本使用', icon:'', noCache:true}
+      },
+      {
+        path:'test2',
+        component:() => import('@/views/baiduMap/test2/index'),
+        name:'test2',
+        meta:{title:'路书', icon:'', noCache:true}
+      },
+      {
+        path:'test3',
+        component:() => import('@/views/baiduMap/test3/index'),
+        name:'test3',
+        meta:{title:'指南', icon:'', noCache:true}
+      }
+    ]
+    
+  },
   { path: '*', redirect: '/404', hidden: true }
 ]
 

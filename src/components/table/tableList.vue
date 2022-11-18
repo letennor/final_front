@@ -75,12 +75,15 @@
         :sortable="dealSortable(item)"
         :filters="item.headFilters ? item.headFilters : null"
       >
+      
+      <template v-for="(child, index) in item.children">
         <my-column
-          v-for="(child, index) in item.children"
           v-if="item.children"
           :key="index"
           :item="child"
         />
+      </template>
+        
         <template slot-scope="scope">
           <my-render
             v-if="item.render"

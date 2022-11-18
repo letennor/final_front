@@ -10,6 +10,7 @@ import '@/styles/index.scss' // 全局CSS
 import './permission'
 import * as filters from './filters'
 import myStroage from '@/utils/sessionStorage'
+import BaiduMap from 'vue-baidu-map'
 
 //全局指令
 import createDirectives from '@/directive'
@@ -20,6 +21,10 @@ Vue.config.productionTip = false
 
 Vue.use(Element, {
   size:'medium'
+})
+
+Vue.use(BaiduMap, {
+  ak:'CPEvt459mKpMp7qNbg8GK3YVBlRCPfdq'
 })
 
 //注册全部过滤器

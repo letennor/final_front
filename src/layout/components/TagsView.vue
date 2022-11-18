@@ -5,7 +5,7 @@
                    v-for="tag in Array.from(visitedViews)"
                    :to="tag.path" :key="tag.path" @contextmenu.prevent.native="openMenu(tag,$event)">
         {{ tag.title }}
-        <span class="el-icon-close" @click.prevent.stop="closeSelectedTag(tag)"></span>
+        <span class="el-icon-close listtleDot" @click.prevent.stop="closeSelectedTag(tag)"></span>
       </router-link>
     </scroll-pane>
     <ul class="contextmenu" v-show="visible" :style="{left:left+'px',top:top+'px'}">
@@ -124,36 +124,44 @@
 </script>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
+
+
   .tags-view-container {
     background: #fff;
+    height: 40px;
+
 
     .tags-view-wrapper {
       background: #fff;
       /*height: 34px;*/
-      border-bottom: 1px solid #d8dce5;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
+      // border-bottom: 1px solid #d8dce5;
+      // box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12), 0 0 3px 0 rgba(0, 0, 0, .04);
 
       .tags-view-item {
         display: inline-block;
         position: relative;
-        height: 26px;
+        height: 30px;
         line-height: 26px;
+        
         /*border: 1px solid #d8dce5;*/
-        color: #495060;
+        color: #7488C9;
         background: #f2f2f2;
         padding: 0 8px;
-        font-size: 12px;
-        margin-left: 5px;
+        font-size: 18px;
+        margin-left: 10px;
         margin-top: 4px;
+        border-radius: 6px;
 
         &:first-of-type {
           margin-left: 30px;
         }
 
         &.active {
-          background-color: rgba(24, 142, 255, 1);
+          background-color: #2c68ff;
           color: #fff;
-          border-color: rgba(24, 142, 255, 1);
+          border-color: #2c68ff;
+          height: 30px;
+          line-height: 30px;
 
           &::before {
             content: '';
@@ -189,6 +197,7 @@
 
         &:hover {
           background: #eee;
+          
         }
       }
     }
@@ -207,6 +216,7 @@
         text-align: center;
         transition: all .3s cubic-bezier(.645, .045, .355, 1);
         transform-origin: 100% 50%;
+        
 
         &:before {
           transform: scale(.6);
@@ -216,8 +226,7 @@
 
         &:hover {
           background-color: #b4bccc;
-          color: #fff;
-        }
+          color: #fff;}
       }
     }
   }
