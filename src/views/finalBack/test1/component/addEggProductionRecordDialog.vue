@@ -22,7 +22,7 @@
                 placeholder="请选择批次"
               >
                 <el-option
-                  v-for="item in batchInfo"
+                  v-for="item in batchList"
                   :key="item.batchId"
                   :label="item.batchName"
                   :value="item.batchId"
@@ -115,12 +115,12 @@ export default {
       addEggProductionForm: {},
       addEggProductionVisibility: false,
       addEggProductionRules: {},
-      batchInfo: [],
+      batchList: [],
       personList: [],
     };
   },
   mounted() {
-    this.getBatchInfo();
+    this.getBatchList();
     this.getPersonList();
   },
   methods: {
@@ -139,10 +139,10 @@ export default {
       this.addEggProductionVisibility = false;
     },
 
-    getBatchInfo() {
+    getBatchList() {
       getAllBatch().then((res) => {
         console.log('批次:', res)
-        this.batchInfo = res.data.data;
+        this.batchList = res.data.data;
       });
     },
 

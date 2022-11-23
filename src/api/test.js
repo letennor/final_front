@@ -46,7 +46,6 @@ export function getAllBatch(param) {
     })
 }
 
-
 //添加用料
 export function addFeedInfo(param) {
     return request({
@@ -74,4 +73,21 @@ export function addMedicine(param) {
     })
 }
 
+//获取药物
+export function getAllMedicine(param) {
+    return request({
+        url: 'http://localhost:8991/getAllMedicine',
+        method: 'post',
+        data: param
+    })
+}
+
+//添加投药记录
+export function addDosingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/addDosingRecord',
+        method: 'post',
+        data: param
+    })
+}
 

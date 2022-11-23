@@ -22,7 +22,7 @@
                 placeholder="请选择批次"
               >
                 <el-option
-                  v-for="item in batchInfo"
+                  v-for="item in batchList"
                   :key="item.batchId"
                   :label="item.batchName"
                   :value="item.batchId"
@@ -39,7 +39,7 @@
                 placeholder="请选择批次"
               >
                 <el-option
-                  v-for="item in feedInfo"
+                  v-for="item in feedList"
                   :key="item.feedId"
                   :label="item.feedName"
                   :value="item.feedId"
@@ -125,15 +125,15 @@ export default {
       addFeedRecordForm: {},
       addFeedRecordVisiblility: false,
       addFeedRecordRules: {},
-      batchInfo: [],
-      feedInfo: [],
+      batchList: [],
+      feedList: [],
       personList: [],
     };
   },
   mounted() {
     this.getPersonList();
-    this.getFeedInfo();
-    this.getBatchInfo();
+    this.getFeedList();
+    this.getBatchList();
   },
   methods: {
     addNewFeedRecord() {
@@ -151,17 +151,17 @@ export default {
       });
     },
 
-    getFeedInfo() {
+    getFeedList() {
       getAllFeed().then((res) => {
         console.log("res:", res);
-        this.feedInfo = res.data.data;
+        this.feedList = res.data.data;
       });
     },
 
-    getBatchInfo() {
+    getBatchList() {
       getAllBatch().then((res) => {
         console.log("getAllBatch:", res);
-        this.batchInfo = res.data.data;
+        this.batchList = res.data.data;
       });
     },
   },

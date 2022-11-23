@@ -36,8 +36,8 @@
       >
 
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves
-          >添加个人基本信息</el-button
+        ><el-button type="primary" class="addButton" v-waves @click="openAddDosingRecord()"
+          >添加投药记录</el-button
         ></el-col
       >
 
@@ -59,6 +59,9 @@
     <!-- 添加药物 -->
     <AddMedicineInfoDialog ref="AddMedicineInfoDialog"/>
 
+    <!-- 添加投药记录 -->
+    <AddDosingRecordDialog ref="AddDosingRecordDialog"/>
+
   </div>
 </template>
 <script>
@@ -67,6 +70,7 @@ import AddFeedRecordDialog from "./component/addFeedRecordDialog.vue"
 import AddFeedInfoDialog from "./component/addFeedInfoDialog.vue"
 import AddEggProductionRecordDialog from './component/addEggProductionRecordDialog.vue'
 import AddMedicineInfoDialog from './component/addMedicineInfoDialog.vue'
+import AddDosingRecordDialog from './component/addDosingRecordDialog.vue'
 export default {
   name: "Test1",
   components:{
@@ -74,7 +78,8 @@ export default {
     AddFeedRecordDialog,
     AddFeedInfoDialog,
     AddEggProductionRecordDialog,
-    AddMedicineInfoDialog
+    AddMedicineInfoDialog,
+    AddDosingRecordDialog
   },
   data() {
     return {
@@ -97,6 +102,9 @@ export default {
     },
     openAddMedicine(){
       this.$refs.AddMedicineInfoDialog.addMedicineVisibility = true
+    },
+    openAddDosingRecord(){
+      this.$refs.AddDosingRecordDialog.addDosingRecordVisibility = true
     }
   },
 
