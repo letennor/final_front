@@ -145,14 +145,14 @@
 </template>
 <script>
 import AddUserDialog from "./component/system/addUserDialog.vue";
-import AddFeedRecordDialog from "./component/addFeedRecordDialog.vue";
-import AddFeedInfoDialog from "./component/addFeedInfoDialog.vue";
-import AddEggProductionRecordDialog from "./component/addEggProductionRecordDialog.vue";
-import AddMedicineInfoDialog from "./component/addMedicineInfoDialog.vue";
-import AddDosingRecordDialog from "./component/addDosingRecordDialog.vue";
-import AddDeathRecordDialog from "./component/addDeathRecordDialog.vue";
-import AddIndividualDeathRecordDialog from "./component/addIndividualDeathRecordDialog.vue";
-import AddGoodsInfoDialog from "./component/transport/addGoodsInfoDialog.vue";
+import AddFeedRecordDialog from "./component/cultivation/addFeedRecordDialog.vue"
+import AddFeedInfoDialog from "./component/maintainInfo/addFeedInfoDialog.vue";
+import AddEggProductionRecordDialog from "./component/cultivation/addEggProductionRecordDialog.vue";
+import AddMedicineInfoDialog from "./component/maintainInfo/addMedicineInfoDialog.vue";
+import AddDosingRecordDialog from "./component/cultivation/addDosingRecordDialog.vue";
+import AddDeathRecordDialog from "./component/cultivation/addDeathRecordDialog.vue";
+import AddIndividualDeathRecordDialog from "./component/cultivation/addIndividualDeathRecordDialog.vue";
+import AddGoodsInfoDialog from "./component/maintainInfo/addGoodsInfoDialog.vue";
 import AddTransportRecordDialog from "./component/transport/addTransportRecordDialog.vue"
 import AddIncomingRecordDialog from "./component/transport/addIncomingRecordDialog.vue"
 export default {
