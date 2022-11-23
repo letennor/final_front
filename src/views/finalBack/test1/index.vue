@@ -123,7 +123,7 @@
           class="addButton"
           v-waves
           @click="openAddOutputRecord()"
-          >添加受精记录</el-button
+          >添加出苗记录</el-button
         ></el-col
       >
     </el-row>
