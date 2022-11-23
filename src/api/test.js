@@ -164,3 +164,12 @@ export function addIncomingRecord(param) {
     })
 }
 
+//添加受精信息
+export function addFertilizationRecord(param) {
+    return request({
+        url: 'http://localhost:8991/addFertilizationRecord',
+        method: 'post',
+        data: param
+    })
+}
+
