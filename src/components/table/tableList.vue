@@ -61,7 +61,6 @@
         </template>
       </el-table-column>
       <el-table-column
-        
         :show-overflow-tooltip="true"
         :fixed="item.fixed"
         :label="item.text"
@@ -139,13 +138,11 @@
                   @click="key.click(scope, $event)"
                 />
               </el-tooltip>
-              <!--<i v-button-privilege="key.privilege" style="font-size: 25px; padding-right: 5px;" class="icon iconfont projectColor pointer" :class="key.class" @click='key.click(scope,$event)'  ></i>-->
               <span
                 class="projectColor"
                 style="position: absolute; margin-left: -4px; font-weight: 700"
                 v-if="num < item.list(scope.row).length - 1"
-              >|</span
-              >
+              >|</span>
             </span>
           </div>
           <div v-if="item.type === 'switch'">

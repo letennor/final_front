@@ -109,10 +109,36 @@ export const asyncRouterMap = [
         path:'test3',
         component:() => import('@/views/baiduMap/test3/index'),
         name:'test3',
-        meta:{title:'指南', icon:'', noCache:true}
+        meta:{title:'定位', icon:'', noCache:true}
       }
     ]
-    
+  },
+  {
+    path:'/finalBack',
+    component: Layout,
+    redirect: 'finalBack',
+    name:'finalBack',
+    meta: {title: '后端测试', icon:'iconmoxingzhongxin'},
+    children:[
+      {
+        path:'test1',
+        component:() => import('@/views/finalBack/test1/index'),
+        name:'finalTest1',
+        meta:{title:'test1', icon:'', noCache:true}
+      },
+      {
+        path:'test2',
+        component:() => import('@/views/finalBack/test2/index'),
+        name:'finalTest2',
+        meta:{title:'test2', icon:'', noCache:true}
+      },
+      {
+        path:'test3',
+        component:() => import('@/views/finalBack/test3/index'),
+        name:'finalTest3',
+        meta:{title:'test3', icon:'', noCache:true}
+      }
+    ]
   },
   { path: '*', redirect: '/404', hidden: true }
 ]
