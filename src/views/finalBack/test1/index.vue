@@ -47,6 +47,12 @@
         ></el-col
       >
 
+      <el-col :span="3"
+        ><el-button type="primary" class="addButton" v-waves @click="openAddIndividualDeathRecord()"
+          >添加个体死亡记录</el-button
+        ></el-col
+      >
+
       
     </el-row>
 
@@ -71,6 +77,9 @@
     <!-- 添加死亡记录 -->
     <AddDeathRecordDialog ref="AddDeathRecordDialog"/>
 
+    <!-- 添加个体死亡记录 -->
+    <AddIndividualDeathRecordDialog ref="AddIndividualDeathRecordDialog"/>
+
   </div>
 </template>
 <script>
@@ -81,6 +90,7 @@ import AddEggProductionRecordDialog from './component/addEggProductionRecordDial
 import AddMedicineInfoDialog from './component/addMedicineInfoDialog.vue'
 import AddDosingRecordDialog from './component/addDosingRecordDialog.vue'
 import AddDeathRecordDialog from './component/addDeathRecordDialog.vue'
+import AddIndividualDeathRecordDialog from './component/addIndividualDeathRecordDialog.vue'
 export default {
   name: "Test1",
   components:{
@@ -90,7 +100,8 @@ export default {
     AddEggProductionRecordDialog,
     AddMedicineInfoDialog,
     AddDosingRecordDialog,
-    AddDeathRecordDialog
+    AddDeathRecordDialog,
+    AddIndividualDeathRecordDialog
   },
   data() {
     return {
@@ -119,6 +130,9 @@ export default {
     },
     openAddDeathRecord(){
       this.$refs.AddDeathRecordDialog.addDeathRecordVisibility = true
+    },
+    openAddIndividualDeathRecord(){
+      this.$refs.AddIndividualDeathRecordDialog.addIndividualDeathRecordVisibility = true
     }
   },
 

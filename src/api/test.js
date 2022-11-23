@@ -100,3 +100,22 @@ export function addDeathRecord(param) {
     })
 }
 
+
+//获取所有死亡记录
+export function getAllDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//添加个体死亡记录
+export function addIndividualDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/addIndividualDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
