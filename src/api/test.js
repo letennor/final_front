@@ -91,3 +91,12 @@ export function addDosingRecord(param) {
     })
 }
 
+//添加死亡记录
+export function addDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/addDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
