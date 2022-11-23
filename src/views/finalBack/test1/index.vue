@@ -116,6 +116,16 @@
           >添加受精记录</el-button
         ></el-col
       >
+
+      <el-col :span="3"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddOutputRecord()"
+          >添加受精记录</el-button
+        ></el-col
+      >
     </el-row>
 
     <!-- 添加用户 -->
@@ -154,6 +164,9 @@
     <!-- 添加受精记录 -->
     <AddFertilizationRecordDialog ref="AddFertilizationRecordDialog"/>
 
+    <!-- 添加出苗记录 -->
+    <AddOutputRecordDialog ref="AddOutputRecordDialog"/>
+
   </div>
 </template>
 <script>
@@ -169,6 +182,7 @@ import AddGoodsInfoDialog from "./component/maintainInfo/addGoodsInfoDialog.vue"
 import AddTransportRecordDialog from "./component/transport/addTransportRecordDialog.vue"
 import AddIncomingRecordDialog from "./component/transport/addIncomingRecordDialog.vue"
 import AddFertilizationRecordDialog from "./component/cultivation/addFertilizationRecordDialog.vue"
+import AddOutputRecordDialog from "./component/transport/addOutputRecordDialog.vue"
 export default {
   name: "Test1",
   components: {
@@ -183,7 +197,8 @@ export default {
     AddGoodsInfoDialog,
     AddTransportRecordDialog,
     AddIncomingRecordDialog,
-    AddFertilizationRecordDialog
+    AddFertilizationRecordDialog,
+    AddOutputRecordDialog
   },
   data() {
     return {};
@@ -225,6 +240,9 @@ export default {
     },
     openAddFertilizationRecord(){
       this.$refs.AddFertilizationRecordDialog.addFertilizationRecordVisibility = true
+    },
+    openAddOutputRecord(){
+      this.$refs.AddOutputRecordDialog.addOutputRecordVisibility = true
     }
   },
 };

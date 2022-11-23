@@ -173,3 +173,12 @@ export function addFertilizationRecord(param) {
     })
 }
 
+//添加出苗记录
+export function addOutputRecord(param) {
+    return request({
+        url: 'http://localhost:8991/addOutputRecord',
+        method: 'post',
+        data: param
+    })
+}
+

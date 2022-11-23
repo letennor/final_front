@@ -1,0 +1,169 @@
+<template>
+  <div>
+    <el-dialog
+      title="添加出苗记录"
+      :visible.sync="addOutputRecordVisibility"
+      width="600px"
+      v-dragDialog
+    >
+      <el-form
+        :rules="addOutputRecordRules"
+        ref="addOutputRecordForm"
+        :model="addOutputRecordForm"
+        label-position="center"
+        size="small"
+        label-width="110px"
+      >
+        <el-row>
+          <el-col :span="24">
+            <el-form-item label="批次:" prop="batchId">
+              <el-select
+                v-model="addOutputRecordForm.batchId"
+                placeholder="请选择批次"
+              >
+                <el-option
+                  v-for="item in batchList"
+                  :key="item.batchId"
+                  :label="item.batchName"
+                  :value="item.batchId"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="出苗量:" prop="outputAmount">
+              <el-input
+                class="filter-item"
+                type="number"
+                placeholder="请输入出苗量"
+                v-model="addOutputRecordForm.outputAmount"
+              >
+              </el-input>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="运输记录:" prop="transportRecordId">
+              <el-select
+                v-model="addOutputRecordForm.transportRecordId"
+                placeholder="请选择运输记录"
+              >
+                <el-option
+                  v-for="item in transportInfoList"
+                  :key="item.transportRecordId"
+                  :label="
+                    item.start +
+                    '->' +
+                    item.end +
+                    ' | ' +
+                    myParsetime(item.gmtCreate)
+                  "
+                  :value="item.transportRecordId"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="记录员:" prop="recordPerson">
+              <el-select
+                v-model="addOutputRecordForm.recordPerson"
+                placeholder="请选择记录员"
+              >
+                <el-option
+                  v-for="item in personList"
+                  :key="item.userBasicInfoId"
+                  :label="item.name"
+                  :value="item.userBasicInfoId"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="addOutputRecordVisibility = false">取消</el-button>
+        <el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="addNewIncomingRecord()"
+          >提交</el-button
+        >
+      </div>
+    </el-dialog>
+  </div>
+</template>
+<script>
+import { parseTime } from "@/utils/index";
+import {
+  getAllPerson,
+  getAllTransportRecord,
+  getAllBatch,
+  addOutputRecord,
+} from "@/api/test";
+export default {
+  name: "AddIncomingRecordDialog",
+  data() {
+    return {
+      addOutputRecordForm: {},
+      addOutputRecordVisibility: false,
+      addOutputRecordRules: {},
+      personList: [],
+      batchList: [],
+      transportInfoList: [],
+    };
+  },
+  mounted() {
+    this.getPersonList();
+    this.getBatchList();
+    this.getTransportRecordList();
+  },
+  methods: {
+    addNewIncomingRecord() {
+      console.log("addOutputRecordForm:", this.addOutputRecordForm);
+      this.addOutputRecordForm.outputRate =
+        this.addOutputRecordForm.outputAmount / 1000.0;
+      addOutputRecord(this.addOutputRecordForm).then((res) => {
+        console.log("res:", res);
+      });
+      this.addOutputRecordVisibility = false;
+    },
+
+    getPersonList() {
+      getAllPerson().then((res) => {
+        this.personList = res.data.data;
+      });
+    },
+
+    getBatchList() {
+      getAllBatch().then((res) => {
+        this.batchList = res.data.data;
+      });
+    },
+
+    getTransportRecordList() {
+      getAllTransportRecord().then((res) => {
+        this.transportInfoList = res.data.data;
+      });
+    },
+
+    myParsetime(time, cFormat) {
+      return parseTime(time, "{y}-{m}-{d}");
+    },
+  },
+  watch: {
+    addOutputRecordVisibility(newValue, oldValue) {
+      if (newValue === false) {
+        this.addOutputRecordForm = {};
+      }
+    },
+  },
+};
+</script>
+<style>
+</style>
