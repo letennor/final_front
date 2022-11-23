@@ -20,80 +20,144 @@
         ></el-col
       >
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves @click="openFeedInfo()"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openFeedInfo()"
           >添加用料</el-button
         ></el-col
       >
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves @click="openEggProduction()"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openEggProduction()"
           >添加产蛋量记录</el-button
         ></el-col
       >
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves @click="openAddMedicine()"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddMedicine()"
           >添加药物</el-button
         ></el-col
       >
 
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves @click="openAddDosingRecord()"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddDosingRecord()"
           >添加投药记录</el-button
         ></el-col
       >
 
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves @click="openAddDeathRecord()"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddDeathRecord()"
           >添加死亡记录</el-button
         ></el-col
       >
 
       <el-col :span="3"
-        ><el-button type="primary" class="addButton" v-waves @click="openAddIndividualDeathRecord()"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddIndividualDeathRecord()"
           >添加个体死亡记录</el-button
         ></el-col
       >
 
-      
+      <el-col :span="3"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddGoodsInfo()"
+          >添加货物信息</el-button
+        ></el-col
+      >
+
+      <el-col :span="3"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddTransportRecord()"
+          >添加运输信息</el-button
+        ></el-col
+      >
+
+      <el-col :span="3"
+        ><el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="openAddIncomingRecord()"
+          >添加进货信息</el-button
+        ></el-col
+      >
     </el-row>
 
     <!-- 添加用户 -->
-    <AddUserDialog ref="AddUserDialog"/>
+    <AddUserDialog ref="AddUserDialog" />
 
     <!-- 添加投喂记录 -->
-    <AddFeedRecordDialog ref="AddFeedRecordDialog"/>
+    <AddFeedRecordDialog ref="AddFeedRecordDialog" />
 
     <!-- 添加用料 -->
-    <AddFeedInfoDialog ref="AddFeedInfoDialog"/>
+    <AddFeedInfoDialog ref="AddFeedInfoDialog" />
 
     <!-- 添加捡蛋记录 -->
-    <AddEggProductionRecordDialog ref="AddEggProductionRecordDialog"/>
+    <AddEggProductionRecordDialog ref="AddEggProductionRecordDialog" />
 
     <!-- 添加药物 -->
-    <AddMedicineInfoDialog ref="AddMedicineInfoDialog"/>
+    <AddMedicineInfoDialog ref="AddMedicineInfoDialog" />
 
     <!-- 添加投药记录 -->
-    <AddDosingRecordDialog ref="AddDosingRecordDialog"/>
+    <AddDosingRecordDialog ref="AddDosingRecordDialog" />
 
     <!-- 添加死亡记录 -->
-    <AddDeathRecordDialog ref="AddDeathRecordDialog"/>
+    <AddDeathRecordDialog ref="AddDeathRecordDialog" />
 
     <!-- 添加个体死亡记录 -->
-    <AddIndividualDeathRecordDialog ref="AddIndividualDeathRecordDialog"/>
+    <AddIndividualDeathRecordDialog ref="AddIndividualDeathRecordDialog" />
+
+    <!-- 添加货物信息 -->
+    <AddGoodsInfoDialog ref="AddGoodsInfoDialog" />
+
+    <!-- 添加运输记录 -->
+    <AddTransportRecordDialog ref="AddTransportRecordDialog"/>
+
+    <!-- 添加进货记录 -->
+    <AddIncomingRecordDialog ref="AddIncomingRecordDialog"/>
 
   </div>
 </template>
 <script>
-import AddUserDialog from "./component/addUserDialog.vue"
-import AddFeedRecordDialog from "./component/addFeedRecordDialog.vue"
-import AddFeedInfoDialog from "./component/addFeedInfoDialog.vue"
-import AddEggProductionRecordDialog from './component/addEggProductionRecordDialog.vue'
-import AddMedicineInfoDialog from './component/addMedicineInfoDialog.vue'
-import AddDosingRecordDialog from './component/addDosingRecordDialog.vue'
-import AddDeathRecordDialog from './component/addDeathRecordDialog.vue'
-import AddIndividualDeathRecordDialog from './component/addIndividualDeathRecordDialog.vue'
+import AddUserDialog from "./component/system/addUserDialog.vue";
+import AddFeedRecordDialog from "./component/addFeedRecordDialog.vue";
+import AddFeedInfoDialog from "./component/addFeedInfoDialog.vue";
+import AddEggProductionRecordDialog from "./component/addEggProductionRecordDialog.vue";
+import AddMedicineInfoDialog from "./component/addMedicineInfoDialog.vue";
+import AddDosingRecordDialog from "./component/addDosingRecordDialog.vue";
+import AddDeathRecordDialog from "./component/addDeathRecordDialog.vue";
+import AddIndividualDeathRecordDialog from "./component/addIndividualDeathRecordDialog.vue";
+import AddGoodsInfoDialog from "./component/transport/addGoodsInfoDialog.vue";
+import AddTransportRecordDialog from "./component/transport/addTransportRecordDialog.vue"
+import AddIncomingRecordDialog from "./component/transport/addIncomingRecordDialog.vue"
 export default {
   name: "Test1",
-  components:{
+  components: {
     AddUserDialog,
     AddFeedRecordDialog,
     AddFeedInfoDialog,
@@ -101,41 +165,50 @@ export default {
     AddMedicineInfoDialog,
     AddDosingRecordDialog,
     AddDeathRecordDialog,
-    AddIndividualDeathRecordDialog
+    AddIndividualDeathRecordDialog,
+    AddGoodsInfoDialog,
+    AddTransportRecordDialog,
+    AddIncomingRecordDialog
   },
   data() {
-    return {
-
-    };
+    return {};
   },
   mounted() {},
   methods: {
-    openAddUser(){
-      this.$refs.AddUserDialog.addUserVisiblility = true
+    openAddUser() {
+      this.$refs.AddUserDialog.addUserVisiblility = true;
     },
-    openFeedRecord(){
-      this.$refs.AddFeedRecordDialog.addFeedRecordVisiblility = true
+    openFeedRecord() {
+      this.$refs.AddFeedRecordDialog.addFeedRecordVisiblility = true;
     },
-    openFeedInfo(){
-      this.$refs.AddFeedInfoDialog.addFeedInfoVisibility = true
+    openFeedInfo() {
+      this.$refs.AddFeedInfoDialog.addFeedInfoVisibility = true;
     },
-    openEggProduction(){
-      this.$refs.AddEggProductionRecordDialog.addEggProductionVisibility = true
+    openEggProduction() {
+      this.$refs.AddEggProductionRecordDialog.addEggProductionVisibility = true;
     },
-    openAddMedicine(){
-      this.$refs.AddMedicineInfoDialog.addMedicineVisibility = true
+    openAddMedicine() {
+      this.$refs.AddMedicineInfoDialog.addMedicineVisibility = true;
     },
-    openAddDosingRecord(){
-      this.$refs.AddDosingRecordDialog.addDosingRecordVisibility = true
+    openAddDosingRecord() {
+      this.$refs.AddDosingRecordDialog.addDosingRecordVisibility = true;
     },
-    openAddDeathRecord(){
-      this.$refs.AddDeathRecordDialog.addDeathRecordVisibility = true
+    openAddDeathRecord() {
+      this.$refs.AddDeathRecordDialog.addDeathRecordVisibility = true;
     },
-    openAddIndividualDeathRecord(){
-      this.$refs.AddIndividualDeathRecordDialog.addIndividualDeathRecordVisibility = true
+    openAddIndividualDeathRecord() {
+      this.$refs.AddIndividualDeathRecordDialog.addIndividualDeathRecordVisibility = true;
+    },
+    openAddGoodsInfo() {
+      this.$refs.AddGoodsInfoDialog.addGoodsInfoVisibility = true;
+    },
+    openAddTransportRecord(){
+      this.$refs.AddTransportRecordDialog.addTransportRecordVisibility = true
+    },
+    openAddIncomingRecord(){
+      this.$refs.AddIncomingRecordDialog.addIncomingRecordVisibility = true
     }
   },
-
 };
 </script>
 
