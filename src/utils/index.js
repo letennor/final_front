@@ -431,3 +431,13 @@ export function transformBoolean(data) {
   return data ? '是' : '否'
 }
 
+//性别转换
+export function genderTransform(data) {
+  if(data === 1){
+    return '男'
+  }
+
+  if(data === 0){
+    return '女'
+  }
+}
