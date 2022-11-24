@@ -64,3 +64,93 @@ export function addFertilizationRecord(param) {
         data: param
     })
 }
+
+//取得所有喂养信息
+export function getAllFeedRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllFeedRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除喂养信息
+export function deleteFeedRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteFeedRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有产蛋量信息
+export function getAllEggProductionRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllEggProductionRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除产蛋量信息
+export function deleteEggProductionRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteEggProductionRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有个体死亡信息
+export function getAllIndividualDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllIndividualDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除个体死亡信息
+export function deleteIndividualDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteIndividualDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有投药信息
+export function getAllDosingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllDosingRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除投药信息
+export function deleteDosingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteDosingRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有受精信息
+export function getAllFertilizationRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllFertilizationRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除受精信息
+export function deleteFertilizationRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteFertilizationRecord',
+        method: 'post',
+        data: param
+    })
+}

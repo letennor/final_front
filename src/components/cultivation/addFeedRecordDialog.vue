@@ -112,12 +112,9 @@
 </template>
 <script>
 import request from "@/utils/request";
-import {
-  getAllPerson,
-  addFeedRecord,
-  getAllFeed,
-  getAllBatch,
-} from "@/api/cultivation";
+import { getAllPerson } from "@/api/system";
+import { getAllFeed, getAllBatch } from "@/api/maintainInfo";
+import { addFeedRecord } from "@/api/cultivation";
 export default {
   name: "AddFeedRecordDialog",
   data() {
@@ -140,6 +137,7 @@ export default {
       console.log("addFeedRecordForm:", this.addFeedRecordForm);
       addFeedRecord(this.addFeedRecordForm).then((res) => {
         console.log("suc");
+        this.$emit("refresh");
       });
       this.addFeedRecordVisiblility = false;
     },

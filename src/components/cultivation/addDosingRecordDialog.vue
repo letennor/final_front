@@ -102,7 +102,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewFeed()"
+          @click="addNewDosingRecord()"
           >提交</el-button
         >
       </div>
@@ -111,12 +111,10 @@
 </template>
 <script>
 import request from "@/utils/request";
+import { getAllMedicine, getAllBatch } from "@/api/maintainInfo";
+import { getAllPerson } from "@/api/system";
 import {
-  addFeedInfo,
-  getAllMedicine,
-  getAllPerson,
-  getAllBatch,
-  addDosingRecord
+  addDosingRecord,
 } from "@/api/cultivation";
 export default {
   name: "AddDosingRecordDialog",
@@ -127,19 +125,20 @@ export default {
       addDosingRecordRules: {},
       personList: [],
       medicineList: [],
-      batchList:[]
+      batchList: [],
     };
   },
   mounted() {
     this.getMedicineList();
     this.getPersonList();
-    this.getBatchList()
+    this.getBatchList();
   },
   methods: {
-    addNewFeed() {
+    addNewDosingRecord() {
       console.log(this.addDosingRecordForm);
       addDosingRecord(this.addDosingRecordForm).then((res) => {
         console.log("suc");
+        this.$emit("refresh");
       });
       this.addDosingRecordVisibility = false;
     },

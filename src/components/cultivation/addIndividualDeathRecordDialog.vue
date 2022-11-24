@@ -80,12 +80,9 @@
 </template>
 <script>
 import request from "@/utils/request";
-import {
-  getAllPerson,
-  getAllBatch,
-  getAllDeathRecord,
-  addIndividualDeathRecord,
-} from "@/api/cultivation";
+import { getAllBatch } from "@/api/maintainInfo";
+import { getAllPerson } from "@/api/system";
+import { getAllDeathRecord, addIndividualDeathRecord } from "@/api/cultivation";
 import { parseTime } from "@/utils/index";
 export default {
   name: "AddIndividualDeathRecord",
@@ -105,13 +102,10 @@ export default {
   },
   methods: {
     addNewFeedRecord() {
-      console.log(
-        "addIndividualDeathRecordForm:",
-        this.addIndividualDeathRecordForm
-      );
       addIndividualDeathRecord(this.addIndividualDeathRecordForm).then(
         (res) => {
           console.log("res:", res);
+          this.$emit("refresh")
         }
       );
       this.addIndividualDeathRecordVisibility = false;

@@ -103,7 +103,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewFeedRecord()"
+          @click="addNewFerilizationRecord()"
           >提交</el-button
         >
       </div>
@@ -111,13 +111,11 @@
   </div>
 </template>
 <script>
-import {
-  getAllPerson,
-  getAllBatch,
-  addFertilizationRecord,
-} from "@/api/cultivation";
-export default {
-  name: "AddFeedRecordDialog",
+import { getAllPerson } from "@/api/system";
+import { getAllBatch } from "@/api/maintainInfo";
+import { addFertilizationRecord } from "@/api/cultivation";
+export default { 
+  name: "AddFertilizationRecordDialog",
   data() {
     return {
       addFertilizationRecordForm: {},
@@ -132,7 +130,7 @@ export default {
     this.getBatchList();
   },
   methods: {
-    addNewFeedRecord() {
+    addNewFerilizationRecord() {
       console.log(
         "addFertilizationRecordForm:",
         this.addFertilizationRecordForm
@@ -141,6 +139,7 @@ export default {
         this.addFertilizationRecordForm.fertilizationRate / 100.0;
       addFertilizationRecord(this.addFertilizationRecordForm).then((res) => {
         console.log("res:", res);
+        this.$emit("refresh")
       });
       this.addFertilizationRecordVisibility = false;
     },

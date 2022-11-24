@@ -107,11 +107,9 @@
   </div>
 </template>
 <script>
-import {
-  getAllBatch,
-  getAllPerson,
-  addEggProductionRecord,
-} from "@/api/cultivation";
+import { getAllBatch } from "@/api/maintainInfo";
+import { getAllPerson } from "@/api/system";
+import { addEggProductionRecord } from "@/api/cultivation";
 export default {
   name: "AddFeedRecordDialog",
   data() {
@@ -140,6 +138,7 @@ export default {
 
       addEggProductionRecord(this.addEggProductionForm).then((res) => {
         console.log("res:", res);
+        this.$emit('refresh')
       });
 
       this.addEggProductionVisibility = false;
