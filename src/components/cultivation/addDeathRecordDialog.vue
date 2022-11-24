@@ -94,12 +94,9 @@
 </template>
 <script>
 import request from "@/utils/request";
-import {
-  getAllMedicine,
-  getAllPerson,
-  getAllBatch,
-  addDeathRecord,
-} from "@/api/cultivation";
+import { getAllMedicine, getAllBatch } from "@/api/maintainInfo";
+import { getAllPerson } from "@/api/system";
+import { addDeathRecord } from "@/api/cultivation";
 export default {
   name: "AddDeathRecordDialog",
   data() {
@@ -119,11 +116,12 @@ export default {
   },
   methods: {
     addNewDeathRecord() {
-      
-      this.addDeathRecordForm.deathRate = this.addDeathRecordForm.deathNumber / 1000.00
+      this.addDeathRecordForm.deathRate =
+        this.addDeathRecordForm.deathNumber / 1000.0;
       console.log(this.addDeathRecordForm);
       addDeathRecord(this.addDeathRecordForm).then((res) => {
         console.log("res:", res);
+        this.$emit("refresh")
       });
 
       this.addDeathRecordVisibility = false;

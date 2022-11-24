@@ -48,6 +48,10 @@ export default {
       // 表头名称和字段
       columns: [
         {
+          text: "死亡记录",
+          value: "deathRecordId",
+        },
+        {
           text: "死亡原因",
           value: "deathReason",
         },

@@ -37,6 +37,15 @@ export function addDeathRecord(param) {
     })
 }
 
+//删除死亡记录
+export function deleteDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
 
 //获取所有死亡记录
 export function getAllDeathRecord(param) {
