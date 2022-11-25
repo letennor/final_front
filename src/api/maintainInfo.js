@@ -93,3 +93,12 @@ export function deleteGoodsInfo(param) {
         data: param
     })
 }
+
+//删除喂料信息
+export function deleteFeedInfo(param) {
+    return request({
+        url: 'http://localhost:8991/deleteFeedInfo',
+        method: 'post',
+        data: param
+    })
+}

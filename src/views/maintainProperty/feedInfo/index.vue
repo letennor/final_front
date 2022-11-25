@@ -19,18 +19,18 @@
     </my-card>
 
     <!-- 添加用户 -->
-    <AddFeedInfoDialog ref="AddFeedInfoDialog" @refresh="refresh()"/>
+    <AddFeedInfoDialog ref="AddFeedInfoDialog" @refresh="refresh()" />
   </div>
 </template>
 
 <script>
-import AddFeedInfoDialog from "@/components/maintainInfo/addFeedInfoDialog.vue"
+import AddFeedInfoDialog from "@/components/maintainInfo/addFeedInfoDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllFeed } from "@/api/maintainInfo";
+import { getAllFeed, deleteFeedInfo } from "@/api/maintainInfo";
 export default {
   name: "FeedInfo",
   components: {
@@ -61,7 +61,7 @@ export default {
         {
           text: "创建时间",
           value: "gmtCreate",
-          filter: parseTime
+          filter: parseTime,
         },
         {
           text: "操作",
@@ -82,8 +82,11 @@ export default {
       console.log("点击编辑");
     },
 
-    delete() {
-      console.log("点击删除");
+    delete(val) {
+      deleteFeedInfo(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
@@ -107,9 +110,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>
