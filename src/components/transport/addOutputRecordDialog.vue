@@ -100,12 +100,9 @@
 </template>
 <script>
 import { parseTime } from "@/utils/index";
-import {
-  getAllPerson,
-  getAllTransportRecord,
-  getAllBatch,
-  addOutputRecord,
-} from "@/api/transport";
+import { getAllPerson } from "@/api/system";
+import { getAllBatch } from "@/api/maintainInfo";
+import { getAllTransportRecord, addOutputRecord } from "@/api/transport";
 export default {
   name: "AddIncomingRecordDialog",
   data() {
@@ -129,7 +126,7 @@ export default {
       this.addOutputRecordForm.outputRate =
         this.addOutputRecordForm.outputAmount / 1000.0;
       addOutputRecord(this.addOutputRecordForm).then((res) => {
-        console.log("res:", res);
+        this.$emit("refresh")
       });
       this.addOutputRecordVisibility = false;
     },

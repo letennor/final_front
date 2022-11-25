@@ -53,3 +53,22 @@ export function deleteIncomingRecord(param) {
         data: param
     })
 }
+
+//取得所有出苗信息
+export function getAllOutputRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllOutputRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除出苗信息
+export function deleteOutputRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteOutputRecord',
+        method: 'post',
+        data: param
+    })
+}
+
