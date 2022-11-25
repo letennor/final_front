@@ -72,3 +72,13 @@ export function deleteOutputRecord(param) {
     })
 }
 
+
+//删除运输信息
+export function deleteTransportRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteTransportRecord',
+        method: 'post',
+        data: param
+    })
+}
+

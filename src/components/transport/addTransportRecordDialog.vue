@@ -116,7 +116,9 @@
   </div>
 </template>
 <script>
-import { getAllGoodsInfo, getAllPerson, addTransportRecord } from "@/api/transport";
+import { getAllGoodsInfo } from "@/api/maintainInfo";
+import { getAllPerson } from "@/api/system";
+import { addTransportRecord, getAllTransportRecord, deleteTransportRecord } from "@/api/transport";
 export default {
   name: "AddFeedRecordDialog",
   data() {
@@ -136,7 +138,7 @@ export default {
     addNewTransportRecord() {
       console.log("addTransportRecordForm:", this.addTransportRecordForm);
       addTransportRecord(this.addTransportRecordForm).then((res) => {
-        console.log("res:", res);
+        this.$emit("refresh")
       });
       this.addTransportRecordVisibility = false;
     },
