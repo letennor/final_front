@@ -17,3 +17,13 @@ export function getAllPerson(param) {
         data: param
     })
 }
+
+
+//取得所有用户密码信息
+export function getAllUserPasswordInfo(param) {
+    return request({
+        url: 'http://localhost:8991/getAllUserPasswordInfo',
+        method: 'post',
+        data: param
+    })
+}

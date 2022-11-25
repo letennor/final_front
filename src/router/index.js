@@ -172,6 +172,12 @@ export const asyncRouterMap = [
         meta:{title:'用户', icon:'', noCache:true}
       },
       {
+        path:'userPasswordInfo',
+        component: () => import("@/views/maintainProperty/userPasswordInfo/index"),
+        name:'userPasswordInfo',
+        meta:{title: "用户密码信息", icon:'', noCache:true}
+      },
+      {
         path:'feedInfo',
         component:() => import('@/views/maintainProperty/feedInfo/index'),
         name:'feedInfo',
