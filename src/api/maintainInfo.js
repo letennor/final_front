@@ -64,3 +64,12 @@ export function addGoodsInfo(param) {
         data: param
     })
 }
+
+//添加批次信息
+export function addBatchInfo(param) {
+    return request({
+        url: 'http://localhost:8991/addBatchInfo',
+        method: 'post',
+        data: param
+    })
+}

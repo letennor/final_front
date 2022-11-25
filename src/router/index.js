@@ -188,6 +188,12 @@ export const asyncRouterMap = [
         component:() => import('@/views/maintainProperty/medicineInfo/index'),
         name:'medicineInfo',
         meta:{title:'药物', icon:'', noCache:true}
+      },
+      {
+        path:'batchInfo',
+        component:() => import('@/views/maintainProperty/batchInfo/index'),
+        name:'batchInfo',
+        meta:{title:'批次', icon:'', noCache:true}
       }
     ]
   },

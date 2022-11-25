@@ -63,7 +63,7 @@ export default {
     addNewGoodsInfo() {
       console.log("addGoodsInfoForm:",this.addGoodsInfoForm);
       addGoodsInfo(this.addGoodsInfoForm).then((res)=>{
-        console.log('res:', res)
+        this.$emit("refresh")
       })
       this.addGoodsInfoVisibility = false;
     },

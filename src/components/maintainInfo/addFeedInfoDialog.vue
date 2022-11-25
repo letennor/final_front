@@ -73,7 +73,7 @@ export default {
     addNewFeed() {
       console.log(this.addFeedInfoForm);
       addFeedInfo(this.addFeedInfoForm).then((res)=>{
-        console.log('suc');
+        this.$emit("refresh")
       })
       this.addFeedInfoVisibility = false
     },

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container mainDiv">
-    <my-card title="账号维护">
+    <my-card title="批次信息维护">
       <div class="filter-container">
         <el-button
           class="filter-item addButton"
@@ -18,25 +18,24 @@
       ></table-list>
     </my-card>
 
-    <!-- 添加用户 -->
-    <AddUserDialog ref="AddUserDialog" @refresh="refresh()"/>
+    <AddBatchInfoDialog ref="AddBatchInfoDialog" @refresh="refresh()"/>
   </div>
 </template>
 
 <script>
-import AddUserDialog from "@/components/system/addUserDialog.vue";
+import AddBatchInfoDialog from "@/components/maintainInfo/addBatchInfoDialog.vue"
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllPerson } from "@/api/system";
+import { getAllBatch } from "@/api/maintainInfo";
 export default {
-  name: "UserInfo",
+  name: "FeedInfo",
   components: {
     tableList,
     MyCard,
-    AddUserDialog,
+    AddBatchInfoDialog,
   },
   directives: {
     waves,
@@ -47,39 +46,21 @@ export default {
       // 表头名称和字段
       columns: [
         {
-          text: "姓名",
-          value: "name",
+          text: "批次id",
+          value: "batchId",
         },
         {
-          text: "年龄",
-          value: "age",
+          text: "批次名称",
+          value: "batchName",
         },
         {
-          text: "性别",
-          value: "gender",
-          filter: genderTransform,
+          text: "记录员",
+          value: "recordPerson",
         },
         {
-          text: "电话号码",
-          value: "phoneNumber",
-        },
-        {
-          text: "薪资",
-          value: "salary",
-        },
-        {
-          text: "微信",
-          value: "wechat",
-        },
-        {
-          text: "工作时间",
-          value: "workYear",
-        },
-        {
-          text: "入职时间",
-          value: "entryTime",
-          filter: parseTime,
-          filterParams: ["{y}/{m}/{d}"],
+          text: "创建时间",
+          value: "gmtCreate",
+          filter: parseTime
         },
         {
           text: "操作",
@@ -106,7 +87,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddUserDialog.addUserVisiblility = true;
+      this.$refs.AddBatchInfoDialog.addBatchInfoVisibility = true;
     },
 
     // 表格操作按鈕
@@ -119,7 +100,7 @@ export default {
     },
 
     getList() {
-      getAllPerson().then((res) => {
+      getAllBatch().then((res) => {
         this.list = res.data.data;
         console.log("list:", this.list);
       });

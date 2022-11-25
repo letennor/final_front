@@ -74,7 +74,7 @@ export default {
     addNewMedicine() {
       console.log(this.addMedicineForm);
       addMedicine(this.addMedicineForm).then((res)=>{
-        console.log('res:', res)
+        this.$emit("refresh")
       })
       this.addMedicineVisibility = false
     },
