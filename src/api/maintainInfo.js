@@ -83,3 +83,13 @@ export function deleteMedicineInfo(param) {
         data: param
     })
 }
+
+
+//删除药物信息
+export function deleteGoodsInfo(param) {
+    return request({
+        url: 'http://localhost:8991/deleteGoodsInfo',
+        method: 'post',
+        data: param
+    })
+}
