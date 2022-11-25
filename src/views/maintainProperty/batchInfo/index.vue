@@ -29,7 +29,7 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllBatch } from "@/api/maintainInfo";
+import { getAllBatch, deleteBatchInfo } from "@/api/maintainInfo";
 export default {
   name: "FeedInfo",
   components: {
@@ -81,7 +81,11 @@ export default {
       console.log("点击编辑");
     },
 
-    delete() {
+    delete(val) {
+      deleteBatchInfo(val.row).then((res)=>{
+        console.log("res:", res);
+        this.getList()
+      })
       console.log("点击删除");
     },
 

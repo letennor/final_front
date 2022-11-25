@@ -102,3 +102,12 @@ export function deleteFeedInfo(param) {
         data: param
     })
 }
+
+//删除批次信息
+export function deleteBatchInfo(param) {
+    return request({
+        url: 'http://localhost:8991/deleteBatchInfo',
+        method: 'post',
+        data: param
+    })
+}
