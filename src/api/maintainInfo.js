@@ -73,3 +73,13 @@ export function addBatchInfo(param) {
         data: param
     })
 }
+
+
+//删除药物信息
+export function deleteMedicineInfo(param) {
+    return request({
+        url: 'http://localhost:8991/deleteMedicineInfo',
+        method: 'post',
+        data: param
+    })
+}

@@ -23,7 +23,6 @@
                 v-model="addBatchInfoForm.batchName"
               >
               </el-input>
-
             </el-form-item>
           </el-col>
 
@@ -43,7 +42,6 @@
               </el-select>
             </el-form-item>
           </el-col>
-
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -60,9 +58,8 @@
   </div>
 </template>
 <script>
-import request from "@/utils/request";
-import { addBatchInfo} from "@/api/maintainInfo";
-import { getAllPerson } from '@/api/system';
+import { addBatchInfo } from "@/api/maintainInfo";
+import { getAllPerson } from "@/api/system";
 export default {
   name: "AddFeedRecordDialog",
   data() {
@@ -70,24 +67,24 @@ export default {
       addBatchInfoForm: {},
       addBatchInfoVisibility: false,
       addBatchInfoRules: {},
-      personList:[]
+      personList: [],
     };
   },
   mounted() {
-    this.getPersonList()
+    this.getPersonList();
   },
   methods: {
     addNewBatchInfo() {
       console.log(this.addBatchInfoForm);
-      addBatchInfo(this.addBatchInfoForm).then((res)=>{
-        this.$emit("refresh")
-      })
-      this.addBatchInfoVisibility = false
+      addBatchInfo(this.addBatchInfoForm).then((res) => {
+        this.$emit("refresh");
+      });
+      this.addBatchInfoVisibility = false;
     },
 
-     getPersonList() {
+    getPersonList() {
       getAllPerson().then((res) => {
-        console.log('personList:', res)
+        console.log("personList:", res);
         this.personList = res.data.data;
       });
     },

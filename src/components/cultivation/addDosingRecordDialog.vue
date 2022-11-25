@@ -137,7 +137,7 @@ export default {
     addNewDosingRecord() {
       console.log(this.addDosingRecordForm);
       addDosingRecord(this.addDosingRecordForm).then((res) => {
-        console.log("suc");
+        console.log("res:", res);
         this.$emit("refresh");
       });
       this.addDosingRecordVisibility = false;

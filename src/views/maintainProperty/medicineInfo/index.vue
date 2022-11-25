@@ -29,7 +29,7 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllMedicine } from "@/api/maintainInfo";
+import { getAllMedicine, deleteMedicineInfo } from "@/api/maintainInfo";
 export default {
   name: "MedicineInfo",
   components: {
@@ -81,8 +81,11 @@ export default {
       console.log("点击编辑");
     },
 
-    delete() {
-      console.log("点击删除");
+    delete(val) {
+      deleteMedicineInfo(val.row).then((res)=>{
+        console.log("res:", res)
+        this.getList()
+      })
     },
 
     // 新增
