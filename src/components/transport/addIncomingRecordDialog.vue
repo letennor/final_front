@@ -70,7 +70,13 @@
                 <el-option
                   v-for="item in transportInfoList"
                   :key="item.transportRecordId"
-                  :label="item.start + '->' + item.end + ' | ' + myParsetime(item.gmtCreate)"
+                  :label="
+                    item.start +
+                    '->' +
+                    item.end +
+                    ' | ' +
+                    myParsetime(item.gmtCreate)
+                  "
                   :value="item.transportRecordId"
                 >
                 </el-option>
@@ -93,14 +99,10 @@
   </div>
 </template>
 <script>
-import {parseTime} from "@/utils/index"
-import {
-  getAllPerson,
-  getAllGoodsInfo,
-  getAllTransportRecord,
-  getAllBatch,
-  addIncomingRecord,
-} from "@/api/transport";
+import { parseTime } from "@/utils/index";
+import { getAllPerson } from "@/api/system";
+import { getAllGoodsInfo, getAllBatch } from "@/api/maintainInfo";
+import { getAllTransportRecord, addIncomingRecord } from "@/api/transport";
 export default {
   name: "AddIncomingRecordDialog",
   data() {
@@ -125,6 +127,7 @@ export default {
       console.log("addIncomingRecordForm:", this.addIncomingRecordForm);
       addIncomingRecord(this.addIncomingRecordForm).then((res) => {
         console.log("res:", res);
+        this.$emit("refresh")
       });
       this.addIncomingRecordVisibility = false;
     },
@@ -153,10 +156,10 @@ export default {
         this.transportInfoList = res.data.data;
       });
     },
-    
-    myParsetime(time, cFormat){
-        return parseTime(time, "{y}-{m}-{d}")
-    }
+
+    myParsetime(time, cFormat) {
+      return parseTime(time, "{y}-{m}-{d}");
+    },
   },
   watch: {
     addIncomingRecordVisibility(newValue, oldValue) {

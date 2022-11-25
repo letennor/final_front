@@ -35,3 +35,21 @@ export function addOutputRecord(param) {
         data: param
     })
 }
+
+//取得所有进货信息
+export function getAllIncomingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/getAllIncomingRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除进货信息
+export function deleteIncomingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/deleteIncomingRecord',
+        method: 'post',
+        data: param
+    })
+}
