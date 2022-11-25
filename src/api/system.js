@@ -27,3 +27,12 @@ export function getAllUserPasswordInfo(param) {
         data: param
     })
 }
+
+//删除用户
+export function deleteUserBasicInfo(param) {
+    return request({
+        url: 'http://localhost:8991/deleteUserBasicInfo',
+        method: 'post',
+        data: param
+    })
+}

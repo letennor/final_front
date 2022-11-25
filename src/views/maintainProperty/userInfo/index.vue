@@ -30,7 +30,7 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllPerson } from "@/api/system";
+import { getAllPerson, deleteUserBasicInfo } from "@/api/system";
 export default {
   name: "UserInfo",
   components: {
@@ -100,7 +100,11 @@ export default {
       console.log("点击编辑");
     },
 
-    delete() {
+    delete(val) {
+      deleteUserBasicInfo(val.row).then((res)=>{
+        console.log("res:", res)
+        this.getList()
+      })
       console.log("点击删除");
     },
 
