@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加药物"
-      :visible.sync="addMedicineVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addMedicineRules"
-        ref="addMedicineForm"
-        :model="addMedicineForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -20,7 +20,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入药物名称"
-                v-model="addMedicineForm.medicineName"
+                v-model="dialogForm.medicineName"
               >
               </el-input>
 
@@ -33,7 +33,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入总量"
-                v-model="addMedicineForm.totalAmount"
+                v-model="dialogForm.totalAmount"
               >
               <template slot="append">公斤</template>
               </el-input>
@@ -44,12 +44,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addMedicineVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewMedicine()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -63,27 +63,27 @@ export default {
   name: "AddMedicineInfoDialog",
   data() {
     return {
-      addMedicineForm: {},
-      addMedicineVisibility: false,
-      addMedicineRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
     };
   },
   mounted() {
   },
   methods: {
-    addNewMedicine() {
-      console.log(this.addMedicineForm);
-      addMedicine(this.addMedicineForm).then((res)=>{
+    add() {
+      console.log(this.dialogForm);
+      addMedicine(this.dialogForm).then((res)=>{
         this.$emit("refresh")
       })
-      this.addMedicineVisibility = false
+      this.dialogFormVisibility = false
     },
 
   },
   watch: {
-    addMedicineVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addMedicineForm = {};
+        this.dialogForm = {};
       }
     },
   },

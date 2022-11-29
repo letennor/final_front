@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加投药记录"
-      :visible.sync="addDosingRecordVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addDosingRecordRules"
-        ref="addDosingRecordForm"
-        :model="addDosingRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -21,7 +21,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入投药量"
-                v-model="addDosingRecordForm.dosingAmount"
+                v-model="dialogForm.dosingAmount"
               >
               </el-input>
             </el-form-item>
@@ -30,7 +30,7 @@
           <el-col :span="24">
             <el-form-item label="投药种类:" prop="medicineId">
               <el-select
-                v-model="addDosingRecordForm.medicineId"
+                v-model="dialogForm.medicineId"
                 placeholder="请选择投药种类"
               >
                 <el-option
@@ -47,7 +47,7 @@
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
               <el-select
-                v-model="addDosingRecordForm.batchId"
+                v-model="dialogForm.batchId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -64,7 +64,7 @@
           <el-col :span="24">
             <el-form-item label="投药员:" prop="dosingPerson">
               <el-select
-                v-model="addDosingRecordForm.dosingPerson"
+                v-model="dialogForm.dosingPerson"
                 placeholder="请选择投药员"
               >
                 <el-option
@@ -81,7 +81,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addDosingRecordForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择捡记录员"
               >
                 <el-option
@@ -97,12 +97,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addDosingRecordVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewDosingRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -120,9 +120,9 @@ export default {
   name: "AddDosingRecordDialog",
   data() {
     return {
-      addDosingRecordForm: {},
-      addDosingRecordVisibility: false,
-      addDosingRecordRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       personList: [],
       medicineList: [],
       batchList: [],
@@ -134,13 +134,13 @@ export default {
     this.getBatchList();
   },
   methods: {
-    addNewDosingRecord() {
-      console.log(this.addDosingRecordForm);
-      addDosingRecord(this.addDosingRecordForm).then((res) => {
+    add() {
+      console.log(this.dialogForm);
+      addDosingRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit("refresh");
       });
-      this.addDosingRecordVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
     getMedicineList() {
@@ -162,9 +162,9 @@ export default {
     },
   },
   watch: {
-    addDosingRecordVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addDosingRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

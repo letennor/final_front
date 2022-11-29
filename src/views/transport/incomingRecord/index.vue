@@ -91,7 +91,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddIncomingRecordDialog.addIncomingRecordVisibility = true;
+      this.$refs.AddIncomingRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

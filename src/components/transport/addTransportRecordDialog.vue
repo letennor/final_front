@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加运输信息"
-      :visible.sync="addTransportRecordVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addTransportRecordRules"
-        ref="addTransportRecordForm"
-        :model="addTransportRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -20,7 +20,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入出发地"
-                v-model="addTransportRecordForm.start"
+                v-model="dialogForm.start"
               >
               </el-input>
             </el-form-item>
@@ -31,7 +31,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入目的地"
-                v-model="addTransportRecordForm.end"
+                v-model="dialogForm.end"
               >
               </el-input>
             </el-form-item>
@@ -42,7 +42,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入车牌号"
-                v-model="addTransportRecordForm.licensePlate"
+                v-model="dialogForm.licensePlate"
               >
               </el-input>
             </el-form-item>
@@ -51,7 +51,7 @@
           <el-col :span="24">
             <el-form-item label="司机:" prop="driver">
               <el-select
-                v-model="addTransportRecordForm.driver"
+                v-model="dialogForm.driver"
                 placeholder="请选择司机"
               >
                 <el-option
@@ -68,7 +68,7 @@
           <el-col :span="24">
             <el-form-item label="货物类别:" prop="goodsId">
               <el-select
-                v-model="addTransportRecordForm.goodsId"
+                v-model="dialogForm.goodsId"
                 placeholder="请选择货物类别"
               >
                 <el-option
@@ -85,7 +85,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addTransportRecordForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择记录员"
               >
                 <el-option
@@ -101,14 +101,14 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addTransportRecordVisibility = false"
+        <el-button @click="dialogFormVisibility = false"
           >取消</el-button
         >
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewTransportRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -123,9 +123,9 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      addTransportRecordForm: {},
-      addTransportRecordVisibility: false,
-      addTransportRecordRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       personList: [],
       goodsInfoList: [],
     };
@@ -135,12 +135,12 @@ export default {
     this.getPersonList();
   },
   methods: {
-    addNewTransportRecord() {
-      console.log("addTransportRecordForm:", this.addTransportRecordForm);
-      addTransportRecord(this.addTransportRecordForm).then((res) => {
+    add() {
+      console.log("dialogForm:", this.dialogForm);
+      addTransportRecord(this.dialogForm).then((res) => {
         this.$emit("refresh")
       });
-      this.addTransportRecordVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
     getGoodsInfoList() {
@@ -156,9 +156,9 @@ export default {
     },
   },
   watch: {
-    addTransportRecordVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addTransportRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

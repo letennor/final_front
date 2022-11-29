@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加个体死亡记录"
-      :visible.sync="addIndividualDeathRecordVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addIndividualDeathRecordRules"
-        ref="addIndividualDeathRecordForm"
-        :model="addIndividualDeathRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -18,7 +18,7 @@
           <el-col :span="24">
             <el-form-item label="死亡记录:" prop="deathRecordId">
               <el-select
-                v-model="addIndividualDeathRecordForm.deathRecordId"
+                v-model="dialogForm.deathRecordId"
                 placeholder="请选择死亡记录"
               >
                 <el-option
@@ -39,7 +39,7 @@
                 type="textarea"
                 autosize
                 placeholder="请输入死亡原因"
-                v-model="addIndividualDeathRecordForm.deathReason"
+                v-model="dialogForm.deathReason"
               >
               </el-input>
             </el-form-item>
@@ -48,7 +48,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addIndividualDeathRecordForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -64,14 +64,14 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addIndividualDeathRecordVisibility = false"
+        <el-button @click="dialogFormVisibility = false"
           >取消</el-button
         >
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewFeedRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -88,9 +88,9 @@ export default {
   name: "AddIndividualDeathRecord",
   data() {
     return {
-      addIndividualDeathRecordForm: {},
-      addIndividualDeathRecordVisibility: false,
-      addIndividualDeathRecordRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       batchList: [],
       personList: [],
       deathRecordList: [],
@@ -101,14 +101,14 @@ export default {
     this.getPersonList();
   },
   methods: {
-    addNewFeedRecord() {
-      addIndividualDeathRecord(this.addIndividualDeathRecordForm).then(
+    add() {
+      addIndividualDeathRecord(this.dialogForm).then(
         (res) => {
           console.log("res:", res);
           this.$emit("refresh")
         }
       );
-      this.addIndividualDeathRecordVisibility = false;
+      this.dialogFormVisibility = false;
     },
     getPersonList() {
       //调用接口获取person
@@ -129,9 +129,9 @@ export default {
     },
   },
   watch: {
-    addIndividualDeathRecordVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addIndividualDeathRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

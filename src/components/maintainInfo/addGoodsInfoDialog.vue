@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加货物信息"
-      :visible.sync="addGoodsInfoVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addGoodsInfoRules"
-        ref="addGoodsInfoForm"
-        :model="addGoodsInfoForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -22,7 +22,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入货物名称"
-                v-model="addGoodsInfoForm.goodsName"
+                v-model="dialogForm.goodsName"
               >
               </el-input>
             </el-form-item>
@@ -30,12 +30,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addGoodsInfoVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewGoodsInfo()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -51,28 +51,28 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      addGoodsInfoForm: {},
-      addGoodsInfoVisibility: false,
-      addGoodsInfoRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
     };
   },
   mounted() {
 
   },
   methods: {
-    addNewGoodsInfo() {
-      console.log("addGoodsInfoForm:",this.addGoodsInfoForm);
-      addGoodsInfo(this.addGoodsInfoForm).then((res)=>{
+    add() {
+      console.log("dialogForm:",this.dialogForm);
+      addGoodsInfo(this.dialogForm).then((res)=>{
         this.$emit("refresh")
       })
-      this.addGoodsInfoVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
   },
   watch: {
-    addGoodsInfoVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addGoodsInfoForm = {};
+        this.dialogForm = {};
       }
     },
   },

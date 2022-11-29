@@ -106,7 +106,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddDeathRecordDialog.addDeathRecordVisibility = true;
+      this.$refs.AddDeathRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

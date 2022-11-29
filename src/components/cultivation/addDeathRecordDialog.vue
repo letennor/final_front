@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加投药记录"
-      :visible.sync="addDeathRecordVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addDeathRecordRules"
-        ref="addDeathRecordForm"
-        :model="addDeathRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -21,7 +21,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入死亡数"
-                v-model="addDeathRecordForm.deathNumber"
+                v-model="dialogForm.deathNumber"
               >
               </el-input>
             </el-form-item>
@@ -30,7 +30,7 @@
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
               <el-select
-                v-model="addDeathRecordForm.batchId"
+                v-model="dialogForm.batchId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -47,7 +47,7 @@
           <el-col :span="24">
             <el-form-item label="统计员:" prop="deathRecordPerson">
               <el-select
-                v-model="addDeathRecordForm.deathRecordPerson"
+                v-model="dialogForm.deathRecordPerson"
                 placeholder="请选择统计员"
               >
                 <el-option
@@ -64,7 +64,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addDeathRecordForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择捡记录员"
               >
                 <el-option
@@ -80,12 +80,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addDeathRecordVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewDeathRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -101,9 +101,9 @@ export default {
   name: "AddDeathRecordDialog",
   data() {
     return {
-      addDeathRecordForm: {},
-      addDeathRecordVisibility: false,
-      addDeathRecordRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       personList: [],
       medicineList: [],
       batchList: [],
@@ -115,16 +115,16 @@ export default {
     this.getBatchList();
   },
   methods: {
-    addNewDeathRecord() {
-      this.addDeathRecordForm.deathRate =
-        this.addDeathRecordForm.deathNumber / 1000.0;
-      console.log(this.addDeathRecordForm);
-      addDeathRecord(this.addDeathRecordForm).then((res) => {
+    add() {
+      this.dialogForm.deathRate =
+        this.dialogForm.deathNumber / 1000.0;
+      console.log(this.dialogForm);
+      addDeathRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit("refresh")
       });
 
-      this.addDeathRecordVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
     getMedicineList() {
@@ -145,9 +145,9 @@ export default {
     },
   },
   watch: {
-    addDeathRecordVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addDeathRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加受精记录"
-      :visible.sync="addFertilizationRecordVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addFertilizationRecordRules"
-        ref="addFertilizationRecordForm"
-        :model="addFertilizationRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -18,7 +18,7 @@
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
               <el-select
-                v-model="addFertilizationRecordForm.batchId"
+                v-model="dialogForm.batchId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -36,7 +36,7 @@
             <el-form-item label="受精时间:" prop="fertilizationTime">
               <el-date-picker
                 placement="bottom-start"
-                v-model="addFertilizationRecordForm.fertilizationTime"
+                v-model="dialogForm.fertilizationTime"
                 type="date"
                 placeholder="选择日期"
                 format="yyyy 年 MM 月 dd 日"
@@ -53,7 +53,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入受精率"
-                v-model="addFertilizationRecordForm.fertilizationRate"
+                v-model="dialogForm.fertilizationRate"
               >
                 <template slot="append">%</template>
               </el-input>
@@ -63,7 +63,7 @@
           <el-col :span="24">
             <el-form-item label="操作员:" prop="operatePerson">
               <el-select
-                v-model="addFertilizationRecordForm.operatePerson"
+                v-model="dialogForm.operatePerson"
                 placeholder="请选择人员"
               >
                 <el-option
@@ -80,7 +80,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addFertilizationRecordForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -96,14 +96,14 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addFertilizationRecordVisibility = false"
+        <el-button @click="dialogFormVisibility = false"
           >取消</el-button
         >
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewFerilizationRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -118,9 +118,9 @@ export default {
   name: "AddFertilizationRecordDialog",
   data() {
     return {
-      addFertilizationRecordForm: {},
-      addFertilizationRecordVisibility: false,
-      addFertilizationRecordRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       batchList: [],
       personList: [],
     };
@@ -130,18 +130,18 @@ export default {
     this.getBatchList();
   },
   methods: {
-    addNewFerilizationRecord() {
+    add() {
       console.log(
-        "addFertilizationRecordForm:",
-        this.addFertilizationRecordForm
+        "dialogForm:",
+        this.dialogForm
       );
-      this.addFertilizationRecordForm.fertilizationRate =
-        this.addFertilizationRecordForm.fertilizationRate / 100.0;
-      addFertilizationRecord(this.addFertilizationRecordForm).then((res) => {
+      this.dialogForm.fertilizationRate =
+        this.dialogForm.fertilizationRate / 100.0;
+      addFertilizationRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit("refresh")
       });
-      this.addFertilizationRecordVisibility = false;
+      this.dialogFormVisibility = false;
     },
     getPersonList() {
       //调用接口获取person
@@ -159,9 +159,9 @@ export default {
     },
   },
   watch: {
-    addFertilizationRecordVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addFertilizationRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

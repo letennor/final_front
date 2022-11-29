@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加进货信息"
-      :visible.sync="addIncomingRecordVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addIncomingRules"
-        ref="addIncomingRecordForm"
-        :model="addIncomingRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -18,7 +18,7 @@
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
               <el-select
-                v-model="addIncomingRecordForm.batchId"
+                v-model="dialogForm.batchId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -38,7 +38,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入进货量"
-                v-model="addIncomingRecordForm.incomingAmount"
+                v-model="dialogForm.incomingAmount"
               >
               </el-input>
             </el-form-item>
@@ -47,7 +47,7 @@
           <el-col :span="24">
             <el-form-item label="货物类别:" prop="goodsId">
               <el-select
-                v-model="addIncomingRecordForm.goodsId"
+                v-model="dialogForm.goodsId"
                 placeholder="请选择货物类别"
               >
                 <el-option
@@ -64,7 +64,7 @@
           <el-col :span="24">
             <el-form-item label="运输记录:" prop="transportRecordId">
               <el-select
-                v-model="addIncomingRecordForm.transportRecordId"
+                v-model="dialogForm.transportRecordId"
                 placeholder="请选择运输记录"
               >
                 <el-option
@@ -86,12 +86,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addIncomingRecordVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewIncomingRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -107,9 +107,9 @@ export default {
   name: "AddIncomingRecordDialog",
   data() {
     return {
-      addIncomingRecordForm: {},
-      addIncomingRecordVisibility: false,
-      addIncomingRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       personList: [],
       batchList: [],
       goodsInfoList: [],
@@ -123,13 +123,13 @@ export default {
     this.getTransportRecordList();
   },
   methods: {
-    addNewIncomingRecord() {
-      console.log("addIncomingRecordForm:", this.addIncomingRecordForm);
-      addIncomingRecord(this.addIncomingRecordForm).then((res) => {
+    add() {
+      console.log("dialogForm:", this.dialogForm);
+      addIncomingRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit("refresh")
       });
-      this.addIncomingRecordVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
     getGoodsInfoList() {
@@ -162,9 +162,9 @@ export default {
     },
   },
   watch: {
-    addIncomingRecordVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addIncomingRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

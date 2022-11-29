@@ -96,7 +96,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddDosingRecordDialog.addDosingRecordVisibility = true;
+      this.$refs.AddDosingRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

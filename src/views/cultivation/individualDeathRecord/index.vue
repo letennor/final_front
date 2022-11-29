@@ -87,7 +87,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.IndividualDeathRecordDialog.addIndividualDeathRecordVisibility = true;
+      this.$refs.IndividualDeathRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

@@ -19,7 +19,7 @@
     </my-card>
 
     <!-- 添加用户 -->
-    <AddUserDialog ref="AddUserDialog" @refresh="refresh()"/>
+    <AddUserDialog ref="AddUserDialog" @refresh="refresh()" />
   </div>
 </template>
 
@@ -30,7 +30,7 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllPerson, deleteUserBasicInfo } from "@/api/system";
+import { getAllPerson, deleteUserBasicInfo, updateUserBasicInfo } from "@/api/system";
 export default {
   name: "UserInfo",
   components: {
@@ -46,6 +46,11 @@ export default {
     return {
       // 表头名称和字段
       columns: [
+        {
+          text: "id",
+          value: "userBasicInfoId",
+          width: 200
+        },
         {
           text: "姓名",
           value: "name",
@@ -96,21 +101,29 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
-      console.log("点击编辑");
+    update(val) {
+      //和添加用一样的dialog，将数据回显上去
+      console.log("update中的val:",val)
+      this.$refs.AddUserDialog.dialogForm = val.row
+      this.$refs.AddUserDialog.type = 0
+      this.$refs.AddUserDialog.dialogFormVisibility = true;
     },
 
     delete(val) {
-      deleteUserBasicInfo(val.row).then((res)=>{
-        console.log("res:", res)
-        this.getList()
-      })
-      console.log("点击删除");
+      deleteUserBasicInfo(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
     add() {
-      this.$refs.AddUserDialog.addUserVisiblility = true;
+      //清空dialog里面的对象，type设置为1
+      this.$refs.AddUserDialog.type = 1
+      this.$refs.AddUserDialog.dialogForm = {}
+      //清除校验
+      console.log("表单:", this.$refs.AddUserDialog)
+      this.$refs.AddUserDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕
@@ -125,13 +138,13 @@ export default {
     getList() {
       getAllPerson().then((res) => {
         this.list = res.data.data;
-        console.log("list:", this.list);
+        console.log("userInfo-list:", this.list);
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

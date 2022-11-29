@@ -86,7 +86,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddGoodsInfoDialog.addGoodsInfoVisibility = true;
+      this.$refs.AddGoodsInfoDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

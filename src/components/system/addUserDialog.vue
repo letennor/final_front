@@ -1,15 +1,15 @@
 <template>
   <div>
     <el-dialog
-      title="添加用户"
-      :visible.sync="addUserVisiblility"
+      :title="type === 1 ? '添加' : '编辑'"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addUserRules"
-        ref="addUserForm"
-        :model="addUserForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -20,7 +20,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入姓名"
-                v-model="addUserForm.name"
+                v-model="dialogForm.name"
               >
               </el-input>
             </el-form-item>
@@ -31,7 +31,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入账号"
-                v-model="addUserForm.account"
+                v-model="dialogForm.account"
               >
               </el-input>
             </el-form-item>
@@ -42,7 +42,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入密码"
-                v-model="addUserForm.password"
+                v-model="dialogForm.password"
               >
               </el-input>
             </el-form-item>
@@ -50,8 +50,10 @@
 
           <el-col :span="24">
             <el-form-item label="性别" prop="gender">
-              <el-radio v-model="addUserForm.gender" label="1">男</el-radio>
-              <el-radio v-model="addUserForm.gender" label="0">女</el-radio>
+              <el-radio-group v-model="dialogForm.gender">
+                <el-radio :label="1">男</el-radio>
+                <el-radio :label="0">女</el-radio>
+              </el-radio-group>
             </el-form-item>
           </el-col>
 
@@ -60,7 +62,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入年龄"
-                v-model="addUserForm.age"
+                v-model="dialogForm.age"
               >
               </el-input>
             </el-form-item>
@@ -70,7 +72,7 @@
             <el-form-item label="入职时间:" prop="entryTime">
               <el-date-picker
                 placement="bottom-start"
-                v-model="addUserForm.entryTime"
+                v-model="dialogForm.entryTime"
                 type="date"
                 placeholder="选择日期"
                 format="yyyy 年 MM 月 dd 日"
@@ -86,7 +88,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入薪资"
-                v-model="addUserForm.salary"
+                v-model="dialogForm.salary"
                 type="number"
               >
               </el-input>
@@ -98,7 +100,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入电话号码"
-                v-model="addUserForm.phoneNumber"
+                v-model="dialogForm.phoneNumber"
               >
               </el-input>
             </el-form-item>
@@ -109,7 +111,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入微信"
-                v-model="addUserForm.wechat"
+                v-model="dialogForm.wechat"
               >
               </el-input>
             </el-form-item>
@@ -120,7 +122,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入邮箱"
-                v-model="addUserForm.email"
+                v-model="dialogForm.email"
               >
               </el-input>
             </el-form-item>
@@ -128,8 +130,8 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addUserVisiblility = false">取消</el-button>
-        <el-button type="primary" class="addButton" v-waves @click="addUser()"
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
+        <el-button type="primary" class="addButton" v-waves @click="type === 1? add() : update()"
           >提交</el-button
         >
       </div>
@@ -142,11 +144,13 @@ export default {
   name: "AddUserDialog",
   data() {
     return {
-      addUserForm: {},
-      addUserVisiblility: false,
-      addUserRules: {
+      type: 1, //如果是1表示添加，如果是0表示编辑
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {
         // 表单必填项设置
-        name: [{ required: true, message: "请填写姓名" }],
+        //动态控制require，当关闭的时候，设置为false，当打开的时候设置为true
+        name: [{ required: true, message: "请填写姓名", trigger: "blur" }],
         account: [{ required: true, message: "请填写账号名" }],
         gender: [{ required: true, message: "请选择性别" }],
         age: [{ required: true, message: "请输入年龄" }],
@@ -157,21 +161,33 @@ export default {
     };
   },
   methods: {
-    addUser() {
-      console.log("添加用户:", this.addUserForm);
+    add() {
+      console.log("添加用户:", this.dialogForm);
       //调用接口
-      addUser(this.addUserForm).then((res) => {
+      addUser(this.dialogForm).then((res) => {
         console.log("res:", res);
-        this.addUserVisiblility = false;
+        this.dialogFormVisibility = false;
         //调用一个emit，触发父组件的getList方法
-        this.$emit('refresh')
+        this.$emit("refresh");
       });
     },
+    update(){
+      console.log('更新用户信息:', this.dialogForm)
+    }
   },
   watch: {
-    addUserVisiblility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
+      //关闭
       if (newValue === false) {
-        this.addUserForm = {};
+        this.dialogForm = {};
+      }
+
+      //打开
+      if (newValue === true) {
+        this.$nextTick(() => {
+          //表单验证失效
+          this.$refs.dialogForm.clearValidate();
+        });
       }
     },
   },

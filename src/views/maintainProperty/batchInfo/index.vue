@@ -91,7 +91,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddBatchInfoDialog.addBatchInfoVisibility = true;
+      this.$refs.AddBatchInfoDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

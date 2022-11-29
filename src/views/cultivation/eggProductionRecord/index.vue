@@ -103,7 +103,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddEggProductionRecordDialog.addEggProductionVisibility = true;
+      this.$refs.AddEggProductionRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

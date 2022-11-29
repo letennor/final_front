@@ -53,11 +53,7 @@ export default {
           text: "组织列表id",
           value: "organizationId",
         },
-        {
-          text: "创建时间",
-          value: "gmtCreate",
-          filter: parseTime
-        },
+
 
       ],
       list: [],
@@ -77,7 +73,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddUserDialog.addUserVisiblility = true;
+      this.$refs.AddUserDialog.dialogFormVisibility = true;
     },
 
 

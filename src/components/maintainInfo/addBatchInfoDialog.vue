@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加批次"
-      :visible.sync="addBatchInfoVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addBatchInfoRules"
-        ref="addBatchInfoForm"
-        :model="addBatchInfoForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -20,7 +20,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入用料名称"
-                v-model="addBatchInfoForm.batchName"
+                v-model="dialogForm.batchName"
               >
               </el-input>
             </el-form-item>
@@ -29,7 +29,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addBatchInfoForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择记录员"
               >
                 <el-option
@@ -45,12 +45,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addBatchInfoVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewBatchInfo()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -64,9 +64,9 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      addBatchInfoForm: {},
-      addBatchInfoVisibility: false,
-      addBatchInfoRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       personList: [],
     };
   },
@@ -74,12 +74,12 @@ export default {
     this.getPersonList();
   },
   methods: {
-    addNewBatchInfo() {
-      console.log(this.addBatchInfoForm);
-      addBatchInfo(this.addBatchInfoForm).then((res) => {
+    add() {
+      console.log(this.dialogForm);
+      addBatchInfo(this.dialogForm).then((res) => {
         this.$emit("refresh");
       });
-      this.addBatchInfoVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
     getPersonList() {
@@ -90,9 +90,9 @@ export default {
     },
   },
   watch: {
-    addBatchInfoVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addBatchInfoForm = {};
+        this.dialogForm = {};
       }
     },
   },

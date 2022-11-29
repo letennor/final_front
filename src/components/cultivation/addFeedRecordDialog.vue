@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加投喂记录"
-      :visible.sync="addFeedRecordVisiblility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addFeedRecordRules"
-        ref="addFeedRecordForm"
-        :model="addFeedRecordForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -18,7 +18,7 @@
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
               <el-select
-                v-model="addFeedRecordForm.batchId"
+                v-model="dialogForm.batchId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -35,7 +35,7 @@
           <el-col :span="24">
             <el-form-item label="用料类型:" prop="feedId">
               <el-select
-                v-model="addFeedRecordForm.feedId"
+                v-model="dialogForm.feedId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -55,7 +55,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入用料量"
-                v-model="addFeedRecordForm.feedAmount"
+                v-model="dialogForm.feedAmount"
               >
                 <template slot="append">公斤</template>
               </el-input>
@@ -65,7 +65,7 @@
           <el-col :span="24">
             <el-form-item label="饲养员:" prop="feedPerson">
               <el-select
-                v-model="addFeedRecordForm.feedPerson"
+                v-model="dialogForm.feedPerson"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -82,7 +82,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addFeedRecordForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -98,12 +98,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addFeedRecordVisiblility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewFeedRecord()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -119,9 +119,9 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      addFeedRecordForm: {},
-      addFeedRecordVisiblility: false,
-      addFeedRecordRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       batchList: [],
       feedList: [],
       personList: [],
@@ -133,13 +133,13 @@ export default {
     this.getBatchList();
   },
   methods: {
-    addNewFeedRecord() {
-      console.log("addFeedRecordForm:", this.addFeedRecordForm);
-      addFeedRecord(this.addFeedRecordForm).then((res) => {
+    add() {
+      console.log("dialogForm:", this.dialogForm);
+      addFeedRecord(this.dialogForm).then((res) => {
         console.log("suc");
         this.$emit("refresh");
       });
-      this.addFeedRecordVisiblility = false;
+      this.dialogFormVisibility = false;
     },
     getPersonList() {
       //调用接口获取person
@@ -164,9 +164,9 @@ export default {
     },
   },
   watch: {
-    addFeedRecordVisiblility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addFeedRecordForm = {};
+        this.dialogForm = {};
       }
     },
   },

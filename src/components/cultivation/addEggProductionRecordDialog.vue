@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加产蛋记录"
-      :visible.sync="addEggProductionVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addEggProductionRules"
-        ref="addEggProductionForm"
-        :model="addEggProductionForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -18,7 +18,7 @@
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
               <el-select
-                v-model="addEggProductionForm.batchId"
+                v-model="dialogForm.batchId"
                 placeholder="请选择批次"
               >
                 <el-option
@@ -38,7 +38,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入产蛋量"
-                v-model="addEggProductionForm.eggProductionAmount"
+                v-model="dialogForm.eggProductionAmount"
               >
                 <template slot="append">公斤</template>
               </el-input>
@@ -51,7 +51,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入坏蛋量"
-                v-model="addEggProductionForm.badEggProductionAmount"
+                v-model="dialogForm.badEggProductionAmount"
               >
                 <template slot="append">公斤</template>
               </el-input>
@@ -61,7 +61,7 @@
           <el-col :span="24">
             <el-form-item label="捡蛋员:" prop="pickEggPerson">
               <el-select
-                v-model="addEggProductionForm.pickEggPerson"
+                v-model="dialogForm.pickEggPerson"
                 placeholder="请选择捡蛋员"
               >
                 <el-option
@@ -78,7 +78,7 @@
           <el-col :span="24">
             <el-form-item label="记录员:" prop="recordPerson">
               <el-select
-                v-model="addEggProductionForm.recordPerson"
+                v-model="dialogForm.recordPerson"
                 placeholder="请选择记录员"
               >
                 <el-option
@@ -94,12 +94,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addEggProductionVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewEggProduction()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -114,9 +114,9 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      addEggProductionForm: {},
-      addEggProductionVisibility: false,
-      addEggProductionRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
       batchList: [],
       personList: [],
     };
@@ -126,22 +126,22 @@ export default {
     this.getPersonList();
   },
   methods: {
-    addNewEggProduction() {
-      console.log(this.addEggProductionForm);
+    add() {
+      console.log(this.dialogForm);
       const eggProductionRate =
-        this.addEggProductionForm.eggProductionAmount / 1000.0;
+        this.dialogForm.eggProductionAmount / 1000.0;
       const badEggProductionRate =
-        this.addEggProductionForm.badEggProductionAmount / 1000.0;
+        this.dialogForm.badEggProductionAmount / 1000.0;
 
-      this.addEggProductionForm.eggProductionRate = eggProductionRate;
-      this.addEggProductionForm.badEggProductionRate = badEggProductionRate;
+      this.dialogForm.eggProductionRate = eggProductionRate;
+      this.dialogForm.badEggProductionRate = badEggProductionRate;
 
-      addEggProductionRecord(this.addEggProductionForm).then((res) => {
+      addEggProductionRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit('refresh')
       });
 
-      this.addEggProductionVisibility = false;
+      this.dialogFormVisibility = false;
     },
 
     getBatchList() {
@@ -158,9 +158,9 @@ export default {
     },
   },
   watch: {
-    addEggProductionVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addEggProductionForm = {};
+        this.dialogForm = {};
       }
     },
   },

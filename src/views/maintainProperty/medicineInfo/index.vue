@@ -90,7 +90,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddMedicineInfoDialog.addMedicineVisibility = true;
+      this.$refs.AddMedicineInfoDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

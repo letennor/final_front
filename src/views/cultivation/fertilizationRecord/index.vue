@@ -97,7 +97,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddFertilizationRecordDialog.addFertilizationRecordVisibility = true;
+      this.$refs.AddFertilizationRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

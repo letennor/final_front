@@ -36,3 +36,12 @@ export function deleteUserBasicInfo(param) {
         data: param
     })
 }
+
+//修改用户
+export function updateUserBasicInfo(param) {
+    return request({
+        url: 'http://localhost:8991/updateUserBasicInfo',
+        method: 'post',
+        data: param
+    })
+}

@@ -2,14 +2,14 @@
   <div>
     <el-dialog
       title="添加用料"
-      :visible.sync="addFeedInfoVisibility"
+      :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
     >
       <el-form
-        :rules="addFeedInfoRules"
-        ref="addFeedInfoForm"
-        :model="addFeedInfoForm"
+        :rules="dialogFormRules"
+        ref="dialogForm"
+        :model="dialogForm"
         label-position="center"
         size="small"
         label-width="110px"
@@ -20,7 +20,7 @@
               <el-input
                 class="filter-item"
                 placeholder="请输入用料名称"
-                v-model="addFeedInfoForm.feedName"
+                v-model="dialogForm.feedName"
               >
               </el-input>
 
@@ -33,7 +33,7 @@
                 class="filter-item"
                 type="number"
                 placeholder="请输入总量"
-                v-model="addFeedInfoForm.totalAmount"
+                v-model="dialogForm.totalAmount"
               >
               </el-input>
 
@@ -43,12 +43,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="addFeedInfoVisibility = false">取消</el-button>
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="addNewFeed()"
+          @click="add()"
           >提交</el-button
         >
       </div>
@@ -62,27 +62,27 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      addFeedInfoForm: {},
-      addFeedInfoVisibility: false,
-      addFeedInfoRules: {},
+      dialogForm: {},
+      dialogFormVisibility: false,
+      dialogFormRules: {},
     };
   },
   mounted() {
   },
   methods: {
-    addNewFeed() {
-      console.log(this.addFeedInfoForm);
-      addFeedInfo(this.addFeedInfoForm).then((res)=>{
+    add() {
+      console.log(this.dialogForm);
+      addFeedInfo(this.dialogForm).then((res)=>{
         this.$emit("refresh")
       })
-      this.addFeedInfoVisibility = false
+      this.dialogFormVisibility = false
     },
 
   },
   watch: {
-    addFeedInfoVisibility(newValue, oldValue) {
+    dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {
-        this.addFeedInfoForm = {};
+        this.dialogForm = {};
       }
     },
   },

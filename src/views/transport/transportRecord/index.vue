@@ -106,7 +106,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddTransportRecordDialog.addTransportRecordVisibility = true;
+      this.$refs.AddTransportRecordDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕

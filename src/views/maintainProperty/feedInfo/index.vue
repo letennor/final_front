@@ -91,7 +91,7 @@ export default {
 
     // 新增
     add() {
-      this.$refs.AddFeedInfoDialog.addFeedInfoVisibility = true;
+      this.$refs.AddFeedInfoDialog.dialogFormVisibility = true;
     },
 
     // 表格操作按鈕
