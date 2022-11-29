@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加运输信息"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -50,10 +50,7 @@
 
           <el-col :span="24">
             <el-form-item label="司机:" prop="driver">
-              <el-select
-                v-model="dialogForm.driver"
-                placeholder="请选择司机"
-              >
+              <el-select v-model="dialogForm.driver" placeholder="请选择司机">
                 <el-option
                   v-for="item in personList"
                   :key="item.userBasicInfoId"
@@ -101,14 +98,8 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisibility = false"
-          >取消</el-button
-        >
-        <el-button
-          type="primary"
-          class="addButton"
-          v-waves
-          @click="add()"
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
+        <el-button type="primary" class="addButton" v-waves @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -118,11 +109,17 @@
 <script>
 import { getAllGoodsInfo } from "@/api/maintainInfo";
 import { getAllPerson } from "@/api/system";
-import { addTransportRecord, getAllTransportRecord, deleteTransportRecord } from "@/api/transport";
+import {
+  addTransportRecord,
+  getAllTransportRecord,
+  deleteTransportRecord,
+  updateTransportRecord,
+} from "@/api/transport";
 export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
+      type:1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -138,9 +135,16 @@ export default {
     add() {
       console.log("dialogForm:", this.dialogForm);
       addTransportRecord(this.dialogForm).then((res) => {
-        this.$emit("refresh")
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
-      this.dialogFormVisibility = false;
+    },
+
+    update() {
+      updateTransportRecord(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
     },
 
     getGoodsInfoList() {

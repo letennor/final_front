@@ -93,8 +93,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
-      console.log("点击编辑");
+    update(val) {
+      this.$refs.AddTransportRecordDialog.dialogForm = val.row;
+      this.$refs.AddTransportRecordDialog.type = 0;
+      this.$refs.AddTransportRecordDialog.dialogFormVisibility = true;
     },
 
     delete(val) {
@@ -106,6 +108,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.AddTransportRecordDialog.type = 1;
+      this.$refs.AddTransportRecordDialog.dialogForm = {};
       this.$refs.AddTransportRecordDialog.dialogFormVisibility = true;
     },
 

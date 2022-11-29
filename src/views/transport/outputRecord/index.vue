@@ -18,13 +18,12 @@
       ></table-list>
     </my-card>
 
-    <AddOutputRecordDialog ref="AddOutputRecordDialog" @refresh="refresh"/>
-
+    <AddOutputRecordDialog ref="AddOutputRecordDialog" @refresh="refresh" />
   </div>
 </template>
 
 <script>
-import AddOutputRecordDialog from "@/components/transport/addOutputRecordDialog.vue"
+import AddOutputRecordDialog from "@/components/transport/addOutputRecordDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
@@ -36,7 +35,7 @@ export default {
   components: {
     tableList,
     MyCard,
-    AddOutputRecordDialog
+    AddOutputRecordDialog,
   },
   directives: {
     waves,
@@ -81,19 +80,23 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
-      console.log("点击编辑");
+    update(val) {
+      this.$refs.AddOutputRecordDialog.dialogForm = val.row;
+      this.$refs.AddOutputRecordDialog.type = 0;
+      this.$refs.AddOutputRecordDialog.dialogFormVisibility = true;
     },
 
     delete(val) {
-        deleteOutputRecord(val.row).then((res)=>{
-            console.log('res:', res)
-            this.getList()
-        })
+      deleteOutputRecord(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
     add() {
+      this.$refs.AddOutputRecordDialog.type = 1;
+      this.$refs.AddOutputRecordDialog.dialogForm = {};
       this.$refs.AddOutputRecordDialog.dialogFormVisibility = true;
     },
 
@@ -113,9 +116,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

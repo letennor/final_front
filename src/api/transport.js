@@ -82,3 +82,30 @@ export function deleteTransportRecord(param) {
     })
 }
 
+//修改进货信息
+export function updateIncomingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateIncomingRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//修改出苗信息
+export function updateOutputRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateOutputRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//修改运输信息
+export function updateTransportRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateTransportRecord',
+        method: 'post',
+        data: param
+    })
+}
+

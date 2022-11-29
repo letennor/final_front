@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加进货信息"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -17,10 +17,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
-              <el-select
-                v-model="dialogForm.batchId"
-                placeholder="请选择批次"
-              >
+              <el-select v-model="dialogForm.batchId" placeholder="请选择批次">
                 <el-option
                   v-for="item in batchList"
                   :key="item.batchId"
@@ -91,7 +88,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -102,11 +99,16 @@
 import { parseTime } from "@/utils/index";
 import { getAllPerson } from "@/api/system";
 import { getAllGoodsInfo, getAllBatch } from "@/api/maintainInfo";
-import { getAllTransportRecord, addIncomingRecord } from "@/api/transport";
+import {
+  getAllTransportRecord,
+  addIncomingRecord,
+  updateIncomingRecord,
+} from "@/api/transport";
 export default {
   name: "AddIncomingRecordDialog",
   data() {
     return {
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -127,9 +129,16 @@ export default {
       console.log("dialogForm:", this.dialogForm);
       addIncomingRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
-        this.$emit("refresh")
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
-      this.dialogFormVisibility = false;
+    },
+
+    update() {
+      updateIncomingRecord(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
     },
 
     getGoodsInfoList() {

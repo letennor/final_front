@@ -19,13 +19,12 @@
     </my-card>
 
     <!-- 添加个体死亡量记录 -->
-    <AddIncomingRecordDialog ref="AddIncomingRecordDialog" @refresh="refresh"/>
-
+    <AddIncomingRecordDialog ref="AddIncomingRecordDialog" @refresh="refresh" />
   </div>
 </template>
 
 <script>
-import AddIncomingRecordDialog from "@/components/transport/addIncomingRecordDialog.vue"
+import AddIncomingRecordDialog from "@/components/transport/addIncomingRecordDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
@@ -37,7 +36,7 @@ export default {
   components: {
     tableList,
     MyCard,
-    AddIncomingRecordDialog
+    AddIncomingRecordDialog,
   },
   directives: {
     waves,
@@ -78,19 +77,23 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
-      console.log("点击编辑");
+    update(val) {
+      this.$refs.AddIncomingRecordDialog.dialogForm = val.row;
+      this.$refs.AddIncomingRecordDialog.type = 0;
+      this.$refs.AddIncomingRecordDialog.dialogFormVisibility = true;
     },
 
     delete(val) {
-        deleteIncomingRecord(val.row).then((res)=>{
-            console.log('res:', res)
-            this.getList()
-        })
+      deleteIncomingRecord(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
     add() {
+      this.$refs.AddIncomingRecordDialog.type = 1;
+      this.$refs.AddIncomingRecordDialog.dialogForm = {};
       this.$refs.AddIncomingRecordDialog.dialogFormVisibility = true;
     },
 
@@ -110,9 +113,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>
