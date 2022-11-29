@@ -18,12 +18,12 @@
       ></table-list>
     </my-card>
 
-    <AddBatchInfoDialog ref="AddBatchInfoDialog" @refresh="refresh()"/>
+    <AddBatchInfoDialog ref="AddBatchInfoDialog" @refresh="refresh()" />
   </div>
 </template>
 
 <script>
-import AddBatchInfoDialog from "@/components/maintainInfo/addBatchInfoDialog.vue"
+import AddBatchInfoDialog from "@/components/maintainInfo/addBatchInfoDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
@@ -60,7 +60,7 @@ export default {
         {
           text: "创建时间",
           value: "gmtCreate",
-          filter: parseTime
+          filter: parseTime,
         },
         {
           text: "操作",
@@ -77,20 +77,25 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
+    update(val) {
+      this.$refs.AddBatchInfoDialog.dialogForm = val.row;
+      this.$refs.AddBatchInfoDialog.type = 0;
+      this.$refs.AddBatchInfoDialog.dialogFormVisibility = true;
       console.log("点击编辑");
     },
 
     delete(val) {
-      deleteBatchInfo(val.row).then((res)=>{
+      deleteBatchInfo(val.row).then((res) => {
         console.log("res:", res);
-        this.getList()
-      })
+        this.getList();
+      });
       console.log("点击删除");
     },
 
     // 新增
     add() {
+      this.$refs.AddBatchInfoDialog.type = 1;
+      this.$refs.AddBatchInfoDialog.dialogForm = {};
       this.$refs.AddBatchInfoDialog.dialogFormVisibility = true;
     },
 
@@ -110,9 +115,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

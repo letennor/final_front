@@ -102,8 +102,7 @@ export default {
   },
   methods: {
     update(val) {
-      //和添加用一样的dialog，将数据回显上去
-      console.log("update中的val:",val)
+
       this.$refs.AddUserDialog.dialogForm = val.row
       this.$refs.AddUserDialog.type = 0
       this.$refs.AddUserDialog.dialogFormVisibility = true;
@@ -121,8 +120,6 @@ export default {
       //清空dialog里面的对象，type设置为1
       this.$refs.AddUserDialog.type = 1
       this.$refs.AddUserDialog.dialogForm = {}
-      //清除校验
-      console.log("表单:", this.$refs.AddUserDialog)
       this.$refs.AddUserDialog.dialogFormVisibility = true;
     },
 

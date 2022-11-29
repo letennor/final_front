@@ -38,7 +38,7 @@ export function deleteUserBasicInfo(param) {
 }
 
 //修改用户
-export function updateUserBasicInfo(param) {
+export function updateUser(param) {
     return request({
         url: 'http://localhost:8991/updateUserBasicInfo',
         method: 'post',

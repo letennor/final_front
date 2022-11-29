@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加批次"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -50,7 +50,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1? add() : update()"
           >提交</el-button
         >
       </div>
@@ -58,12 +58,13 @@
   </div>
 </template>
 <script>
-import { addBatchInfo } from "@/api/maintainInfo";
+import { addBatchInfo, updateBatchInfo } from "@/api/maintainInfo";
 import { getAllPerson } from "@/api/system";
 export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
+      type:1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -78,8 +79,17 @@ export default {
       console.log(this.dialogForm);
       addBatchInfo(this.dialogForm).then((res) => {
         this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
-      this.dialogFormVisibility = false;
+      
+    },
+    
+    update(){
+      updateBatchInfo(this.dialogForm).then((res)=>{
+        console.log("res:", res)
+        this.$emit("refresh")
+        this.dialogFormVisibility = false
+      })
     },
 
     getPersonList() {

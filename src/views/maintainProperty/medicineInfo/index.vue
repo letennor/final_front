@@ -77,7 +77,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
+    update(val) {
+      this.$refs.AddMedicineInfoDialog.dialogForm = val.row;
+      this.$refs.AddMedicineInfoDialog.type = 0;
+      this.$refs.AddMedicineInfoDialog.dialogFormVisibility = true;
       console.log("点击编辑");
     },
 
@@ -90,6 +93,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.AddMedicineInfoDialog.type = 1;
+      this.$refs.AddMedicineInfoDialog.dialogForm = {};
       this.$refs.AddMedicineInfoDialog.dialogFormVisibility = true;
     },
 

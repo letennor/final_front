@@ -139,7 +139,7 @@
   </div>
 </template>
 <script>
-import { addUser } from "@/api/system";
+import { addUser, updateUser } from "@/api/system";
 export default {
   name: "AddUserDialog",
   data() {
@@ -173,6 +173,13 @@ export default {
     },
     update(){
       console.log('更新用户信息:', this.dialogForm)
+
+      updateUser(this.dialogForm).then((res)=>{
+        console.log("res:", res)
+        this.dialogFormVisibility = false;
+        this.$emit("refresh")
+      })
+      //调用接口
     }
   },
   watch: {

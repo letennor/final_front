@@ -78,7 +78,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
+    update(val) {
+      this.$refs.AddFeedInfoDialog.dialogForm = val.row;
+      this.$refs.AddFeedInfoDialog.type = 0;
+      this.$refs.AddFeedInfoDialog.dialogFormVisibility = true;
       console.log("点击编辑");
     },
 
@@ -91,6 +94,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.AddFeedInfoDialog.type = 1;
+      this.$refs.AddFeedInfoDialog.dialogForm = {};
       this.$refs.AddFeedInfoDialog.dialogFormVisibility = true;
     },
 

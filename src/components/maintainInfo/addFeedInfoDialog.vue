@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加用料"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -23,7 +23,6 @@
                 v-model="dialogForm.feedName"
               >
               </el-input>
-
             </el-form-item>
           </el-col>
 
@@ -36,10 +35,8 @@
                 v-model="dialogForm.totalAmount"
               >
               </el-input>
-
             </el-form-item>
           </el-col>
-
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -48,7 +45,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -57,7 +54,7 @@
 </template>
 <script>
 import request from "@/utils/request";
-import { addFeedInfo} from "@/api/maintainInfo";
+import { addFeedInfo, updateFeedInfo } from "@/api/maintainInfo";
 export default {
   name: "AddFeedRecordDialog",
   data() {
@@ -67,17 +64,23 @@ export default {
       dialogFormRules: {},
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     add() {
       console.log(this.dialogForm);
-      addFeedInfo(this.dialogForm).then((res)=>{
-        this.$emit("refresh")
-      })
-      this.dialogFormVisibility = false
+      addFeedInfo(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+      });
+      this.dialogFormVisibility = false;
     },
 
+    update() {
+      updateFeedInfo(this.dialogForm).then((res) => {
+        console.log("res:", res);
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
+    },
   },
   watch: {
     dialogFormVisibility(newValue, oldValue) {

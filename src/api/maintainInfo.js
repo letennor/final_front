@@ -111,3 +111,40 @@ export function deleteBatchInfo(param) {
         data: param
     })
 }
+
+//更新批次信息
+export function updateBatchInfo(param) {
+    return request({
+        url: 'http://localhost:8991/updateBatchInfo',
+        method: 'post',
+        data: param
+    })
+}
+
+//更新用料信息
+export function updateFeedInfo(param) {
+    return request({
+        url: 'http://localhost:8991/updateFeedInfo',
+        method: 'post',
+        data: param
+    })
+}
+
+//更新货物信息
+export function updateGoodsInfo(param) {
+    return request({
+        url: 'http://localhost:8991/updateGoodsInfo',
+        method: 'post',
+        data: param
+    })
+}
+
+//更新药物信息
+export function updateMedicineInfo(param) {
+    return request({
+        url: 'http://localhost:8991/updateMedicineInfo',
+        method: 'post',
+        data: param
+    })
+}
+

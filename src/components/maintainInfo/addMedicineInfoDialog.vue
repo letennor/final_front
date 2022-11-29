@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加药物"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -23,7 +23,6 @@
                 v-model="dialogForm.medicineName"
               >
               </el-input>
-
             </el-form-item>
           </el-col>
 
@@ -35,12 +34,10 @@
                 placeholder="请输入总量"
                 v-model="dialogForm.totalAmount"
               >
-              <template slot="append">公斤</template>
+                <template slot="append">公斤</template>
               </el-input>
-
             </el-form-item>
           </el-col>
-
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -49,7 +46,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -58,7 +55,7 @@
 </template>
 <script>
 import request from "@/utils/request";
-import { addMedicine} from "@/api/maintainInfo";
+import { addMedicine, updateMedicineInfo } from "@/api/maintainInfo";
 export default {
   name: "AddMedicineInfoDialog",
   data() {
@@ -68,17 +65,22 @@ export default {
       dialogFormRules: {},
     };
   },
-  mounted() {
-  },
+  mounted() {},
   methods: {
     add() {
       console.log(this.dialogForm);
-      addMedicine(this.dialogForm).then((res)=>{
-        this.$emit("refresh")
-      })
-      this.dialogFormVisibility = false
+      addMedicine(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
     },
 
+    update() {
+      updateMedicineInfo(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
+    },
   },
   watch: {
     dialogFormVisibility(newValue, oldValue) {
