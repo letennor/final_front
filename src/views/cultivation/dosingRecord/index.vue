@@ -82,7 +82,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
+    update(val) {
+      this.$refs.AddDosingRecordDialog.dialogForm = val.row;
+      this.$refs.AddDosingRecordDialog.type = 0;
+      this.$refs.AddDosingRecordDialog.dialogFormVisibility = true;
       console.log("点击编辑");
     },
 
@@ -96,6 +99,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.AddDosingRecordDialog.type = 1;
+      this.$refs.AddDosingRecordDialog.dialogForm = {};
       this.$refs.AddDosingRecordDialog.dialogFormVisibility = true;
     },
 

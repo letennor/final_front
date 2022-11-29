@@ -74,8 +74,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
-      console.log("点击编辑");
+    update(val) {
+      this.$refs.IndividualDeathRecordDialog.dialogForm = val.row;
+      this.$refs.IndividualDeathRecordDialog.type = 0;
+      this.$refs.IndividualDeathRecordDialog.dialogFormVisibility = true;
     },
 
     delete(val) {
@@ -87,6 +89,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.IndividualDeathRecordDialog.type = 1;
+      this.$refs.IndividualDeathRecordDialog.dialogForm = {};
       this.$refs.IndividualDeathRecordDialog.dialogFormVisibility = true;
     },
 

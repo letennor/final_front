@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加产蛋记录"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -17,10 +17,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
-              <el-select
-                v-model="dialogForm.batchId"
-                placeholder="请选择批次"
-              >
+              <el-select v-model="dialogForm.batchId" placeholder="请选择批次">
                 <el-option
                   v-for="item in batchList"
                   :key="item.batchId"
@@ -99,7 +96,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -109,11 +106,15 @@
 <script>
 import { getAllBatch } from "@/api/maintainInfo";
 import { getAllPerson } from "@/api/system";
-import { addEggProductionRecord } from "@/api/cultivation";
+import {
+  addEggProductionRecord,
+  updateEggProductionRecord,
+} from "@/api/cultivation";
 export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -127,9 +128,7 @@ export default {
   },
   methods: {
     add() {
-      console.log(this.dialogForm);
-      const eggProductionRate =
-        this.dialogForm.eggProductionAmount / 1000.0;
+      const eggProductionRate = this.dialogForm.eggProductionAmount / 1000.0;
       const badEggProductionRate =
         this.dialogForm.badEggProductionAmount / 1000.0;
 
@@ -138,10 +137,16 @@ export default {
 
       addEggProductionRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
-        this.$emit('refresh')
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
+    },
 
-      this.dialogFormVisibility = false;
+    update() {
+      updateEggProductionRecord(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
     },
 
     getBatchList() {

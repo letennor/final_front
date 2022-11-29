@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加投喂记录"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -17,10 +17,7 @@
         <el-row>
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
-              <el-select
-                v-model="dialogForm.batchId"
-                placeholder="请选择批次"
-              >
+              <el-select v-model="dialogForm.batchId" placeholder="请选择批次">
                 <el-option
                   v-for="item in batchList"
                   :key="item.batchId"
@@ -34,10 +31,7 @@
 
           <el-col :span="24">
             <el-form-item label="用料类型:" prop="feedId">
-              <el-select
-                v-model="dialogForm.feedId"
-                placeholder="请选择批次"
-              >
+              <el-select v-model="dialogForm.feedId" placeholder="请选择批次">
                 <el-option
                   v-for="item in feedList"
                   :key="item.feedId"
@@ -103,7 +97,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -114,11 +108,12 @@
 import request from "@/utils/request";
 import { getAllPerson } from "@/api/system";
 import { getAllFeed, getAllBatch } from "@/api/maintainInfo";
-import { addFeedRecord } from "@/api/cultivation";
+import { addFeedRecord, updateFeedRecord } from "@/api/cultivation";
 export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -138,9 +133,17 @@ export default {
       addFeedRecord(this.dialogForm).then((res) => {
         console.log("suc");
         this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
-      this.dialogFormVisibility = false;
     },
+
+    update() {
+      updateFeedRecord(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
+    },
+
     getPersonList() {
       //调用接口获取person
       getAllPerson().then((res) => {

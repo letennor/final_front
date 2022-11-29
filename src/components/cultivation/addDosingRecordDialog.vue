@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加投药记录"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -46,10 +46,7 @@
 
           <el-col :span="24">
             <el-form-item label="批次:" prop="batchId">
-              <el-select
-                v-model="dialogForm.batchId"
-                placeholder="请选择批次"
-              >
+              <el-select v-model="dialogForm.batchId" placeholder="请选择批次">
                 <el-option
                   v-for="item in batchList"
                   :key="item.batchId"
@@ -102,7 +99,7 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -113,13 +110,12 @@
 import request from "@/utils/request";
 import { getAllMedicine, getAllBatch } from "@/api/maintainInfo";
 import { getAllPerson } from "@/api/system";
-import {
-  addDosingRecord,
-} from "@/api/cultivation";
+import { addDosingRecord, updateDosingRecord } from "@/api/cultivation";
 export default {
   name: "AddDosingRecordDialog",
   data() {
     return {
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -139,8 +135,15 @@ export default {
       addDosingRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
-      this.dialogFormVisibility = false;
+    },
+
+    update() {
+      updateDosingRecord(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
     },
 
     getMedicineList() {

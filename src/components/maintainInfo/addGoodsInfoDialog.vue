@@ -47,6 +47,7 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
+      type:1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},

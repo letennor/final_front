@@ -90,7 +90,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
+    update(val) {
+      this.$refs.AddEggProductionRecordDialog.dialogForm = val.row;
+      this.$refs.AddEggProductionRecordDialog.type = 0;
+      this.$refs.AddEggProductionRecordDialog.dialogFormVisibility = true;
       console.log("点击编辑");
     },
 
@@ -103,6 +106,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.AddEggProductionRecordDialog.type = 1;
+      this.$refs.AddEggProductionRecordDialog.dialogForm = {};
       this.$refs.AddEggProductionRecordDialog.dialogFormVisibility = true;
     },
 

@@ -163,3 +163,61 @@ export function deleteFertilizationRecord(param) {
         data: param
     })
 }
+
+//修改死亡信息
+export function updateDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//修改投药信息
+export function updateDosingRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateDosingRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//修改产蛋信息
+export function updateEggProductionRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateEggProductionRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+
+//修改喂料信息
+export function updateFeedRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateFeedRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//修改受精信息
+export function updateFertilizationRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateFertilizationRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+//修改个体死亡信息
+export function updateIndividualDeathRecord(param) {
+    return request({
+        url: 'http://localhost:8991/updateIndividualDeathRecord',
+        method: 'post',
+        data: param
+    })
+}
+
+
+

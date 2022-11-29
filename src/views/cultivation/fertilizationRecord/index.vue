@@ -83,8 +83,10 @@ export default {
     this.getList();
   },
   methods: {
-    update() {
-      console.log("点击编辑");
+    update(val) {
+      this.$refs.AddFertilizationRecordDialog.dialogForm = val.row;
+      this.$refs.AddFertilizationRecordDialog.type = 0;
+      this.$refs.AddFertilizationRecordDialog.dialogFormVisibility = true;
     },
 
     delete(val) {
@@ -97,6 +99,8 @@ export default {
 
     // 新增
     add() {
+      this.$refs.AddFertilizationRecordDialog.type = 1;
+      this.$refs.AddFertilizationRecordDialog.dialogForm = {};
       this.$refs.AddFertilizationRecordDialog.dialogFormVisibility = true;
     },
 

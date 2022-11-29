@@ -60,6 +60,7 @@ export default {
   name: "AddMedicineInfoDialog",
   data() {
     return {
+      type:1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},

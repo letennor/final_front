@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-dialog
-      title="添加个体死亡记录"
+      :title="type === 1 ? '添加' : '编辑'"
       :visible.sync="dialogFormVisibility"
       width="600px"
       v-dragDialog
@@ -64,14 +64,12 @@
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisibility = false"
-          >取消</el-button
-        >
+        <el-button @click="dialogFormVisibility = false">取消</el-button>
         <el-button
           type="primary"
           class="addButton"
           v-waves
-          @click="add()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -82,12 +80,17 @@
 import request from "@/utils/request";
 import { getAllBatch } from "@/api/maintainInfo";
 import { getAllPerson } from "@/api/system";
-import { getAllDeathRecord, addIndividualDeathRecord } from "@/api/cultivation";
+import {
+  getAllDeathRecord,
+  addIndividualDeathRecord,
+  updateIndividualDeathRecord,
+} from "@/api/cultivation";
 import { parseTime } from "@/utils/index";
 export default {
   name: "AddIndividualDeathRecord",
   data() {
     return {
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
@@ -102,14 +105,20 @@ export default {
   },
   methods: {
     add() {
-      addIndividualDeathRecord(this.dialogForm).then(
-        (res) => {
-          console.log("res:", res);
-          this.$emit("refresh")
-        }
-      );
-      this.dialogFormVisibility = false;
+      addIndividualDeathRecord(this.dialogForm).then((res) => {
+        console.log("res:", res);
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
     },
+
+    update() {
+      updateIndividualDeathRecord(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
+      });
+    },
+
     getPersonList() {
       //调用接口获取person
       getAllPerson().then((res) => {
