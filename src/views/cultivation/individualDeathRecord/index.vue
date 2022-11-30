@@ -19,25 +19,30 @@
     </my-card>
 
     <!-- 添加个体死亡量记录 -->
-    <IndividualDeathRecordDialog ref="IndividualDeathRecordDialog" @refresh="refresh"/>
-
+    <IndividualDeathRecordDialog
+      ref="IndividualDeathRecordDialog"
+      @refresh="refresh"
+    />
   </div>
 </template>
 
 <script>
-import IndividualDeathRecordDialog from "@/components/cultivation/addIndividualDeathRecordDialog.vue"
+import IndividualDeathRecordDialog from "@/components/cultivation/addIndividualDeathRecordDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllIndividualDeathRecord, deleteIndividualDeathRecord } from "@/api/cultivation";
+import {
+  getAllIndividualDeathRecord,
+  deleteIndividualDeathRecord,
+} from "@/api/cultivation";
 export default {
   name: "IndividualDeathRecord",
   components: {
     tableList,
     MyCard,
-    IndividualDeathRecordDialog
+    IndividualDeathRecordDialog,
   },
   directives: {
     waves,
@@ -58,6 +63,12 @@ export default {
         {
           text: "记录员",
           value: "recordPerson",
+        },
+        {
+          text: "记录时间",
+          value: "recordTime",
+          filter: parseTime,
+          filterParams: ["{y}年{m}月{d}日"],
         },
         {
           text: "操作",
@@ -81,10 +92,10 @@ export default {
     },
 
     delete(val) {
-        deleteIndividualDeathRecord(val.row).then((res)=>{
-            console.log('res:', res)
-            this.getList()
-        })
+      deleteIndividualDeathRecord(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
@@ -110,9 +121,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

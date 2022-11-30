@@ -95,11 +95,30 @@
               </el-select>
             </el-form-item>
           </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="记录时间:" prop="recordPerson">
+              <el-date-picker
+                placement="bottom-start"
+                v-model="dialogForm.recordTime"
+                type="date"
+                placeholder="选择日期"
+                format="yyyy 年 MM 月 dd 日"
+                value-format="timestamp"
+                style="width: 100%"
+              >
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibility = false">取消</el-button>
-        <el-button type="primary" class="addButton" v-waves @click="type === 1 ? add() : update()"
+        <el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -119,7 +138,7 @@ export default {
   name: "AddFeedRecordDialog",
   data() {
     return {
-      type:1,
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},

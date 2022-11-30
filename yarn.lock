@@ -2817,13 +2817,12 @@
   "resolved" "https://registry.npmjs.org/easy-stack/-/easy-stack-1.0.1.tgz"
   "version" "1.0.1"
 
-"echarts@^5.4.0":
-  "integrity" "sha512-uPsO9VRUIKAdFOoH3B0aNg7NRVdN7aM39/OjovjO9MwmWsAkfGyeXJhK+dbRi51iDrQWliXV60/XwLA7kg3z0w=="
-  "resolved" "https://tech.suitbim.com/verdaccio/echarts/-/echarts-5.4.0.tgz"
-  "version" "5.4.0"
+"echarts@^4.8.0":
+  "integrity" "sha512-YwShpug8fWngj/RlgxDaYrLBoD+LsZUArrusjNPHpAF+is+gGe38xx4W848AwWMGoi745t3OXM52JedNrv+F6g=="
+  "resolved" "https://tech.suitbim.com/verdaccio/echarts/-/echarts-4.8.0.tgz"
+  "version" "4.8.0"
   dependencies:
-    "tslib" "2.3.0"
-    "zrender" "5.4.0"
+    "zrender" "4.3.1"
 
 "ee-first@1.1.1":
   "integrity" "sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow=="
@@ -5936,11 +5935,6 @@
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.1.tgz"
   "version" "2.4.1"
 
-"tslib@2.3.0":
-  "integrity" "sha512-N82ooyxVNm6h1riLCoyS9e3fuJ3AMG2zIZs2Gd1ATcSFjSA23Q0fzjjZeh0jbJvWVDZ0cJT8yaNNaaXHzueNjg=="
-  "resolved" "https://tech.suitbim.com/verdaccio/tslib/-/tslib-2.3.0.tgz"
-  "version" "2.3.0"
-
 "type-check@^0.4.0", "type-check@~0.4.0":
   "integrity" "sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew=="
   "resolved" "https://registry.npmjs.org/type-check/-/type-check-0.4.0.tgz"
@@ -6419,9 +6413,7 @@
     "normalize-path" "^1.0.0"
     "strip-indent" "^2.0.0"
 
-"zrender@5.4.0":
-  "integrity" "sha512-rOS09Z2HSVGFs2dn/TuYk5BlCaZcVe8UDLLjj1ySYF828LATKKdxuakSZMvrDz54yiKPDYVfjdKqcX8Jky3BIA=="
-  "resolved" "https://tech.suitbim.com/verdaccio/zrender/-/zrender-5.4.0.tgz"
-  "version" "5.4.0"
-  dependencies:
-    "tslib" "2.3.0"
+"zrender@4.3.1":
+  "integrity" "sha512-CeH2TpJeCdG0TAGYoPSAcFX2ogdug1K7LIn9UO/q9HWqQ54gWhrMAlDP9AwWYMUDhrPe4VeazQ4DW3msD96nUQ=="
+  "resolved" "https://tech.suitbim.com/verdaccio/zrender/-/zrender-4.3.1.tgz"
+  "version" "4.3.1"

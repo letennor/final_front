@@ -19,12 +19,12 @@
     </my-card>
 
     <!-- 添加投喂记录 -->
-    <AddFeedRecordDialog ref="AddFeedRecordDialog" @refresh="refresh()"/>
+    <AddFeedRecordDialog ref="AddFeedRecordDialog" @refresh="refresh()" />
   </div>
 </template>
 
 <script>
-import AddFeedRecordDialog from "@/components/cultivation/addFeedRecordDialog.vue"
+import AddFeedRecordDialog from "@/components/cultivation/addFeedRecordDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
@@ -67,6 +67,12 @@ export default {
           value: "recordPerson",
         },
         {
+          text: "记录时间",
+          value: "recordTime",
+          filter: parseTime,
+          filterParams: ["{y}年{m}月{d}日"],
+        },
+        {
           text: "操作",
           type: "iconButton",
           width: 180,
@@ -88,10 +94,10 @@ export default {
     },
 
     delete(val) {
-        deleteFeedRecord(val.row).then((res)=>{
-            console.log('res:', res)
-            this.getList()
-        })
+      deleteFeedRecord(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
@@ -117,9 +123,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

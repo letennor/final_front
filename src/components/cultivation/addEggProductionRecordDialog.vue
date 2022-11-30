@@ -88,6 +88,21 @@
               </el-select>
             </el-form-item>
           </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="记录时间:" prop="recordPerson">
+              <el-date-picker
+                placement="bottom-start"
+                v-model="dialogForm.recordTime"
+                type="date"
+                placeholder="选择日期"
+                format="yyyy 年 MM 月 dd 日"
+                value-format="timestamp"
+                style="width: 100%"
+              >
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -128,13 +143,13 @@ export default {
   },
   methods: {
     add() {
+
       const eggProductionRate = this.dialogForm.eggProductionAmount / 1000.0;
       const badEggProductionRate =
         this.dialogForm.badEggProductionAmount / 1000.0;
 
       this.dialogForm.eggProductionRate = eggProductionRate;
       this.dialogForm.badEggProductionRate = badEggProductionRate;
-
       addEggProductionRecord(this.dialogForm).then((res) => {
         console.log("res:", res);
         this.$emit("refresh");

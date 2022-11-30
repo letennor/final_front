@@ -18,25 +18,32 @@
       ></table-list>
     </my-card>
 
-    <AddTransportRecordDialog ref="AddTransportRecordDialog" @refresh="refresh"/>
-
+    <AddTransportRecordDialog
+      ref="AddTransportRecordDialog"
+      @refresh="refresh"
+    />
   </div>
 </template>
 
 <script>
-import AddTransportRecordDialog from "@/components/transport/addTransportRecordDialog.vue"
+import AddTransportRecordDialog from "@/components/transport/addTransportRecordDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllOutputRecord, deleteOutputRecord, deleteTransportRecord, getAllTransportRecord } from "@/api/transport";
+import {
+  getAllOutputRecord,
+  deleteOutputRecord,
+  deleteTransportRecord,
+  getAllTransportRecord,
+} from "@/api/transport";
 export default {
   name: "IndividualDeathRecord",
   components: {
     tableList,
     MyCard,
-    AddTransportRecordDialog
+    AddTransportRecordDialog,
   },
   directives: {
     waves,
@@ -79,6 +86,12 @@ export default {
           value: "recordPerson",
         },
         {
+          text: "记录时间",
+          value: "recordTime",
+          filter: parseTime,
+          filterParams: ["{y}年{m}月{d}日"],
+        },
+        {
           text: "操作",
           type: "iconButton",
           width: 180,
@@ -100,10 +113,10 @@ export default {
     },
 
     delete(val) {
-        deleteTransportRecord(val.row).then((res)=>{
-            console.log('res:', res)
-            this.getList()
-        })
+      deleteTransportRecord(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
@@ -129,9 +142,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

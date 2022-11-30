@@ -63,6 +63,12 @@ export default {
           value: "transportRecordId",
         },
         {
+          text: "记录时间",
+          value: "recordTime",
+          filter: parseTime,
+          filterParams: ["{y}年{m}月{d}日"],
+        },
+        {
           text: "操作",
           type: "iconButton",
           width: 180,
