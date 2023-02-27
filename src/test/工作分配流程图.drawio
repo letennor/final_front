@@ -1,0 +1,81 @@
+<mxfile host="65bd71144e">
+    <diagram id="WYRJOporM2WyBqpcenE2" name="第 1 页">
+        <mxGraphModel dx="1188" dy="539" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="5" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="3" target="4">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="3" value="开始" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="350" y="40" width="80" height="30" as="geometry"/>
+                </mxCell>
+                <mxCell id="8" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="4" target="7">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="4" value="用户点击“工作分配”页面" style="whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="106" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="12" value="" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="7" target="14">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="390" y="337" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7" value="用户点击员工的“分配工作”按钮" style="whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="207" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="19" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="14" target="18">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="14" value="用户选择日期、工作项目，点击“完成分配”按钮&lt;br&gt;" style="whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="300" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="21" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="18" target="20">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="22" value="YES" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="21">
+                    <mxGeometry x="-0.2028" y="3" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="24" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="18" target="23">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="25" value="NO" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="24">
+                    <mxGeometry x="-0.1966" relative="1" as="geometry">
+                        <mxPoint as="offset"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="18" value="系统判断员工在选择的日期是否有空" style="rhombus;whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="300" y="388" width="180" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="27" style="edgeStyle=none;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="20" target="26">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="20" value="系统关闭工作分配框，并提示用户工作分配成功" style="whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="522" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="31" style="edgeStyle=elbowEdgeStyle;html=1;elbow=vertical;" edge="1" parent="1" source="23">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="390" y="690" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="520" y="690"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="23" value="系统关闭工作分配对话框，并提示用户该员工在当天已有安排" style="whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="590" y="398" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="30" value="" style="edgeStyle=none;html=1;" edge="1" parent="1" source="26" target="29">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="26" value="系统将该工作项目对应生产流程的工作项目自动填入被分配员工的工作流程中" style="whiteSpace=wrap;html=1;fillColor=rgb(255, 255, 255);dashed=0;" vertex="1" parent="1">
+                    <mxGeometry x="330" y="610" width="120" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="29" value="结束" style="html=1;dashed=0;whitespace=wrap;shape=mxgraph.dfd.start" vertex="1" parent="1">
+                    <mxGeometry x="350" y="710" width="80" height="30" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

@@ -66,10 +66,6 @@ export default {
           value: "end",
         },
         {
-          text: "出苗率",
-          value: "outputRate",
-        },
-        {
           text: "车牌号",
           value: "licensePlate",
         },
