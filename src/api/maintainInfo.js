@@ -148,3 +148,39 @@ export function updateMedicineInfo(param) {
     })
 }
 
+//增加权限信息
+export function addPrivilege(param) {
+    return request({
+        url: 'http://localhost:8991/addPrivilege',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有权限信息
+export function getAllPrivilege(param) {
+    return request({
+        url: 'http://localhost:8991/getAllPrivilege',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除权限
+export function deletePrivilege(param) {
+    return request({
+        url: 'http://localhost:8991/deletePrivilege',
+        method: 'post',
+        data: param
+    })
+}
+
+//更新权限
+export function updatePrivilege(param) {
+    return request({
+        url: 'http://localhost:8991/updatePrivilege',
+        method: 'post',
+        data: param
+    })
+}
+

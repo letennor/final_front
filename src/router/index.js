@@ -99,7 +99,7 @@ export const asyncRouterMap = [
     component: Layout,
     redirect: "cultivation",
     name: "cultivation",
-    meta: { title: "培育", icon: "iconzidian" },
+    meta: { title: "生产", icon: "iconzidian" },
     children: [
       {
         path: "deathRecord",
@@ -213,23 +213,29 @@ export const asyncRouterMap = [
         name: "batchInfo",
         meta: { title: "批次", icon: "", noCache: true },
       },
-    ],
-  },
-  {
-    path: "/echartsTest",
-    component: Layout,
-    redirect: "echartsTest",
-    name: "echartsTest",
-    meta: { title: "echarts测试", icon: "iconZzhou" },
-    children: [
       {
-        path: "multiBar",
-        component: () => import("@/views/echartsTest/multiBar/index"),
-        name: "multiBar",
-        meta: { title: "多Y轴柱状图", icon: "", noCache: true },
+        path: "privilege",
+        component: () => import("@/views/maintainProperty/privilege/index"),
+        name: "privilege",
+        meta: { title: "权限", icon: "", noCache: true },
       },
     ],
   },
+  // {
+  //   path: "/echartsTest",
+  //   component: Layout,
+  //   redirect: "echartsTest",
+  //   name: "echartsTest",
+  //   meta: { title: "echarts测试", icon: "iconZzhou" },
+  //   children: [
+  //     {
+  //       path: "multiBar",
+  //       component: () => import("@/views/echartsTest/multiBar/index"),
+  //       name: "multiBar",
+  //       meta: { title: "多Y轴柱状图", icon: "", noCache: true },
+  //     },
+  //   ],
+  // },
 
   { path: "*", redirect: "/404", hidden: true },
 ];
