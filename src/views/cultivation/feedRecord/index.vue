@@ -48,11 +48,11 @@ export default {
       columns: [
         {
           text: "批次",
-          value: "batchId",
+          value: "batchName",
         },
         {
           text: "用料类型",
-          value: "feedId",
+          value: "feedName",
         },
         {
           text: "用料量",
@@ -60,11 +60,11 @@ export default {
         },
         {
           text: "饲养员",
-          value: "feedPerson",
+          value: "feedPersonName",
         },
         {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "记录时间",

@@ -59,11 +59,11 @@ export default {
         },
         {
           text: "出发地",
-          value: "start",
+          value: "startPos",
         },
         {
           text: "目的地",
-          value: "end",
+          value: "endPos",
         },
         {
           text: "车牌号",
@@ -71,15 +71,15 @@ export default {
         },
         {
           text: "司机",
-          value: "driver",
+          value: "driverName",
         },
         {
           text: "货物类别",
-          value: "goodsId",
+          value: "goodsName",
         },
         {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "记录时间",

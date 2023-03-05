@@ -1,6 +1,6 @@
 <template>
   <div class="app-container mainDiv">
-    <my-card title="进货情况记录">
+    <my-card title="货物信息维护">
       <div class="filter-container">
         <el-button
           class="filter-item addButton"
@@ -18,25 +18,24 @@
       ></table-list>
     </my-card>
 
-    <!-- 添加个体死亡量记录 -->
-    <AddIncomingRecordDialog ref="AddIncomingRecordDialog" @refresh="refresh" />
+    <AddTransportRouteDialog ref="AddTransportRouteDialog" @refresh="refresh()"/>
   </div>
 </template>
 
 <script>
-import AddIncomingRecordDialog from "@/components/transport/addIncomingRecordDialog.vue";
+import AddTransportRouteDialog from "@/components/maintainInfo/addTransportRouteInfoDialog.vue"
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllIncomingRecord, deleteIncomingRecord } from "@/api/transport";
+import { getAllTransportRouteInfo, deleteTransportRouteInfo } from "@/api/maintainInfo";
 export default {
-  name: "IndividualDeathRecord",
+  name: "Privilege",
   components: {
     tableList,
     MyCard,
-    AddIncomingRecordDialog,
+    AddTransportRouteDialog,
   },
   directives: {
     waves,
@@ -47,22 +46,21 @@ export default {
       // 表头名称和字段
       columns: [
         {
-          text: "批次",
-          value: "batchName",
+          text: "路线id",
+          value: "transportRouteId",
         },
         {
-          text: "进货量",
-          value: "incomingAmount",
+          text: "起点",
+          value: "startPos",
         },
         {
-          text: "进货类型",
-          value: "goodsName",
+          text: "终点",
+          value: "endPos",
         },
         {
-          text: "记录时间",
-          value: "recordTime",
-          filter: parseTime,
-          filterParams: ["{y}年{m}月{d}日"],
+          text: "创建时间",
+          value: "gmtCreate",
+          filter: parseTime
         },
         {
           text: "操作",
@@ -80,26 +78,27 @@ export default {
   },
   methods: {
     update(val) {
-      this.$refs.AddIncomingRecordDialog.dialogForm = val.row;
-      this.$refs.AddIncomingRecordDialog.type = 0;
-      this.$refs.AddIncomingRecordDialog.dialogFormVisibility = true;
+      this.$refs.AddTransportRouteDialog.dialogForm = val.row;
+      this.$refs.AddTransportRouteDialog.type = 0;
+      this.$refs.AddTransportRouteDialog.dialogFormVisibility = true;
+      console.log("点击编辑");
     },
 
     delete(val) {
-      deleteIncomingRecord(val.row).then((res) => {
-        console.log("res:", res);
-        this.getList();
-      });
+      deleteTransportRouteInfo(val.row).then((res)=>{
+        console.log("res:", res)
+        this.getList()
+      })
     },
 
     // 新增
     add() {
-      this.$refs.AddIncomingRecordDialog.type = 1;
-      this.$refs.AddIncomingRecordDialog.dialogForm = {};
-      this.$refs.AddIncomingRecordDialog.dialogFormVisibility = true;
+      this.$refs.AddTransportRouteDialog.type = 1;
+      this.$refs.AddTransportRouteDialog.dialogForm = {};
+      this.$refs.AddTransportRouteDialog.dialogFormVisibility = true;
     },
 
-    // 表格操作按鈕
+    // 表格操作按钮
     operButton(val) {
       const temp = [
         { class: "iconzidingyipoumian", value: "编辑", click: this.update },
@@ -109,15 +108,15 @@ export default {
     },
 
     getList() {
-      getAllIncomingRecord().then((res) => {
+      getAllTransportRouteInfo().then((res) => {
         this.list = res.data.data;
         console.log("list:", this.list);
       });
     },
 
-    refresh() {
-      this.getList();
-    },
+    refresh(){
+      this.getList()
+    }
   },
 };
 </script>

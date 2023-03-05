@@ -48,7 +48,7 @@ export default {
       columns: [
         {
           text: "批次",
-          value: "batchId",
+          value: "batchName",
         },
         {
           text: "投药量",
@@ -56,15 +56,15 @@ export default {
         },
         {
           text: "投药种类",
-          value: "medicineId",
+          value: "medicineName",
         },
         {
           text: "投药员",
-          value: "dosingPerson",
+          value: "dosingPersonName",
         },
         {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "记录时间",

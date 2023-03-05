@@ -48,7 +48,7 @@ export default {
       columns: [
         {
           text: "批次",
-          value: "batchId",
+          value: "batchName",
         },
         {
           text: "受精率",
@@ -61,11 +61,11 @@ export default {
         },
         {
           text: "操作员",
-          value: "operatePerson",
+          value: "operatePersonName",
         },
         {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "记录时间",

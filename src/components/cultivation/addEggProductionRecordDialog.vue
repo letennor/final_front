@@ -143,7 +143,6 @@ export default {
   },
   methods: {
     add() {
-
       const eggProductionRate = this.dialogForm.eggProductionAmount / 1000.0;
       const badEggProductionRate =
         this.dialogForm.badEggProductionAmount / 1000.0;
@@ -177,6 +176,7 @@ export default {
       });
     },
   },
+
   watch: {
     dialogFormVisibility(newValue, oldValue) {
       if (newValue === false) {

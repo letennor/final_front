@@ -3,7 +3,7 @@ import request from '@/utils/request'
 //获取某一段时间内的产蛋记录
 export function getRangeTimeEggProductionRecord(param) {
     return request({
-        url: 'http://localhost:8991/getRangeTimeEggProductionRecord',
+        url: 'http://localhost:8992/getRangeTimeEggProductionRecord',
         method: 'post',
         data: param
     })
@@ -12,7 +12,7 @@ export function getRangeTimeEggProductionRecord(param) {
 //获取某一段时间内的投药记录
 export function getRangeTimeDosingRecord(param) {
     return request({
-        url: 'http://localhost:8991/getRangeTimeDosingRecord',
+        url: 'http://localhost:8992/getRangeTimeDosingRecord',
         method: 'post',
         data: param
     })
@@ -21,7 +21,7 @@ export function getRangeTimeDosingRecord(param) {
 //获取某一段时间内的喂养记录
 export function getRangeTimeFeedRecord(param) {
     return request({
-        url: 'http://localhost:8991/getRangeTimeFeedRecord',
+        url: 'http://localhost:8992/getRangeTimeFeedRecord',
         method: 'post',
         data: param
     })

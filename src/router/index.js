@@ -219,6 +219,12 @@ export const asyncRouterMap = [
         name: "privilege",
         meta: { title: "权限", icon: "", noCache: true },
       },
+      {
+        path: "transportRouteInfo",
+        component: () => import("@/views/maintainProperty/transportRouteInfo/index"),
+        name: "transportRouteInfo",
+        meta: { title: "路线", icon: "", noCache: true },
+      },
     ],
   },
   // {

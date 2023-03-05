@@ -52,7 +52,7 @@ export default {
         },
         {
           text: "批次",
-          value: "batchId",
+          value: "batchName",
         },
         {
           text: "死亡数",
@@ -64,11 +64,11 @@ export default {
         },
         {
           text: "死亡统计员",
-          value: "deathRecordPerson",
+          value: "deathRecordPersonName",
         },
         {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "记录时间",

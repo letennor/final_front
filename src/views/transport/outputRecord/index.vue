@@ -47,7 +47,7 @@ export default {
       columns: [
         {
           text: "批次",
-          value: "batchId",
+          value: "batchName",
         },
         {
           text: "出苗量",
@@ -58,12 +58,8 @@ export default {
           value: "outputRate",
         },
         {
-          text: "运输记录",
-          value: "transportRecordId",
-        },
-        {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "记录时间",

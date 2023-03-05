@@ -3,7 +3,7 @@ import request from '@/utils/request'
 //添加运输信息
 export function addTransportRecord(param) {
     return request({
-        url: 'http://localhost:8991/addTransportRecord',
+        url: 'http://localhost:8992/addTransportRecord',
         method: 'post',
         data: param
     })
@@ -12,7 +12,7 @@ export function addTransportRecord(param) {
 //获取所有运输信息
 export function getAllTransportRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllTransportRecord',
+        url: 'http://localhost:8992/getAllTransportRecord',
         method: 'post',
         data: param
     })
@@ -21,7 +21,7 @@ export function getAllTransportRecord(param) {
 //添加进货信息
 export function addIncomingRecord(param) {
     return request({
-        url: 'http://localhost:8991/addIncomingRecord',
+        url: 'http://localhost:8992/addIncomingRecord',
         method: 'post',
         data: param
     })
@@ -30,7 +30,7 @@ export function addIncomingRecord(param) {
 //添加出苗记录
 export function addOutputRecord(param) {
     return request({
-        url: 'http://localhost:8991/addOutputRecord',
+        url: 'http://localhost:8992/addOutputRecord',
         method: 'post',
         data: param
     })
@@ -39,7 +39,7 @@ export function addOutputRecord(param) {
 //取得所有进货信息
 export function getAllIncomingRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllIncomingRecord',
+        url: 'http://localhost:8992/getAllIncomingRecord',
         method: 'post',
         data: param
     })
@@ -48,7 +48,7 @@ export function getAllIncomingRecord(param) {
 //删除进货信息
 export function deleteIncomingRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteIncomingRecord',
+        url: 'http://localhost:8992/deleteIncomingRecord',
         method: 'post',
         data: param
     })
@@ -57,7 +57,7 @@ export function deleteIncomingRecord(param) {
 //取得所有出苗信息
 export function getAllOutputRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllOutputRecord',
+        url: 'http://localhost:8992/getAllOutputRecord',
         method: 'post',
         data: param
     })
@@ -66,7 +66,7 @@ export function getAllOutputRecord(param) {
 //删除出苗信息
 export function deleteOutputRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteOutputRecord',
+        url: 'http://localhost:8992/deleteOutputRecord',
         method: 'post',
         data: param
     })
@@ -76,7 +76,7 @@ export function deleteOutputRecord(param) {
 //删除运输信息
 export function deleteTransportRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteTransportRecord',
+        url: 'http://localhost:8992/deleteTransportRecord',
         method: 'post',
         data: param
     })
@@ -85,7 +85,7 @@ export function deleteTransportRecord(param) {
 //修改进货信息
 export function updateIncomingRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateIncomingRecord',
+        url: 'http://localhost:8992/updateIncomingRecord',
         method: 'post',
         data: param
     })
@@ -94,7 +94,7 @@ export function updateIncomingRecord(param) {
 //修改出苗信息
 export function updateOutputRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateOutputRecord',
+        url: 'http://localhost:8992/updateOutputRecord',
         method: 'post',
         data: param
     })
@@ -103,9 +103,11 @@ export function updateOutputRecord(param) {
 //修改运输信息
 export function updateTransportRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateTransportRecord',
+        url: 'http://localhost:8992/updateTransportRecord',
         method: 'post',
         data: param
     })
 }
+
+
 

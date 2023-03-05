@@ -3,7 +3,7 @@ import request from '@/utils/request'
 //添加投喂记录
 export function addFeedRecord(param) {
     return request({
-        url: 'http://localhost:8991/addFeedRecord',
+        url: 'http://localhost:8992/addFeedRecord',
         method: 'post',
         data: param
     })
@@ -12,7 +12,7 @@ export function addFeedRecord(param) {
 //添加产蛋记录
 export function addEggProductionRecord(param) {
     return request({
-        url: 'http://localhost:8991/addEggProductionRecord',
+        url: 'http://localhost:8992/addEggProductionRecord',
         method: 'post',
         data: param
     })
@@ -22,7 +22,7 @@ export function addEggProductionRecord(param) {
 //添加投药记录
 export function addDosingRecord(param) {
     return request({
-        url: 'http://localhost:8991/addDosingRecord',
+        url: 'http://localhost:8992/addDosingRecord',
         method: 'post',
         data: param
     })
@@ -31,7 +31,7 @@ export function addDosingRecord(param) {
 //添加死亡记录
 export function addDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/addDeathRecord',
+        url: 'http://localhost:8992/addDeathRecord',
         method: 'post',
         data: param
     })
@@ -40,7 +40,7 @@ export function addDeathRecord(param) {
 //删除死亡记录
 export function deleteDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteDeathRecord',
+        url: 'http://localhost:8992/deleteDeathRecord',
         method: 'post',
         data: param
     })
@@ -50,7 +50,7 @@ export function deleteDeathRecord(param) {
 //获取所有死亡记录
 export function getAllDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllDeathRecord',
+        url: 'http://localhost:8992/getAllDeathRecord',
         method: 'post',
         data: param
     })
@@ -59,7 +59,7 @@ export function getAllDeathRecord(param) {
 //添加个体死亡记录
 export function addIndividualDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/addIndividualDeathRecord',
+        url: 'http://localhost:8992/addIndividualDeathRecord',
         method: 'post',
         data: param
     })
@@ -68,7 +68,7 @@ export function addIndividualDeathRecord(param) {
 //添加受精信息
 export function addFertilizationRecord(param) {
     return request({
-        url: 'http://localhost:8991/addFertilizationRecord',
+        url: 'http://localhost:8992/addFertilizationRecord',
         method: 'post',
         data: param
     })
@@ -77,7 +77,7 @@ export function addFertilizationRecord(param) {
 //取得所有喂养信息
 export function getAllFeedRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllFeedRecord',
+        url: 'http://localhost:8992/getAllFeedRecord',
         method: 'post',
         data: param
     })
@@ -86,7 +86,7 @@ export function getAllFeedRecord(param) {
 //删除喂养信息
 export function deleteFeedRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteFeedRecord',
+        url: 'http://localhost:8992/deleteFeedRecord',
         method: 'post',
         data: param
     })
@@ -95,7 +95,7 @@ export function deleteFeedRecord(param) {
 //取得所有产蛋量信息
 export function getAllEggProductionRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllEggProductionRecord',
+        url: 'http://localhost:8992/getAllEggProductionRecord',
         method: 'post',
         data: param
     })
@@ -104,7 +104,7 @@ export function getAllEggProductionRecord(param) {
 //删除产蛋量信息
 export function deleteEggProductionRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteEggProductionRecord',
+        url: 'http://localhost:8992/deleteEggProductionRecord',
         method: 'post',
         data: param
     })
@@ -113,7 +113,7 @@ export function deleteEggProductionRecord(param) {
 //取得所有个体死亡信息
 export function getAllIndividualDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllIndividualDeathRecord',
+        url: 'http://localhost:8992/getAllIndividualDeathRecord',
         method: 'post',
         data: param
     })
@@ -122,7 +122,7 @@ export function getAllIndividualDeathRecord(param) {
 //删除个体死亡信息
 export function deleteIndividualDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteIndividualDeathRecord',
+        url: 'http://localhost:8992/deleteIndividualDeathRecord',
         method: 'post',
         data: param
     })
@@ -131,7 +131,7 @@ export function deleteIndividualDeathRecord(param) {
 //取得所有投药信息
 export function getAllDosingRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllDosingRecord',
+        url: 'http://localhost:8992/getAllDosingRecord',
         method: 'post',
         data: param
     })
@@ -140,7 +140,7 @@ export function getAllDosingRecord(param) {
 //删除投药信息
 export function deleteDosingRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteDosingRecord',
+        url: 'http://localhost:8992/deleteDosingRecord',
         method: 'post',
         data: param
     })
@@ -149,7 +149,7 @@ export function deleteDosingRecord(param) {
 //取得所有受精信息
 export function getAllFertilizationRecord(param) {
     return request({
-        url: 'http://localhost:8991/getAllFertilizationRecord',
+        url: 'http://localhost:8992/getAllFertilizationRecord',
         method: 'post',
         data: param
     })
@@ -158,7 +158,7 @@ export function getAllFertilizationRecord(param) {
 //删除受精信息
 export function deleteFertilizationRecord(param) {
     return request({
-        url: 'http://localhost:8991/deleteFertilizationRecord',
+        url: 'http://localhost:8992/deleteFertilizationRecord',
         method: 'post',
         data: param
     })
@@ -167,7 +167,7 @@ export function deleteFertilizationRecord(param) {
 //修改死亡信息
 export function updateDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateDeathRecord',
+        url: 'http://localhost:8992/updateDeathRecord',
         method: 'post',
         data: param
     })
@@ -176,7 +176,7 @@ export function updateDeathRecord(param) {
 //修改投药信息
 export function updateDosingRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateDosingRecord',
+        url: 'http://localhost:8992/updateDosingRecord',
         method: 'post',
         data: param
     })
@@ -185,7 +185,7 @@ export function updateDosingRecord(param) {
 //修改产蛋信息
 export function updateEggProductionRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateEggProductionRecord',
+        url: 'http://localhost:8992/updateEggProductionRecord',
         method: 'post',
         data: param
     })
@@ -195,7 +195,7 @@ export function updateEggProductionRecord(param) {
 //修改喂料信息
 export function updateFeedRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateFeedRecord',
+        url: 'http://localhost:8992/updateFeedRecord',
         method: 'post',
         data: param
     })
@@ -204,7 +204,7 @@ export function updateFeedRecord(param) {
 //修改受精信息
 export function updateFertilizationRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateFertilizationRecord',
+        url: 'http://localhost:8992/updateFertilizationRecord',
         method: 'post',
         data: param
     })
@@ -213,7 +213,7 @@ export function updateFertilizationRecord(param) {
 //修改个体死亡信息
 export function updateIndividualDeathRecord(param) {
     return request({
-        url: 'http://localhost:8991/updateIndividualDeathRecord',
+        url: 'http://localhost:8992/updateIndividualDeathRecord',
         method: 'post',
         data: param
     })
