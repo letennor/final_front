@@ -228,6 +228,24 @@ export function getDeathRecordByCondition(param) {
     })
 }
 
+//通过查询条件获取投药记录
+export function getDosingRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getDosingRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+//通过查询条件获取产蛋记录
+export function getEggProductionRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getEggProductionRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
 
 
 
