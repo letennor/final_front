@@ -219,5 +219,16 @@ export function updateIndividualDeathRecord(param) {
     })
 }
 
+//通过查询条件获取死亡记录
+export function getDeathRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getDeathRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+
+
 
 
