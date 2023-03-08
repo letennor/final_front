@@ -17,6 +17,8 @@
       return {
         levelList: null
       }
+
+      
     },
     watch: {
       $route() {
