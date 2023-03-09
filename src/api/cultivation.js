@@ -246,6 +246,33 @@ export function getEggProductionRecordByCondition(param) {
     })
 }
 
+//通过查询条件获取投喂记录
+export function getFeedRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getFeedRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+//通过查询条件获取受精记录
+export function getFertilizationRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getFertilizationRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+//通过查询条件获取个体死亡记录
+export function getIndividualDeathRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getIndividualDeathRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
 
 
 

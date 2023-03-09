@@ -2,6 +2,49 @@
   <div class="app-container mainDiv">
     <my-card title="个体死亡情况记录">
       <div class="filter-container">
+        <span style="margin-right: 10px">记录员<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择记录员"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.recordPerson"
+        >
+          <el-option
+            v-for="item in personList"
+            :key="item.userBasicInfoId"
+            :label="item.name"
+            :value="item.userBasicInfoId"
+          >
+          </el-option>
+        </el-select>
+
+        <span style="margin-right: 10px">记录日期<strong>:</strong></span>
+        <el-date-picker
+          placement="bottom-start"
+          style="width: 400px; margin-bottom: 10px"
+          v-model="listQuery.params.recordDate"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+        <br />
+        <el-button class="filter-item" v-waves @click="reset">重置</el-button>
+        <el-button
+          class="filter-item"
+          type="primary"
+          v-waves
+          icon="el-icon-search"
+          @click="search"
+          >查询</el-button
+        >
+
         <el-button
           class="filter-item addButton"
           type="primary"
@@ -33,9 +76,11 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
+import { getAllPerson } from "@/api/system";
 import {
   getAllIndividualDeathRecord,
   deleteIndividualDeathRecord,
+  getIndividualDeathRecordByCondition
 } from "@/api/cultivation";
 export default {
   name: "IndividualDeathRecord",
@@ -79,10 +124,17 @@ export default {
         },
       ],
       list: [],
+      listQuery: {
+        pageSize: 15,
+        currPage: 1,
+        params: {},
+      },
+      personList: {},
     };
   },
   mounted() {
     this.getList();
+    this.getPersonList();
   },
   methods: {
     update(val) {
@@ -123,6 +175,29 @@ export default {
 
     refresh() {
       this.getList();
+    },
+
+        getPersonList() {
+      getAllPerson().then((res) => {
+        this.personList = res.data.data;
+        console.log("personList:", this.personList);
+      });
+    },
+
+    reset() {
+      (this.listQuery.params = {}), this.getList();
+    },
+
+    search() {
+      if ("recordDate" in this.listQuery.params) {
+        this.listQuery.params.startDate = this.listQuery.params.recordDate[0];
+        this.listQuery.params.endDate = this.listQuery.params.recordDate[1];
+      }
+
+      console.log("this.listquery:", this.listQuery.params);
+      getIndividualDeathRecordByCondition(this.listQuery.params).then((res) => {
+        this.list = res.data.data;
+      });
     },
   },
 };

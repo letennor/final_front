@@ -1,7 +1,93 @@
 <template>
   <div class="app-container mainDiv">
-    <my-card title="投喂情况记录">
+    <my-card title="饲养情况记录">
       <div class="filter-container">
+        <span style="margin-right: 10px">记录员<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择记录员"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.recordPerson"
+        >
+          <el-option
+            v-for="item in personList"
+            :key="item.userBasicInfoId"
+            :label="item.name"
+            :value="item.userBasicInfoId"
+          >
+          </el-option>
+        </el-select>
+
+        <span style="margin-right: 10px">饲养员<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择饲养员"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.feedPerson"
+        >
+          <el-option
+            v-for="item in personList"
+            :key="item.userBasicInfoId"
+            :label="item.name"
+            :value="item.userBasicInfoId"
+          >
+          </el-option>
+        </el-select>
+
+        <span style="margin-right: 10px">批次<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择批次"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.batchId"
+        >
+          <el-option
+            v-for="item in batchList"
+            :key="item.batchId"
+            :label="item.batchName"
+            :value="item.batchId"
+          >
+          </el-option>
+        </el-select>
+
+        <br />
+        <span style="margin-right: 10px">记录日期<strong>:</strong></span>
+        <el-date-picker
+          placement="bottom-start"
+          style="width: 400px; margin-bottom: 10px"
+          v-model="listQuery.params.recordDate"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+        <br />
+        <el-button class="filter-item" v-waves @click="reset">重置</el-button>
+        <el-button
+          class="filter-item"
+          type="primary"
+          v-waves
+          icon="el-icon-search"
+          @click="search"
+          >查询</el-button
+        >
+
         <el-button
           class="filter-item addButton"
           type="primary"
@@ -18,7 +104,7 @@
       ></table-list>
     </my-card>
 
-    <!-- 添加投喂记录 -->
+    <!-- 添加饲养记录 -->
     <AddFeedRecordDialog ref="AddFeedRecordDialog" @refresh="refresh()" />
   </div>
 </template>
@@ -30,7 +116,13 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllFeedRecord, deleteFeedRecord } from "@/api/cultivation";
+import { getAllPerson } from "@/api/system";
+import { getAllBatch } from "@/api/maintainInfo";
+import {
+  getAllFeedRecord,
+  deleteFeedRecord,
+  getFeedRecordByCondition,
+} from "@/api/cultivation";
 export default {
   name: "FeedRecord",
   components: {
@@ -81,10 +173,19 @@ export default {
         },
       ],
       list: [],
+      listQuery: {
+        pageSize: 15,
+        currPage: 1,
+        params: {},
+      },
+      personList: {},
+      batchList: {},
     };
   },
   mounted() {
     this.getList();
+    this.getPersonList();
+    this.getBatchList();
   },
   methods: {
     update(val) {
@@ -125,6 +226,34 @@ export default {
 
     refresh() {
       this.getList();
+    },
+
+    getPersonList() {
+      getAllPerson().then((res) => {
+        this.personList = res.data.data;
+        console.log("personList:", this.personList);
+      });
+    },
+
+    getBatchList() {
+      getAllBatch().then((res) => {
+        this.batchList = res.data.data;
+      });
+    },
+
+    reset() {
+      (this.listQuery.params = {}), this.getList();
+    },
+
+    search() {
+      if ("recordDate" in this.listQuery.params) {
+        this.listQuery.params.startDate = this.listQuery.params.recordDate[0];
+        this.listQuery.params.endDate = this.listQuery.params.recordDate[1];
+      }
+      console.log("this.listquery:", this.listQuery.params);
+      getFeedRecordByCondition(this.listQuery.params).then((res) => {
+        this.list = res.data.data;
+      });
     },
   },
 };

@@ -3,7 +3,7 @@
     <my-card title="产蛋量情况记录">
       <div class="filter-container">
 
-<span style="margin-right: 10px">记录员<strong>:</strong></span>
+        <span style="margin-right: 10px">记录员<strong>:</strong></span>
         <el-select
           class="filter-item"
           placeholder="请选择记录员"
