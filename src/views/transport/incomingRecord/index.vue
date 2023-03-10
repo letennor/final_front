@@ -2,6 +2,73 @@
   <div class="app-container mainDiv">
     <my-card title="进货情况记录">
       <div class="filter-container">
+        <span style="margin-right: 10px">批次<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择批次"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.batchId"
+        >
+          <el-option
+            v-for="item in batchList"
+            :key="item.batchId"
+            :label="item.batchName"
+            :value="item.batchId"
+          >
+          </el-option>
+        </el-select>
+
+        <!-- <span style="margin-right: 10px">进货量<strong>:</strong></span>
+        <el-input
+          class="filter-item"
+          type="number"
+          placeholder="最小值"
+          v-model="listQuery.params.minAmount"
+          style="background-color: white; width: 200px; margin-top: 10px"
+        >
+        </el-input>
+        -
+        <el-input
+          class="filter-item"
+          type="number"
+          placeholder="最大值"
+          v-model="listQuery.params.maxAmount"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+        >
+        </el-input> -->
+        <br />
+        <span style="margin-right: 10px">记录日期<strong>:</strong></span>
+        <el-date-picker
+          placement="bottom-start"
+          style="width: 400px; margin-bottom: 10px"
+          v-model="listQuery.params.recordDate"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+        >
+        </el-date-picker>
+        <br />
+        <el-button class="filter-item" v-waves @click="reset">重置</el-button>
+        <el-button
+          class="filter-item"
+          type="primary"
+          v-waves
+          icon="el-icon-search"
+          @click="search"
+          >查询</el-button
+        >
+
         <el-button
           class="filter-item addButton"
           type="primary"
@@ -30,7 +97,12 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllIncomingRecord, deleteIncomingRecord } from "@/api/transport";
+import {
+  getAllIncomingRecord,
+  deleteIncomingRecord,
+  getIncomingRecordByCondition,
+} from "@/api/transport";
+import { getAllBatch } from "@/api/maintainInfo";
 export default {
   name: "IndividualDeathRecord",
   components: {
@@ -73,10 +145,17 @@ export default {
         },
       ],
       list: [],
+      batchList: [],
+      listQuery: {
+        pageSize: 15,
+        currPage: 1,
+        params: {},
+      },
     };
   },
   mounted() {
     this.getList();
+    this.getBatchList();
   },
   methods: {
     update(val) {
@@ -117,6 +196,27 @@ export default {
 
     refresh() {
       this.getList();
+    },
+
+    reset() {
+      (this.listQuery.params = {}), this.getList();
+    },
+
+    getBatchList() {
+      getAllBatch().then((res) => {
+        this.batchList = res.data.data;
+      });
+    },
+
+    search() {
+      if ("recordDate" in this.listQuery.params) {
+          this.listQuery.params.startDate = this.listQuery.params.recordDate[0];
+          this.listQuery.params.endDate = this.listQuery.params.recordDate[1];
+        }
+
+        getIncomingRecordByCondition(this.listQuery.params).then((res) => {
+          this.list = res.data.data;
+        });
     },
   },
 };

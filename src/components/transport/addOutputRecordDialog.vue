@@ -51,9 +51,9 @@
                   v-for="item in transportInfoList"
                   :key="item.transportRecordId"
                   :label="
-                    item.start +
+                    item.startPos +
                     '->' +
-                    item.end +
+                    item.endPos +
                     ' | ' +
                     myParsetime(item.gmtCreate)
                   "

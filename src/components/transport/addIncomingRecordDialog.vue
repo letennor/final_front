@@ -68,9 +68,9 @@
                   v-for="item in transportInfoList"
                   :key="item.transportRecordId"
                   :label="
-                    item.start +
-                    '->' +
-                    item.end +
+                    item.startPos +
+                    '->' + 
+                    item.endPos +
                     ' | ' +
                     myParsetime(item.gmtCreate)
                   "
@@ -141,9 +141,7 @@ export default {
   },
   methods: {
     add() {
-      console.log("dialogForm:", this.dialogForm);
       addIncomingRecord(this.dialogForm).then((res) => {
-        console.log("res:", res);
         this.$emit("refresh");
         this.dialogFormVisibility = false;
       });

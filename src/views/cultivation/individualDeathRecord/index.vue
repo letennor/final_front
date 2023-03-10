@@ -80,7 +80,7 @@ import { getAllPerson } from "@/api/system";
 import {
   getAllIndividualDeathRecord,
   deleteIndividualDeathRecord,
-  getIndividualDeathRecordByCondition
+  getIndividualDeathRecordByCondition,
 } from "@/api/cultivation";
 export default {
   name: "IndividualDeathRecord",
@@ -177,7 +177,7 @@ export default {
       this.getList();
     },
 
-        getPersonList() {
+    getPersonList() {
       getAllPerson().then((res) => {
         this.personList = res.data.data;
         console.log("personList:", this.personList);

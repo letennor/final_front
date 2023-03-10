@@ -110,4 +110,33 @@ export function updateTransportRecord(param) {
 }
 
 
+//按条件获取进货信息
+export function getIncomingRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getIncomingRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+//按条件获取出货信息
+export function getOutputRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getOutputRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+
+//按条件获取运输信息
+export function getTransportRecordByCondition(param) {
+    return request({
+        url: 'http://localhost:8992/getTransportRecordByCondition',
+        method: 'post',
+        data: param
+    })
+}
+
+
 
