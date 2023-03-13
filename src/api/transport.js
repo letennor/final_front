@@ -138,5 +138,24 @@ export function getTransportRecordByCondition(param) {
     })
 }
 
+//进货图示信息
+export function getIncomingRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getIncomingRecordChart',
+        method: 'post',
+        data: param
+    })
+}
+
+//出苗图示信息
+export function getOutputRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getOutputRecordChart',
+        method: 'post',
+        data: param
+    })
+}
+
+
 
 

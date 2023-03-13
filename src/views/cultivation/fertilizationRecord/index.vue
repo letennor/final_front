@@ -76,7 +76,10 @@
           start-placeholder="开始日期"
           end-placeholder="结束日期"
         >
-        </el-date-picker><span style="margin-right: 10px; margin-left: 20px">受精日期<strong>:</strong></span>
+        </el-date-picker
+        ><span style="margin-right: 10px; margin-left: 20px"
+          >受精日期<strong>:</strong></span
+        >
 
         <el-date-picker
           placement="bottom-start"
@@ -115,6 +118,12 @@
       ></table-list>
     </my-card>
 
+    <my-card title="受精情况记录可视化" style="margin-top: 20px">
+      <div class="filter-container">
+        <div ref="chart1" style="width: 50%; height: 376px"></div>
+      </div>
+    </my-card>
+
     <!-- 添加受精记录 -->
     <AddFertilizationRecordDialog
       ref="AddFertilizationRecordDialog"
@@ -136,6 +145,7 @@ import {
   getAllFertilizationRecord,
   deleteFertilizationRecord,
   getFertilizationRecordByCondition,
+  getFertilizationRecordChart,
 } from "@/api/cultivation";
 export default {
   name: "DosingRecord",
@@ -164,6 +174,7 @@ export default {
           text: "受精时间",
           value: "fertilizationTime",
           filter: parseTime,
+          filterParams: ["{y}年{m}月{d}日"],
         },
         {
           text: "操作员",
@@ -195,13 +206,16 @@ export default {
       },
       personList: {},
       batchList: {},
+      chartInfo: [],
     };
   },
   mounted() {
     this.getList();
     this.getPersonList();
     this.getBatchList();
+    this.getChartList();
   },
+
   methods: {
     update(val) {
       this.$refs.AddFertilizationRecordDialog.dialogForm = val.row;
@@ -235,7 +249,6 @@ export default {
 
     getList() {
       getAllFertilizationRecord().then((res) => {
-        console.log("res1231231:", res);
         this.list = res.data.data;
       });
     },
@@ -267,9 +280,11 @@ export default {
         this.listQuery.params.endDate = this.listQuery.params.recordDate[1];
       }
 
-      if("fertilizationDate" in this.listQuery.params){
-        this.listQuery.params.fertilizationStartDate = this.listQuery.params.fertilizationDate[0];
-        this.listQuery.params.fertilizationEndDate = this.listQuery.params.fertilizationDate[1];
+      if ("fertilizationDate" in this.listQuery.params) {
+        this.listQuery.params.fertilizationStartDate =
+          this.listQuery.params.fertilizationDate[0];
+        this.listQuery.params.fertilizationEndDate =
+          this.listQuery.params.fertilizationDate[1];
       }
 
       console.log("this.listquery:", this.listQuery.params);
@@ -280,6 +295,66 @@ export default {
 
     myParseTime(time, cformat) {
       return parseTime(time, "{y}-{m}-{d}");
+    },
+
+    getChartList() {
+      getFertilizationRecordChart().then((res) => {
+        this.chartInfo.xData = res.data.data.xData;
+        this.chartInfo.yData = [];
+        //整理数据
+        res.data.data.yData.forEach((element) => {
+          this.chartInfo.yData.push(element.fertilizationRate);
+        });
+
+        this.chartInfo.xData.reverse();
+        this.chartInfo.yData.reverse();
+
+        this.getEchartData();
+      });
+    },
+
+    getEchartData() {
+      const chart1 = this.$refs.chart1;
+      if (chart1) {
+        const myChart = this.$echarts.init(chart1);
+        const option = {
+          tooltip: {
+            trigger: "axis",
+            alwaysShowContent: true,
+          },
+          title: {
+            text: "受精情况记录表",
+            textStyle: {
+              fontSize: 15,
+            },
+          },
+          xAxis: {
+            name: "日期",
+            type: "category",
+            data: this.chartInfo.xData,
+          },
+          yAxis: {
+            name: "受精率",
+            type: "value",
+          },
+          series: [
+            {
+              name: "受精率",
+              data: this.chartInfo.yData,
+              type: "line",
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      }
+      this.$on("hook:destroyed", () => {
+        window.removeEventListener("resize", function () {
+          myChart.resize();
+        });
+      });
     },
   },
 };

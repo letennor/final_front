@@ -83,6 +83,12 @@
       ></table-list>
     </my-card>
 
+    <my-card title="出苗情况记录可视化" style="margin-top: 20px">
+      <div class="filter-container">
+        <div ref="chart1" style="width: 50%; height: 376px"></div>
+      </div>
+    </my-card>
+
     <AddOutputRecordDialog ref="AddOutputRecordDialog" @refresh="refresh" />
   </div>
 </template>
@@ -100,6 +106,7 @@ import {
   getAllOutputRecord,
   deleteOutputRecord,
   getOutputRecordByCondition,
+  getOutputRecordChart,
 } from "@/api/transport";
 export default {
   name: "IndividualDeathRecord",
@@ -154,12 +161,14 @@ export default {
         currPage: 1,
         params: {},
       },
+      chartInfo: {},
     };
   },
   mounted() {
     this.getList();
     this.getBatchList();
     this.getPersonList();
+    this.getChartList();
   },
   methods: {
     update(val) {
@@ -226,6 +235,66 @@ export default {
 
       getOutputRecordByCondition(this.listQuery.params).then((res) => {
         this.list = res.data.data;
+      });
+    },
+
+    getChartList() {
+      getOutputRecordChart().then((res) => {
+        this.chartInfo.xData = res.data.data.xData;
+        this.chartInfo.yData = [];
+        //整理数据
+        res.data.data.yData.forEach((element) => {
+          this.chartInfo.yData.push(element.outputAmount);
+        });
+
+        this.chartInfo.xData.reverse();
+        this.chartInfo.yData.reverse();
+
+        this.getEchartData();
+      });
+    },
+
+    getEchartData() {
+      const chart1 = this.$refs.chart1;
+      if (chart1) {
+        const myChart = this.$echarts.init(chart1);
+        const option = {
+          tooltip: {
+            trigger: "axis",
+            alwaysShowContent: true,
+          },
+          title: {
+            text: "出苗情况记录表",
+            textStyle: {
+              fontSize: 15,
+            },
+          },
+          xAxis: {
+            name: "日期",
+            type: "category",
+            data: this.chartInfo.xData,
+          },
+          yAxis: {
+            name: "出苗量",
+            type: "value",
+          },
+          series: [
+            {
+              name: "出苗量",
+              data: this.chartInfo.yData,
+              type: "line",
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      }
+      this.$on("hook:destroyed", () => {
+        window.removeEventListener("resize", function () {
+          myChart.resize();
+        });
       });
     },
   },

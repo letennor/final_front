@@ -273,7 +273,49 @@ export function getIndividualDeathRecordByCondition(param) {
     })
 }
 
+//取得死亡记录图标数据
+export function getDeathRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getDeathRecordChart',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得死亡记录图表数据
+export function getDosingRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getDosingRecordChart',
+        method: 'post',
+        data: param
+    })
+}
 
 
+//取得产蛋量记录图表数据
+export function getEggProductionRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getEggProductionRecordChart',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得投喂情况记录图表数据
+export function getFeedRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getFeedRecordChart',
+        method: 'post',
+        data: param
+    })
+}
 
 
+//受精情况记录图表数据
+export function getFertilizationRecordChart(param) {
+    return request({
+        url: 'http://localhost:8992/getFertilizationRecordChart',
+        method: 'post',
+        data: param
+    })
+}

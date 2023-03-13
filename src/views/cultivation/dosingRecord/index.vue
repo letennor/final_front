@@ -125,6 +125,35 @@
       ></table-list>
     </my-card>
 
+    <my-card title="投药情况记录可视化" style="margin-top: 20px">
+      <div class="filter-container">
+        <span style="margin-right: 10px">药物<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择药物"
+          style="background-color: white; width: 200px; margin-right: 20px"
+          v-model="chartMedicineId"
+        >
+          <el-option
+            v-for="item in medicineList"
+            :key="item.medicineId"
+            :label="item.medicineName"
+            :value="item.medicineId"
+          >
+          </el-option>
+        </el-select>
+        <el-button
+          class="filter-item"
+          type="primary"
+          v-waves
+          icon="el-icon-search"
+          @click="createChart"
+          >生成图表</el-button
+        >
+        <div ref="chart1" style="width: 50%; height: 376px"></div>
+      </div>
+    </my-card>
+
     <!-- 添加投药记录 -->
     <AddDosingRecordDialog ref="AddDosingRecordDialog" @refresh="refresh" />
   </div>
@@ -141,9 +170,10 @@ import {
   getAllDosingRecord,
   deleteDosingRecord,
   getDosingRecordByCondition,
+  getDosingRecordChart,
 } from "@/api/cultivation";
 import { getAllPerson } from "@/api/system";
-import { getAllMedicine, getAllBatch} from "@/api/maintainInfo"
+import { getAllMedicine, getAllBatch } from "@/api/maintainInfo";
 export default {
   name: "DosingRecord",
   components: {
@@ -200,8 +230,10 @@ export default {
         params: {},
       },
       personList: {},
-      batchList:{},
-      medicineList:{}
+      batchList: {},
+      medicineList: {},
+      chartMedicineId: null,
+      chartInfo: [],
     };
   },
   mounted() {
@@ -260,17 +292,16 @@ export default {
       });
     },
 
-    getBatchList(){
-      getAllBatch().then((res)=>{
+    getBatchList() {
+      getAllBatch().then((res) => {
         this.batchList = res.data.data;
-
-      })
+      });
     },
 
-    getMedicineList(){
-      getAllMedicine().then((res)=>{
-        this.medicineList = res.data.data
-      })
+    getMedicineList() {
+      getAllMedicine().then((res) => {
+        this.medicineList = res.data.data;
+      });
     },
 
     reset() {
@@ -285,6 +316,71 @@ export default {
       console.log("this.listquery:", this.listQuery.params);
       getDosingRecordByCondition(this.listQuery.params).then((res) => {
         this.list = res.data.data;
+      });
+    },
+
+    createChart() {
+      if (this.chartMedicineId == null) {
+        this.$message("请先选择药物");
+      } else {
+        this.chartInfo = {};
+        // 发送请求，生成数据
+        getDosingRecordChart({ medicineId: this.chartMedicineId }).then((res) => {
+          this.chartInfo.xData = res.data.data.xData;
+          this.chartInfo.yData = [];
+          res.data.data.yData.forEach((element) => {
+            this.chartInfo.yData.push(element.dosingAmount);
+          });
+
+          this.chartInfo.xData.reverse();
+          this.chartInfo.yData.reverse();
+
+          this.getEchartData();
+        });
+      }
+    },
+
+    getEchartData() {
+      const chart1 = this.$refs.chart1;
+      if (chart1) {
+        const myChart = this.$echarts.init(chart1);
+        const option = {
+          tooltip: {
+            trigger: "axis",
+            alwaysShowContent: true,
+          },
+          title: {
+            text: "投药情况记录表",
+            textStyle: {
+              fontSize: 15,
+            },
+          },
+          xAxis: {
+            name: "日期",
+            type: "category",
+            data: this.chartInfo.xData,
+          },
+          yAxis: {
+            name: "投药量",
+            type: "value",
+          },
+          series: [
+            {
+              name: "投药量",
+              data: this.chartInfo.yData,
+              type: "line",
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      }
+      this.$on("hook:destroyed", () => {
+        window.removeEventListener("resize", function () {
+          myChart.resize();
+        });
       });
     },
   },

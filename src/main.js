@@ -13,7 +13,6 @@ import myStroage from '@/utils/sessionStorage'
 import BaiduMap from 'vue-baidu-map'
 
 
-console.log('echarts:', echarts)
 
 //全局指令
 import createDirectives from '@/directive'

@@ -46,54 +46,7 @@ export const asyncRouterMap = [
     ],
   },
 
-  // {
-  //   path:'/echartsLearning',
-  //   component: Layout,
-  //   redirect: 'concept',
-  //   name:'echartsLearning',
-  //   meta: {title: 'Echarts学习', icon:'iconYzhou'},
-  //   children:[
-  //     {
-  //       path:'concept',
-  //       component:() => import('@/views/echartsLearning/concept/index'),
-  //       name:'concept',
-  //       meta:{title:'概念篇', icon:'', noCache:true}
-  //     },
-  //     {
-  //       path:'barchart',
-  //       component:() => import('@/views/echartsLearning/barchart/index'),
-  //       name:'barchart',
-  //       meta:{title:'柱状图', icon:'', noCache:true}
-  //     }
-  //   ]
-  // },
-  // {
-  //   path:'/baiduMap',
-  //   component: Layout,
-  //   redirect: 'baiduMap',
-  //   name:'baiduMap',
-  //   meta: {title: '百度地图', icon:'iconmanyou'},
-  //   children:[
-  //     {
-  //       path:'test1',
-  //       component:() => import('@/views/baiduMap/test1/index'),
-  //       name:'test1',
-  //       meta:{title:'百度地图基本使用', icon:'', noCache:true}
-  //     },
-  //     {
-  //       path:'test2',
-  //       component:() => import('@/views/baiduMap/test2/index'),
-  //       name:'test2',
-  //       meta:{title:'路书', icon:'', noCache:true}
-  //     },
-  //     {
-  //       path:'test3',
-  //       component:() => import('@/views/baiduMap/test3/index'),
-  //       name:'test3',
-  //       meta:{title:'定位', icon:'', noCache:true}
-  //     }
-  //   ]
-  // },
+
   {
     path: "/cultivation",
     component: Layout,
@@ -242,6 +195,23 @@ export const asyncRouterMap = [
   //     },
   //   ],
   // },
+  {
+    path: "/echarts",
+    component: Layout,
+    redirect: "echarts",
+    children: [
+      {
+        path: "echarts",
+        component: () => import("@/views/echarts/index"),
+        name: "echarts",
+        meta: {
+          title: "echarts",
+          icon: "iconccgl-xiangmuguanli-3",
+          noCache: true,
+        },
+      },
+    ],
+  },
 
   { path: "*", redirect: "/404", hidden: true },
 ];

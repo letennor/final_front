@@ -23,7 +23,29 @@
           </el-option>
         </el-select>
 
-        <!-- <span style="margin-right: 10px">进货量<strong>:</strong></span>
+        <span style="margin-right: 10px">货物类型<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择货物类型"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.goodsId"
+        >
+          <el-option
+            v-for="item in goodsList"
+            :key="item.goodsId"
+            :label="item.goodsName"
+            :value="item.goodsId"
+          >
+          </el-option>
+        </el-select>
+
+        <!--
+        <span style="margin-right: 10px">进货量<strong>:</strong></span>
         <el-input
           class="filter-item"
           type="number"
@@ -45,7 +67,9 @@
             margin-top: 10px;
           "
         >
-        </el-input> -->
+        </el-input> 
+        -->
+
         <br />
         <span style="margin-right: 10px">记录日期<strong>:</strong></span>
         <el-date-picker
@@ -85,6 +109,35 @@
       ></table-list>
     </my-card>
 
+    <my-card title="进货情况记录可视化" style="margin-top: 20px">
+      <div class="filter-container">
+        <span style="margin-right: 10px">货物<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择货物"
+          style="background-color: white; width: 200px; margin-right: 20px"
+          v-model="chartGoodsId"
+        >
+          <el-option
+            v-for="item in goodsList"
+            :key="item.goodsId"
+            :label="item.goodsName"
+            :value="item.goodsId"
+          >
+          </el-option>
+        </el-select>
+        <el-button
+          class="filter-item"
+          type="primary"
+          v-waves
+          icon="el-icon-search"
+          @click="createChart"
+          >生成图表</el-button
+        >
+        <div ref="chart1" style="width: 50%; height: 376px"></div>
+      </div>
+    </my-card>
+
     <!-- 添加个体死亡量记录 -->
     <AddIncomingRecordDialog ref="AddIncomingRecordDialog" @refresh="refresh" />
   </div>
@@ -101,8 +154,9 @@ import {
   getAllIncomingRecord,
   deleteIncomingRecord,
   getIncomingRecordByCondition,
+  getIncomingRecordChart,
 } from "@/api/transport";
-import { getAllBatch } from "@/api/maintainInfo";
+import { getAllBatch, getAllGoodsInfo } from "@/api/maintainInfo";
 export default {
   name: "IndividualDeathRecord",
   components: {
@@ -146,16 +200,20 @@ export default {
       ],
       list: [],
       batchList: [],
+      goodsList: [],
       listQuery: {
         pageSize: 15,
         currPage: 1,
         params: {},
       },
+      charInfo: {},
+      chartGoodsId: null,
     };
   },
   mounted() {
     this.getList();
     this.getBatchList();
+    this.getGoodsList();
   },
   methods: {
     update(val) {
@@ -210,13 +268,84 @@ export default {
 
     search() {
       if ("recordDate" in this.listQuery.params) {
-          this.listQuery.params.startDate = this.listQuery.params.recordDate[0];
-          this.listQuery.params.endDate = this.listQuery.params.recordDate[1];
-        }
+        this.listQuery.params.startDate = this.listQuery.params.recordDate[0];
+        this.listQuery.params.endDate = this.listQuery.params.recordDate[1];
+      }
 
-        getIncomingRecordByCondition(this.listQuery.params).then((res) => {
-          this.list = res.data.data;
+      getIncomingRecordByCondition(this.listQuery.params).then((res) => {
+        this.list = res.data.data;
+      });
+    },
+
+    getGoodsList() {
+      getAllGoodsInfo().then((res) => {
+        this.goodsList = res.data.data;
+      });
+    },
+
+    createChart() {
+      if (this.chartGoodsId == null) {
+        this.$message("请先选择药物");
+      } else {
+        this.chartInfo = {};
+        // 发送请求，生成数据
+        getIncomingRecordChart({ goodsId: this.chartGoodsId }).then((res) => {
+          this.chartInfo.xData = res.data.data.xData;
+          this.chartInfo.yData = [];
+          res.data.data.yData.forEach((element) => {
+            this.chartInfo.yData.push(element.incomingAmount);
+          });
+
+          this.chartInfo.xData.reverse();
+          this.chartInfo.yData.reverse();
+
+          this.getEchartData();
         });
+      }
+    },
+
+    getEchartData() {
+      const chart1 = this.$refs.chart1;
+      if (chart1) {
+        const myChart = this.$echarts.init(chart1);
+        const option = {
+          tooltip: {
+            trigger: "axis",
+            alwaysShowContent: true,
+          },
+          title: {
+            text: "进货情况记录表",
+            textStyle: {
+              fontSize: 15,
+            },
+          },
+          xAxis: {
+            name: "日期",
+            type: "category",
+            data: this.chartInfo.xData,
+          },
+          yAxis: {
+            name: "进货量",
+            type: "value",
+          },
+          series: [
+            {
+              name: "进货量",
+              data: this.chartInfo.yData,
+              type: "line",
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      }
+      this.$on("hook:destroyed", () => {
+        window.removeEventListener("resize", function () {
+          myChart.resize();
+        });
+      });
     },
   },
 };

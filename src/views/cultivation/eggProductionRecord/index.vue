@@ -2,7 +2,6 @@
   <div class="app-container mainDiv">
     <my-card title="产蛋量情况记录">
       <div class="filter-container">
-
         <span style="margin-right: 10px">记录员<strong>:</strong></span>
         <el-select
           class="filter-item"
@@ -105,6 +104,12 @@
       ></table-list>
     </my-card>
 
+    <my-card title="产蛋量记录可视化" style="margin-top: 20px">
+      <div class="filter-container">
+        <div ref="chart1" style="width: 50%; height: 376px"></div>
+      </div>
+    </my-card>
+
     <!-- 添加产蛋量记录 -->
     <AddEggProductionRecordDialog
       ref="AddEggProductionRecordDialog"
@@ -124,6 +129,7 @@ import {
   getAllEggProductionRecord,
   deleteEggProductionRecord,
   getEggProductionRecordByCondition,
+  getEggProductionRecordChart,
 } from "@/api/cultivation";
 import { getAllPerson } from "@/api/system";
 import { getAllBatch } from "@/api/maintainInfo";
@@ -192,12 +198,14 @@ export default {
       },
       personList: {},
       batchList: {},
+      chartInfo: {},
     };
   },
   mounted() {
     this.getList();
     this.getPersonList();
     this.getBatchList();
+    this.getChartList();
   },
   methods: {
     update(val) {
@@ -266,6 +274,66 @@ export default {
       console.log("this.listquery:", this.listQuery.params);
       getEggProductionRecordByCondition(this.listQuery.params).then((res) => {
         this.list = res.data.data;
+      });
+    },
+
+    getChartList() {
+      getEggProductionRecordChart().then((res) => {
+        this.chartInfo.xData = res.data.data.xData;
+        this.chartInfo.yData = [];
+        //整理数据
+        res.data.data.yData.forEach((element) => {
+          this.chartInfo.yData.push(element.eggProductionAmount);
+        });
+
+        this.chartInfo.xData.reverse();
+        this.chartInfo.yData.reverse();
+
+        this.getEchartData();
+      });
+    },
+
+    getEchartData() {
+      const chart1 = this.$refs.chart1;
+      if (chart1) {
+        const myChart = this.$echarts.init(chart1);
+        const option = {
+          tooltip: {
+            trigger: "axis",
+            alwaysShowContent: true,
+          },
+          title: {
+            text: "周死亡情况记录表",
+            textStyle: {
+              fontSize: 15,
+            },
+          },
+          xAxis: {
+            name: "日期",
+            type: "category",
+            data: this.chartInfo.xData,
+          },
+          yAxis: {
+            name: "产蛋量",
+            type: "value",
+          },
+          series: [
+            {
+              name: "产蛋量",
+              data: this.chartInfo.yData,
+              type: "line",
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      }
+      this.$on("hook:destroyed", () => {
+        window.removeEventListener("resize", function () {
+          myChart.resize();
+        });
       });
     },
   },

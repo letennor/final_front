@@ -65,6 +65,27 @@
           </el-option>
         </el-select>
 
+        <span style="margin-right: 10px">用料类型<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择用料类型"
+          style="
+            background-color: white;
+            width: 200px;
+            margin-right: 20px;
+            margin-top: 10px;
+          "
+          v-model="listQuery.params.feedId"
+        >
+          <el-option
+            v-for="item in feedList"
+            :key="item.feedId"
+            :label="item.feedName"
+            :value="item.feedId"
+          >
+          </el-option>
+        </el-select>
+
         <br />
         <span style="margin-right: 10px">记录日期<strong>:</strong></span>
         <el-date-picker
@@ -104,6 +125,35 @@
       ></table-list>
     </my-card>
 
+    <my-card title="投喂情况记录可视化" style="margin-top: 20px">
+      <div class="filter-container">
+        <span style="margin-right: 10px">药物<strong>:</strong></span>
+        <el-select
+          class="filter-item"
+          placeholder="请选择用料"
+          style="background-color: white; width: 200px; margin-right: 20px"
+          v-model="chartFeedId"
+        >
+          <el-option
+            v-for="item in feedList"
+            :key="item.feedId"
+            :label="item.feedName"
+            :value="item.feedId"
+          >
+          </el-option>
+        </el-select>
+        <el-button
+          class="filter-item"
+          type="primary"
+          v-waves
+          icon="el-icon-search"
+          @click="createChart"
+          >生成图表</el-button
+        >
+        <div ref="chart1" style="width: 50%; height: 376px"></div>
+      </div>
+    </my-card>
+
     <!-- 添加饲养记录 -->
     <AddFeedRecordDialog ref="AddFeedRecordDialog" @refresh="refresh()" />
   </div>
@@ -117,11 +167,12 @@ import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
 import { getAllPerson } from "@/api/system";
-import { getAllBatch } from "@/api/maintainInfo";
+import { getAllBatch, getAllFeed } from "@/api/maintainInfo";
 import {
   getAllFeedRecord,
   deleteFeedRecord,
   getFeedRecordByCondition,
+  getFeedRecordChart,
 } from "@/api/cultivation";
 export default {
   name: "FeedRecord",
@@ -180,12 +231,16 @@ export default {
       },
       personList: {},
       batchList: {},
+      feedList: {},
+      chartFeedId: null,
+      chartInfo: [],
     };
   },
   mounted() {
     this.getList();
     this.getPersonList();
     this.getBatchList();
+    this.getFeedList();
   },
   methods: {
     update(val) {
@@ -241,6 +296,13 @@ export default {
       });
     },
 
+    getFeedList() {
+      getAllFeed().then((res) => {
+        this.feedList = res.data.data;
+        console.log("feedList:", this.feedList);
+      });
+    },
+
     reset() {
       (this.listQuery.params = {}), this.getList();
     },
@@ -253,6 +315,75 @@ export default {
       console.log("this.listquery:", this.listQuery.params);
       getFeedRecordByCondition(this.listQuery.params).then((res) => {
         this.list = res.data.data;
+      });
+    },
+
+    createChart() {
+      if (this.chartFeedId == null) {
+        this.$message("请先选择饲料");
+      } else {
+        this.chartInfo = {};
+        // 发送请求，生成数据
+        getFeedRecordChart({ feedId: this.chartFeedId }).then(
+          (res) => {
+            this.chartInfo.xData = res.data.data.xData;
+            this.chartInfo.yData = [];
+            res.data.data.yData.forEach((element) => {
+              this.chartInfo.yData.push(element.feedAmount);
+            });
+
+            this.chartInfo.xData.reverse();
+            this.chartInfo.yData.reverse();
+
+            this.getEchartData();
+          }
+        );
+      }
+    },
+
+
+    
+    getEchartData() {
+      const chart1 = this.$refs.chart1;
+      if (chart1) {
+        const myChart = this.$echarts.init(chart1);
+        const option = {
+          tooltip: {
+            trigger: "axis",
+            alwaysShowContent: true,
+          },
+          title: {
+            text: "投喂情况记录表",
+            textStyle: {
+              fontSize: 15,
+            },
+          },
+          xAxis: {
+            name: "日期",
+            type: "category",
+            data: this.chartInfo.xData,
+          },
+          yAxis: {
+            name: "投喂量",
+            type: "value",
+          },
+          series: [
+            {
+              name: "投喂量",
+              data: this.chartInfo.yData,
+              type: "line",
+            },
+          ],
+        };
+        myChart.setOption(option);
+        window.addEventListener("resize", function () {
+          myChart.resize();
+        });
+      }
+      this.$on("hook:destroyed", () => {
+        window.removeEventListener("resize", function () {
+          myChart.resize();
+        });
       });
     },
   },
