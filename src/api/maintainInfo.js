@@ -220,3 +220,58 @@ export function deleteTransportRouteInfo(param) {
     })
 }
 
+
+//获得所有角色
+export function getAllRole(param) {
+    return request({
+        url: 'http://localhost:8992/getAllRole',
+        method: 'post',
+        data: param
+    })
+}
+
+//添加角色
+export function addRole(param) {
+    return request({
+        url: 'http://localhost:8992/addRole',
+        method: 'post',
+        data: param
+    })
+}
+
+//更新角色
+export function updateRole(param) {
+    return request({
+        url: 'http://localhost:8992/updateRole',
+        method: 'post',
+        data: param
+    })
+}
+
+// 取得所有权限列表
+export function getAuthList(param) {
+    return request({
+        url: 'http://localhost:8992/getAuthList',
+        method: 'post',
+        data: param
+    })
+}
+
+// 取得角色权限id
+export function getRolePriId(param) {
+    return request({
+        url: 'http://localhost:8992/getRolePriId',
+        method: 'post',
+        data: param
+    })
+}
+
+// 配置角色权限
+export function configRole(param) {
+    return request({
+        url: 'http://localhost:8992/configRole',
+        method: 'post',
+        data: param
+    })
+}
+

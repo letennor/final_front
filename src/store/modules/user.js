@@ -71,9 +71,14 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         loginByUsername(username, userInfo.password).then(response => {
-          commit('SET_TOKEN', response.result)
-          setToken(response.result)
-          resolve()
+          if (response.data.data == false) {
+            resolve(0)
+          } else {
+            commit('SET_TOKEN', response.data.data)// 将token放进state中
+            setToken(response.data.data)// 将token放进localstorage中
+            resolve(1)
+          }
+
         }).catch(error => {
           reject(error)
         })
@@ -83,16 +88,18 @@ const user = {
     // 获取用户信息
     GetUserInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getUserInfo().then(response => {
-          const data = response
-          const roleArr = data.result.roles
+        // 这个是通过token获取基本信息的
+        getUserInfo({ token: localStorage.getItem("token") }).then(response => {
+          console.log("获取基本信息:", response)
+          const data = response.data.data
+          const roleArr = data.roles
           const privilegesArr = []
           const privilegesButtonArr = []
-          data.result.privileges.forEach(function(item) {
+          data.privileges.forEach(function (item) {
             if (item.type === 'menu') {
-              privilegesArr.push(item.code)
+              privilegesArr.push(item.privilegeCode)
             } else {
-              privilegesButtonArr.push(item.code)
+              privilegesButtonArr.push(item.privilegeCode)
             }
           })
           if (privilegesArr.length === 0) {
@@ -102,9 +109,9 @@ const user = {
           commit('SET_ROLES', roleArr)
           commit('SET_PRIVILEGES', privilegesArr)
           commit('SET_BUTTON_PRIVILEGES', privilegesButtonArr)
-          commit('SET_NAME', data.result.user ? data.result.user.name : data.result.user.name)
-          commit('SET_AVATAR', data.result.user ? data.result.user.photo : '')
-          commit('SET_USERID', data.result.user ? data.result.user.id : null)
+          commit('SET_NAME', data.user ? data.user.name : data.user.name)
+          commit('SET_AVATAR', data.user ? data.user.photo : '')
+          commit('SET_USERID', data.user ? data.user.userBasicInfoId : null)
           // commit('SET_INTRODUCTION', data.introduction)
           resolve(response)
         }).catch(error => {
@@ -113,24 +120,11 @@ const user = {
       })
     },
 
-    // 第三方验证登录
-    // LoginByThirdparty({ commit, state }, code) {
-    //   return new Promise((resolve, reject) => {
-    //     commit('SET_CODE', code)
-    //     loginByThirdparty(state.status, state.email, state.code).then(response => {
-    //       commit('SET_TOKEN', response.data.token)
-    //       setToken(response.data.token)
-    //       resolve()
-    //     }).catch(error => {
-    //       reject(error)
-    //     })
-    //   })
-    // },
 
     // 登出
     LogOut({ commit, state }) {
       return new Promise((resolve, reject) => {
-        logout(state.token).then(() => {
+        logout({ token: state.token }).then(() => {
           commit('SET_TOKEN', '')
           commit('SET_ROLES', [])
           removeToken()
@@ -199,7 +193,7 @@ const user = {
             const privilegesArr = []
             const privilegesButtonArr = []
             if (res[1].result.projectPrivileges && res[1].result.projectPrivileges.length > 0) {
-              res[1].result.projectPrivileges.forEach(function(item) {
+              res[1].result.projectPrivileges.forEach(function (item) {
                 if (item.type === 'menu') {
                   privilegesArr.push(item.code)
                 } else {

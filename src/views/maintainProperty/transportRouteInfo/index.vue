@@ -1,6 +1,6 @@
 <template>
   <div class="app-container mainDiv">
-    <my-card title="货物信息维护">
+    <my-card title="路线信息维护">
       <div class="filter-container">
         <el-button
           class="filter-item addButton"
@@ -18,20 +18,26 @@
       ></table-list>
     </my-card>
 
-    <AddTransportRouteDialog ref="AddTransportRouteDialog" @refresh="refresh()"/>
+    <AddTransportRouteDialog
+      ref="AddTransportRouteDialog"
+      @refresh="refresh()"
+    />
   </div>
 </template>
 
 <script>
-import AddTransportRouteDialog from "@/components/maintainInfo/addTransportRouteInfoDialog.vue"
+import AddTransportRouteDialog from "@/components/maintainInfo/addTransportRouteInfoDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllTransportRouteInfo, deleteTransportRouteInfo } from "@/api/maintainInfo";
+import {
+  getAllTransportRouteInfo,
+  deleteTransportRouteInfo,
+} from "@/api/maintainInfo";
 export default {
-  name: "Privilege",
+  name: "TransportRouteInfo",
   components: {
     tableList,
     MyCard,
@@ -60,7 +66,7 @@ export default {
         {
           text: "创建时间",
           value: "gmtCreate",
-          filter: parseTime
+          filter: parseTime,
         },
         {
           text: "操作",
@@ -85,10 +91,10 @@ export default {
     },
 
     delete(val) {
-      deleteTransportRouteInfo(val.row).then((res)=>{
-        console.log("res:", res)
-        this.getList()
-      })
+      deleteTransportRouteInfo(val.row).then((res) => {
+        console.log("res:", res);
+        this.getList();
+      });
     },
 
     // 新增
@@ -114,9 +120,9 @@ export default {
       });
     },
 
-    refresh(){
-      this.getList()
-    }
+    refresh() {
+      this.getList();
+    },
   },
 };
 </script>

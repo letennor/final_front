@@ -43,7 +43,7 @@ export default {
         },
         {
           text: "工号",
-          value: "account",
+          value: "userName",
         },
         {
           text: "密码",

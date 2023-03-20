@@ -27,11 +27,11 @@
           </el-col>
 
           <el-col :span="24">
-            <el-form-item label="账号:" prop="account">
+            <el-form-item label="账号:" prop="userName">
               <el-input
                 class="filter-item"
                 placeholder="请输入账号"
-                v-model="dialogForm.account"
+                v-model="dialogForm.userName"
               >
               </el-input>
             </el-form-item>
@@ -127,11 +127,32 @@
               </el-input>
             </el-form-item>
           </el-col>
+
+          <el-col :span="24">
+            <el-form-item label="角色:" prop="roleId">
+              <el-select
+                v-model="dialogForm.roleId"
+                placeholder="请选择要分配的角色"
+              >
+                <el-option
+                  v-for="item in roleList"
+                  :key="item.roleId"
+                  :label="item.roleName"
+                  :value="item.roleId"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
         </el-row>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisibility = false">取消</el-button>
-        <el-button type="primary" class="addButton" v-waves @click="type === 1? add() : update()"
+        <el-button
+          type="primary"
+          class="addButton"
+          v-waves
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
@@ -140,6 +161,7 @@
 </template>
 <script>
 import { addUser, updateUser } from "@/api/system";
+import { getAllRole } from "@/api/maintainInfo";
 export default {
   name: "AddUserDialog",
   data() {
@@ -151,14 +173,18 @@ export default {
         // 表单必填项设置
         //动态控制require，当关闭的时候，设置为false，当打开的时候设置为true
         name: [{ required: true, message: "请填写姓名", trigger: "blur" }],
-        account: [{ required: true, message: "请填写账号名" }],
+        userName: [{ required: true, message: "请填写账号名" }],
         gender: [{ required: true, message: "请选择性别" }],
         age: [{ required: true, message: "请输入年龄" }],
         entryTime: [{ required: true, message: "请输入入职时间" }],
         salary: [{ required: true, message: "请输入薪资" }],
         password: [{ required: true, message: "请输入密码" }],
       },
+      roleList: [],
     };
+  },
+  mounted() {
+    this.getRoleList();
   },
   methods: {
     add() {
@@ -171,16 +197,21 @@ export default {
         this.$emit("refresh");
       });
     },
-    update(){
-      console.log('更新用户信息:', this.dialogForm)
+    update() {
+      console.log("更新用户信息:", this.dialogForm);
 
-      updateUser(this.dialogForm).then((res)=>{
-        console.log("res:", res)
+      updateUser(this.dialogForm).then((res) => {
+        console.log("res:", res);
         this.dialogFormVisibility = false;
-        this.$emit("refresh")
-      })
+        this.$emit("refresh");
+      });
       //调用接口
-    }
+    },
+    getRoleList() {
+      getAllRole().then((res) => {
+        this.roleList = res.data.data;
+      });
+    },
   },
   watch: {
     dialogFormVisibility(newValue, oldValue) {

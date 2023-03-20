@@ -1,6 +1,6 @@
 <template>
   <div class="app-container mainDiv">
-    <my-card title="货物信息维护">
+    <my-card title="权限信息维护">
       <div class="filter-container">
         <el-button
           class="filter-item addButton"

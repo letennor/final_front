@@ -27,6 +27,20 @@
           </el-col>
 
           <el-col :span="24">
+            <el-form-item label="权限类型:" prop="type">
+              <el-select v-model="dialogForm.type" placeholder="请选择权限类型">
+                <el-option
+                  v-for="item in privilegeType"
+                  :key="item.typeId"
+                  :label="item.typeName"
+                  :value="item.typeId"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="24">
             <el-form-item label="权限代码:" prop="privilegeCode">
               <el-input
                 class="filter-item"
@@ -70,10 +84,20 @@ export default {
   name: "addPrivilegeDialog",
   data() {
     return {
-      type:1,
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
+      privilegeType: [
+        {
+          typeId: "button",
+          typeName: "按钮权限",
+        },
+        {
+          typeId: "menu",
+          typeName: "菜单权限",
+        },
+      ],
     };
   },
   mounted() {},

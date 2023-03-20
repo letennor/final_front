@@ -16,30 +16,25 @@
       >
         <el-row>
           <el-col :span="24">
-            <el-form-item label="用料名称:" prop="batchName">
+            <el-form-item label="角色名称:" prop="roleName">
               <el-input
                 class="filter-item"
-                placeholder="请输入用料名称"
-                v-model="dialogForm.batchName"
+                placeholder="请输入角色名称"
+                v-model="dialogForm.roleName"
               >
               </el-input>
             </el-form-item>
           </el-col>
 
           <el-col :span="24">
-            <el-form-item label="记录员:" prop="recordPerson">
-              <el-select
-                v-model="dialogForm.recordPerson"
-                placeholder="请选择记录员"
+            <el-form-item label="角色描述:" prop="roleDescription">
+              <el-input
+                class="filter-item"
+                type="textarea"
+                placeholder="请输入角色描述"
+                v-model="dialogForm.roleDescription"
               >
-                <el-option
-                  v-for="item in personList"
-                  :key="item.userBasicInfoId"
-                  :label="item.name"
-                  :value="item.userBasicInfoId"
-                >
-                </el-option>
-              </el-select>
+              </el-input>
             </el-form-item>
           </el-col>
         </el-row>
@@ -50,52 +45,40 @@
           type="primary"
           class="addButton"
           v-waves
-          @click="type === 1? add() : update()"
+          @click="type === 1 ? add() : update()"
           >提交</el-button
         >
       </div>
     </el-dialog>
   </div>
 </template>
-<script>
-import { addBatchInfo, updateBatchInfo } from "@/api/maintainInfo";
-import { getAllPerson } from "@/api/system";
+  <script>
+import request from "@/utils/request";
+import { addRole, updateRole } from "@/api/maintainInfo";
 export default {
-  name: "AddFeedRecordDialog",
+  name: "addRoleInfoDialog",
   data() {
     return {
-      type:1,
+      type: 1,
       dialogForm: {},
       dialogFormVisibility: false,
       dialogFormRules: {},
-      personList: [],
     };
   },
-  mounted() {
-    this.getPersonList();
-  },
+  mounted() {},
   methods: {
     add() {
       console.log(this.dialogForm);
-      addBatchInfo(this.dialogForm).then((res) => {
+      addRole(this.dialogForm).then((res) => {
         this.$emit("refresh");
         this.dialogFormVisibility = false;
       });
-      
-    },
-    
-    update(){
-      updateBatchInfo(this.dialogForm).then((res)=>{
-        console.log("res:", res)
-        this.$emit("refresh")
-        this.dialogFormVisibility = false
-      })
     },
 
-    getPersonList() {
-      getAllPerson().then((res) => {
-        console.log("personList:", res);
-        this.personList = res.data.data;
+    update() {
+      updateRole(this.dialogForm).then((res) => {
+        this.$emit("refresh");
+        this.dialogFormVisibility = false;
       });
     },
   },
@@ -108,5 +91,5 @@ export default {
   },
 };
 </script>
-<style>
+  <style>
 </style>
