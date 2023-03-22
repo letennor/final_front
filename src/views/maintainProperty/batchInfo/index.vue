@@ -2,40 +2,38 @@
   <div class="app-container mainDiv">
     <my-card title="批次信息维护">
       <div class="filter-container">
-        <el-button
-          class="filter-item addButton"
-          type="primary"
-          v-waves
-          icon="el-icon-circle-plus-outline"
-          @click="add()"
-          >添加
+        <el-button class="filter-item addButton" type="primary" v-waves icon="el-icon-circle-plus-outline"
+          @click="add()">添加
         </el-button>
       </div>
-      <table-list
-        :data="list"
-        :columns="columns"
-        class="dataTable"
-      ></table-list>
+      <table-list :data="list" :columns="columns" class="dataTable"></table-list>
     </my-card>
 
     <AddBatchInfoDialog ref="AddBatchInfoDialog" @refresh="refresh()" />
+    <ShowBatchWorkFlowDialog ref="ShowBatchWorkFlowDialog" :batchId="selectBatchId" />
   </div>
 </template>
 
 <script>
 import AddBatchInfoDialog from "@/components/maintainInfo/addBatchInfoDialog.vue";
+import ShowBatchWorkFlowDialog from "./component/showBatchWorkFlowDialog.vue";
 import dragDialog from "@/directive/el-dragDialog";
 import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllBatch, deleteBatchInfo } from "@/api/maintainInfo";
+import {
+  getAllBatch,
+  deleteBatchInfo,
+  getBatchWorkFlow,
+} from "@/api/maintainInfo";
 export default {
   name: "FeedInfo",
   components: {
     tableList,
     MyCard,
     AddBatchInfoDialog,
+    ShowBatchWorkFlowDialog,
   },
   directives: {
     waves,
@@ -54,8 +52,12 @@ export default {
           value: "batchName",
         },
         {
+          text: "类型",
+          value: "type",
+        },
+        {
           text: "记录员",
-          value: "recordPerson",
+          value: "recordPersonName",
         },
         {
           text: "创建时间",
@@ -71,6 +73,7 @@ export default {
         },
       ],
       list: [],
+      selectBatchId: "",
     };
   },
   mounted() {
@@ -104,6 +107,7 @@ export default {
       const temp = [
         { class: "iconzidingyipoumian", value: "编辑", click: this.update },
         { class: "iconshanchu", value: "删除", click: this.delete },
+        { class: "iconyanjing", value: "查看工作流", click: this.showWorkFlow },
       ];
       return temp;
     },
@@ -117,6 +121,12 @@ export default {
 
     refresh() {
       this.getList();
+    },
+
+    showWorkFlow(val) {
+      this.selectBatchId = val.row.batchId;
+
+      this.$refs.ShowBatchWorkFlowDialog.workFlowDialogVisibility = true;
     },
   },
 };

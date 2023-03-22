@@ -184,6 +184,12 @@ export const asyncRouterMap = [
         name: "transportRouteInfo",
         meta: { title: "路线", icon: "", noCache: true, privileges: ['maintainance_route_info'] },
       },
+      {
+        path: "workItem",
+        component: () => import("@/views/maintainProperty/workItem/index"),
+        name: "workItem",
+        meta: { title: "工作项目", icon: "", noCache: true },
+      },
     ],
   },
 

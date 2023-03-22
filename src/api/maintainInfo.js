@@ -275,3 +275,47 @@ export function configRole(param) {
     })
 }
 
+//添加工作项目
+export function addWorkItem(param) {
+    return request({
+        url: 'http://localhost:8992/addWorkItem',
+        method: 'post',
+        data: param
+    })
+}
+
+//获得所有工作项目
+export function getWorkItem(param) {
+    return request({
+        url: 'http://localhost:8992/getWorkItem',
+        method: 'post',
+        data: param
+    })
+}
+
+//删除工作项目
+export function deleteWorkItem(param) {
+    return request({
+        url: 'http://localhost:8992/deleteWorkItem',
+        method: 'post',
+        data: param
+    })
+}
+
+//更新工作项目
+export function updateWorkItem(param) {
+    return request({
+        url: 'http://localhost:8992/updateWorkItem',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得批次工作流
+export function getBatchWorkFlow(param) {
+    return request({
+        url: 'http://localhost:8992/getBatchWorkFlow',
+        method: 'post',
+        data: param
+    })
+}
