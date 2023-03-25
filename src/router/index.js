@@ -211,6 +211,22 @@ export const asyncRouterMap = [
     ],
   },
 
+  {
+    path: "/workArrangement",
+    component: Layout,
+    redirect: "workArrangement",
+    name: "workArrangement",
+    meta: { title: "工作安排", icon: "iconxinzeng" },
+    children: [
+      {
+        path: "arrangeWork",
+        component: () => import("@/views/workArrangement/arrangeWork/index"),
+        name: "arrangeWork",
+        meta: { title: "分配工作", icon: "", noCache: true },
+      },
+    ],
+  },
+
   { path: "*", redirect: "/404", hidden: true },
 ];
 

@@ -30,6 +30,10 @@ export default {
       type: String,
       default: () => "",
     },
+    personCurrentWorkId: {
+      type: String,
+      default: () => "",
+    }
   },
   mounted() { },
   methods: {},
@@ -42,7 +46,6 @@ export default {
           (this.currentWorkCount = 1);
         //调用接口获取数据
         getBatchWorkFlow({ batchId: this.batchId }).then((res) => {
-          console.log("子组件中工作流的数据", res.data.data);
           this.workFlowList = res.data.data.batchWorkFlow;
           this.currentWork = res.data.data.currentWork;
           for (let i = 0; i < this.workFlowList.length; i++) {
