@@ -38,7 +38,7 @@ export function transformBackstageDataToFrontData(val) {
   for (var i in val) {
     // 如果传进来的对象的字段中有对象属性的，将这个对象属性的字段拿出来放到大的对象中
     if (!Array.isArray(val[i])) {
-       obj1 = { ...val[i] }
+      obj1 = { ...val[i] }
     } else {
       obj2[i] = val[i]
     }
@@ -48,36 +48,36 @@ export function transformBackstageDataToFrontData(val) {
 }
 // 将原有的表单数据转换成后端需要的参数格式
 export function transformFormToParams(val, string) {
-          const param = {}
-          const obj = {}
-          for (var i in val) {
-            // 不是数组类型的放在一个对象中
-            if (typeof (val[i]) !== 'object') {
-              obj[i] = val[i]
-              // 是数组类型的直接放进参数中
-            } else {
-              param[i] = val[i]
-            }
-          }
-          // 将对象放进参数中
-          param[string] = obj
-          return param
+  const param = {}
+  const obj = {}
+  for (var i in val) {
+    // 不是数组类型的放在一个对象中
+    if (typeof (val[i]) !== 'object') {
+      obj[i] = val[i]
+      // 是数组类型的直接放进参数中
+    } else {
+      param[i] = val[i]
+    }
+  }
+  // 将对象放进参数中
+  param[string] = obj
+  return param
 }
 // 把数组转换成用逗号分割开的字符串
 export function ArrayTransform(Array) {
   if (Array) {
-  if (Array.length === 0) {
-    return '无'
-  }
-  let String = ''
-  Array.map((item) => {
-    for (var i in item) {
-      if (i !== 'id') {
-        String = String + item[i] + ` `
-      }
+    if (Array.length === 0) {
+      return '无'
     }
-  })
-  return String
+    let String = ''
+    Array.map((item) => {
+      for (var i in item) {
+        if (i !== 'id') {
+          String = String + item[i] + ` `
+        }
+      }
+    })
+    return String
   }
 }
 
@@ -318,7 +318,7 @@ export function getTime(type) {
 
 export function debounce(func, wait, immediate) {
   let timeout, args, context, timestamp, result
-  const later = function() {
+  const later = function () {
     // 据上一次触发时间间隔
     const last = +new Date() - timestamp
     // 上次被包装函数被调用时间间隔last小于设定时间间隔wait
@@ -334,7 +334,7 @@ export function debounce(func, wait, immediate) {
     }
   }
 
-  return function(...args) {
+  return function (...args) {
     context = this
     timestamp = +new Date()
     const callNow = immediate && !timeout
@@ -433,11 +433,11 @@ export function transformBoolean(data) {
 
 //性别转换
 export function genderTransform(data) {
-  if(data === 1){
+  if (data === 1) {
     return '男'
   }
 
-  if(data === 0){
+  if (data === 0) {
     return '女'
   }
 }

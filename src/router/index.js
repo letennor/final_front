@@ -106,19 +106,19 @@ export const asyncRouterMap = [
         path: "incomingRecord",
         component: () => import("@/views/transport/incomingRecord/index"),
         name: "incomingRecord",
-        meta: { title: "进货情况记录", icon: "", noCache: true },
+        meta: { title: "进货情况记录", icon: "", noCache: true, privileges: ['transport_incoming'] },
       },
       {
         path: "outputRecord",
         component: () => import("@/views/transport/outputRecord/index"),
         name: "outputRecord",
-        meta: { title: "出苗情况记录", icon: "", noCache: true },
+        meta: { title: "出苗情况记录", icon: "", noCache: true, privileges: ['transport_output'] },
       },
       {
         path: "transportRecord",
         component: () => import("@/views/transport/transportRecord/index"),
         name: "transportRecord",
-        meta: { title: "运输情况记录", icon: "", noCache: true },
+        meta: { title: "运输情况记录", icon: "", noCache: true, privileges: ['transport_transport'] },
       },
     ],
   },
@@ -188,28 +188,28 @@ export const asyncRouterMap = [
         path: "workItem",
         component: () => import("@/views/maintainProperty/workItem/index"),
         name: "workItem",
-        meta: { title: "工作项目", icon: "", noCache: true },
+        meta: { title: "工作项目", icon: "", noCache: true, privileges: ['maintainance_work_item'] },
       },
     ],
   },
 
-  {
-    path: "/echarts",
-    component: Layout,
-    redirect: "echarts",
-    children: [
-      {
-        path: "echarts",
-        component: () => import("@/views/echarts/index"),
-        name: "echarts",
-        meta: {
-          title: "echarts",
-          icon: "iconccgl-xiangmuguanli-3",
-          noCache: true,
-        },
-      },
-    ],
-  },
+  // {
+  //   path: "/echarts",
+  //   component: Layout,
+  //   redirect: "echarts",
+  //   children: [
+  //     {
+  //       path: "echarts",
+  //       component: () => import("@/views/echarts/index"),
+  //       name: "echarts",
+  //       meta: {
+  //         title: "echarts",
+  //         icon: "iconccgl-xiangmuguanli-3",
+  //         noCache: true,
+  //       },
+  //     },
+  //   ],
+  // },
 
   {
     path: "/workArrangement",
@@ -222,7 +222,7 @@ export const asyncRouterMap = [
         path: "arrangeWork",
         component: () => import("@/views/workArrangement/arrangeWork/index"),
         name: "arrangeWork",
-        meta: { title: "分配工作", icon: "", noCache: true },
+        meta: { title: "分配工作", icon: "", noCache: true, privileges: ['arrangement_arrange_work'] },
       },
     ],
   },

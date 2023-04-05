@@ -2,34 +2,20 @@
   <div class="app-container mainDiv">
     <my-card title="角色信息维护">
       <div class="filter-container">
-        <el-button
-          class="filter-item addButton"
-          type="primary"
-          v-waves
-          icon="el-icon-circle-plus-outline"
-          @click="add()"
-          >添加
+        <el-button class="filter-item addButton" type="primary" v-waves icon="el-icon-circle-plus-outline"
+          @click="add()">添加
         </el-button>
       </div>
-      <table-list
-        :data="list"
-        :columns="columns"
-        class="dataTable"
-      ></table-list>
+      <table-list :data="list" :columns="columns" class="dataTable"></table-list>
     </my-card>
 
     <AddRoleInfoDialog ref="AddRoleInfoDialog" @refresh="refresh()" />
 
     <el-dialog title="配置权限" :visible.sync="authFormVisible">
-      <choose-auth
-        :data="authList"
-        :org-privilges="rolePrivilges"
-      ></choose-auth>
+      <choose-auth :data="authList" :org-privilges="rolePrivilges"></choose-auth>
       <div slot="footer" class="dialog-footer">
         <el-button @click="authFormVisible = false">取消</el-button>
-        <el-button type="primary" @click="configPrivilges" v-waves
-          >提交</el-button
-        >
+        <el-button type="primary" @click="configPrivilges" v-waves>提交</el-button>
       </div>
     </el-dialog>
   </div>
@@ -48,6 +34,7 @@ import {
   getAuthList,
   getRolePriId,
   configRole,
+  deleteRole
 } from "@/api/maintainInfo";
 export default {
   name: "RolePrivilege",
@@ -99,17 +86,30 @@ export default {
   },
   methods: {
     update(val) {
-      this.$refs.AddRoleInfoDialog.dialogForm = val.row;
-      this.$refs.AddRoleInfoDialog.type = 0;
-      this.$refs.AddRoleInfoDialog.dialogFormVisibility = true;
-      console.log("点击编辑");
+
+      if (val.row.roleId === '1639622923849105409') {
+        this.$message("该角色是基础角色，不可编辑")
+      } else {
+        this.$refs.AddRoleInfoDialog.dialogForm = val.row;
+        this.$refs.AddRoleInfoDialog.type = 0;
+        this.$refs.AddRoleInfoDialog.dialogFormVisibility = true;
+        console.log("点击编辑");
+      }
+
+
     },
 
     delete(val) {
-      // deleteTransportRouteInfo(val.row).then((res) => {
-      //   console.log("res:", res);
-      //   this.getList();
-      // });
+      if (val.row.roleId === '1639622923849105409') {
+        this.$message("该角色是基础角色，不可删除")
+      } else {
+        deleteRole(val.row).then((res) => {
+          console.log("res:", res);
+          this.getList();
+        });
+      }
+
+
     },
 
     // 新增
@@ -134,36 +134,43 @@ export default {
 
     // 配置角色
     setPrivilege(val) {
-      this.rolePrivilges = [];
-      this.currentRoleId = val.row.roleId;
-      this.getAuthList();
-      // 获取角色权限
-      console.log(val.row);
-      getRolePriId({ roleId: val.row.roleId }).then((res) => {
-        const temp = [];
-        res.data.data.forEach((element) => {
-          temp.push(element.privilegeId);
-        });
-        const parentId = [
-          "1635930370314407938",
-          "1635926637224464385",
-          "1635926554345017346",
-          "1635926495704453121",
-          "1635926426146115586",
-          "1635926306667171841",
-          "1635926199175548929",
-        ]; //工作权限
-        temp.forEach((element) => {
-          if (!parentId.includes(element)) {
-            this.rolePrivilges.push(element);
-          }
-        });
-        // this.rolePrivilges = temp;
-        //将父节点去掉
-        console.log("rolePrivileges:", this.rolePrivilges);
 
-        this.authFormVisible = true;
-      });
+      if (val.row.roleId === '1639622923849105409') {
+        this.$message("该角色是基础角色，不可配置权限")
+      } else {
+        this.rolePrivilges = [];
+        this.currentRoleId = val.row.roleId;
+        this.getAuthList();
+        // 获取角色权限
+        console.log(val.row);
+        getRolePriId({ roleId: val.row.roleId }).then((res) => {
+          const temp = [];
+          res.data.data.forEach((element) => {
+            temp.push(element.privilegeId);
+          });
+          const parentId = [
+            "1635930370314407938",
+            "1635926637224464385",
+            "1635926554345017346",
+            "1635926495704453121",
+            "1635926426146115586",
+            "1635926306667171841",
+            "1635926199175548929",
+          ]; //工作权限
+          temp.forEach((element) => {
+            if (!parentId.includes(element)) {
+              this.rolePrivilges.push(element);
+            }
+          });
+          // this.rolePrivilges = temp;
+          //将父节点去掉
+          console.log("rolePrivileges:", this.rolePrivilges);
+
+          this.authFormVisible = true;
+        });
+      }
+
+
     },
 
     // 配置角色权限

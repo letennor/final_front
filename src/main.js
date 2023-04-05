@@ -16,17 +16,17 @@ import BaiduMap from 'vue-baidu-map'
 
 //全局指令
 import createDirectives from '@/directive'
-
+console.log("这个Vue的版本：", Vue.version)
 createDirectives(Vue)
 import axios from 'axios'
 Vue.config.productionTip = false
 
 Vue.use(Element, {
-  size:'medium'
+  size: 'medium'
 })
 
 Vue.use(BaiduMap, {
-  ak:'CPEvt459mKpMp7qNbg8GK3YVBlRCPfdq'
+  ak: 'CPEvt459mKpMp7qNbg8GK3YVBlRCPfdq'
 })
 
 //注册全部过滤器

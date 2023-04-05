@@ -112,6 +112,8 @@ const user = {
           commit('SET_NAME', data.user ? data.user.name : data.user.name)
           commit('SET_AVATAR', data.user ? data.user.photo : '')
           commit('SET_USERID', data.user ? data.user.userBasicInfoId : null)
+          console.log("GetUserInfo中的state:", data.user.state)
+          commit("SET_STATUS", data.user ? data.user.state : 0)
           // commit('SET_INTRODUCTION', data.introduction)
           resolve(response)
         }).catch(error => {

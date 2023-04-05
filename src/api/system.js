@@ -45,3 +45,31 @@ export function updateUser(param) {
         data: param
     })
 }
+
+//修改用户状态
+export function changeState(param) {
+    return request({
+        url: 'http://localhost:8992/changeState',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有司机
+export function getAllDriver(param) {
+    return request({
+        url: 'http://localhost:8992/getAllDriver',
+        method: 'post',
+        data: param
+    })
+}
+
+
+//取得某个人的所有信息
+export function getPersonInfoByUserBasicInfoId(param) {
+    return request({
+        url: 'http://localhost:8992/getPersonInfoByUserBasicInfoId',
+        method: 'post',
+        data: param
+    })
+}

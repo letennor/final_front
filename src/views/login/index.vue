@@ -1,63 +1,30 @@
 <template>
   <div class="login-container">
     <div class="centerDiv">
-      <el-form
-        class="login-form"
-        auto-complete="off"
-        :model="loginForm"
-        :rules="loginRules"
-        ref="loginForm"
-        label-position="left"
-      >
+      <el-form class="login-form" auto-complete="off" :model="loginForm" :rules="loginRules" ref="loginForm"
+        label-position="left">
         <div v-show="loginType == 1">
           <div class="titleDiv">
             <span class="titleSpan">欢迎登录您的账号</span>
           </div>
-          <el-form-item
-            prop="username"
-            style="margin-top: 60px; margin-bottom: 40px"
-          >
+          <el-form-item prop="username" style="margin-top: 60px; margin-bottom: 40px">
             <span class="svg-container svg-container_login">
-              <i
-                class="icon iconfont"
-                style="font-size: 30px; margin-left: -5px"
-                >&#xe603;</i
-              >
+              <i class="icon iconfont" style="font-size: 30px; margin-left: -5px">&#xe603;</i>
             </span>
-            <el-input
-              name="username"
-              type="text"
-              v-model="loginForm.username"
-              auto-complete="off"
-              placeholder="请输入用户名"
-            ></el-input>
+            <el-input name="username" type="text" v-model="loginForm.username" auto-complete="off"
+              placeholder="请输入用户名"></el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <span class="svg-container"
-              ><i class="icon iconfont iconmima1"></i
-            ></span>
-            <el-input
-              name="password"
-              :type="passwordType"
-              @keyup.enter.native="handleLogin"
-              v-model="loginForm.password"
-              auto-complete="off"
-              placeholder="请输入密码"
-            ></el-input>
-            <span class="show-pwd" @click="showPwd"
-              ><i class="icon iconfont iconyanjing"></i
-            ></span>
+            <span class="svg-container"><i class="icon iconfont iconmima1"></i></span>
+            <el-input name="password" :type="passwordType" @keyup.enter.native="handleLogin" v-model="loginForm.password"
+              auto-complete="off" placeholder="请输入密码"></el-input>
+            <span class="show-pwd" @click="showPwd"><i class="icon iconfont iconyanjing"></i></span>
           </el-form-item>
-          <el-checkbox v-model="checkedPsd" v-show="loginType == 1">
+          <el-checkbox v-if="false" v-model="checkedPsd" v-show="loginType == 1">
             记住密码
           </el-checkbox>
           <div class="flex flex-center">
-            <el-button
-              type="primary"
-              class="loginButton"
-              :loading="loading"
-              @click.native.prevent="handleLogin"
-            >
+            <el-button type="primary" class="loginButton" :loading="loading" @click.native.prevent="handleLogin">
               登录
             </el-button>
           </div>
@@ -229,6 +196,7 @@ $centerColor: rgb(6, 193, 250);
   position: relative;
   height: 100%;
   width: 100%;
+
   .loginType {
     cursor: pointer;
     font-size: 14px;

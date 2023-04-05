@@ -18,3 +18,32 @@ export function refreshMessageStatus(param) {
         data: param
     })
 }
+
+
+//添加消息
+export function addMessageInfo(param) {
+    return request({
+        url: 'http://localhost:8992/addMessageInfo',
+        method: 'post',
+        data: param
+    })
+}
+
+
+//取得所有信息
+export function getUserMessageInfo(param) {
+    return request({
+        url: 'http://localhost:8992/getUserMessageInfo',
+        method: 'post',
+        data: param
+    })
+}
+
+//确认消息
+export function confirmMessage(param) {
+    return request({
+        url: 'http://localhost:8992/confirmMessage',
+        method: 'post',
+        data: param
+    })
+}

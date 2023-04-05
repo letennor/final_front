@@ -5,16 +5,30 @@
         <p style="text-align: center">
           {{ date | parseTime("{d}") }}
         </p>
+
+        <!-- <template v-if="workFlowInfoObj[data.day]">
+            <strong style="font-size: 10px">{{ workFlowInfoObj[data.day].workName }}</strong>
+        </template> -->
+
+        <template v-if="map.get(data.day)">
+          <span v-for="item in map.get(data.day)" :key="item.workflowId">
+            <template v-if="item.isFinished === 0">
+              {{ item.workName }}
+            </template>
+
+          </span>
+        </template>
+
+
       </template>
     </el-calendar>
-
-    <el-button @click="getUserInfo">取得信息</el-button>
   </div>
 </template>
 
-  <script>
+<script>
 import { parseTime } from "@/utils";
 import { testGenerateToken, getUserInfo } from "@/api/login";
+import { getPersonAllWorkFlow } from "@/api/workArrangement"
 export default {
   name: "Calendar",
   components: {},
@@ -30,13 +44,17 @@ export default {
         params: {},
       },
       detail: {},
+      workFlowInfoList: [],
+      workFlowInfoObj: {},
+      map: new Map,
     };
   },
   mounted() {
     console.log("进入首页");
     this.getToken();
+    this.getWorkInfoList()
   },
-  beforeDestroy() {},
+  beforeDestroy() { },
   methods: {
     currentChange(val) {
       console.log("查找下一页:");
@@ -53,11 +71,30 @@ export default {
         console.log("userInfo:", res.data.data);
       });
     },
+
+    getWorkInfoList() {
+      getPersonAllWorkFlow({ workPerson: this.$store.state.user.userId }).then((res) => {
+        this.workFlowInfoList = res.data.data
+        let map = new Map()
+
+        this.workFlowInfoList.forEach((item) => {
+          let workDateObj = parseTime(item.workDate, "{y}-{m}-{d}")
+          map.set(workDateObj, new Array)
+          this.workFlowInfoObj[workDateObj] = item
+        })
+
+        this.workFlowInfoList.forEach((item) => {
+          let workDateObj = parseTime(item.workDate, "{y}-{m}-{d}")
+          map.get(workDateObj).push(item);
+        })
+        this.map = map
+      })
+    }
   },
 };
 </script>
 
-  <style scoped lang="scss">
+<style scoped lang="scss">
 .calendarContainer {
   width: 100%;
   height: 100%;

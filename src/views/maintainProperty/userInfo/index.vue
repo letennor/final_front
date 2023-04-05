@@ -2,20 +2,11 @@
   <div class="app-container mainDiv">
     <my-card title="账号维护">
       <div class="filter-container">
-        <el-button
-          class="filter-item addButton"
-          type="primary"
-          v-waves
-          icon="el-icon-circle-plus-outline"
-          @click="add()"
-          >添加
+        <el-button class="filter-item addButton" type="primary" v-waves icon="el-icon-circle-plus-outline"
+          @click="add()">添加
         </el-button>
       </div>
-      <table-list
-        :data="list"
-        :columns="columns"
-        class="dataTable"
-      ></table-list>
+      <table-list :data="list" :columns="columns" class="dataTable"></table-list>
     </my-card>
 
     <!-- 添加用户 -->
@@ -30,7 +21,8 @@ import tableList from "@/components/table/tableList.vue";
 import MyCard from "@/components/MyCard";
 import waves from "@/directive/waves";
 import { parseTime, genderTransform } from "@/utils";
-import { getAllPerson, deleteUserBasicInfo, updateUserBasicInfo } from "@/api/system";
+import { getAllPerson, deleteUserBasicInfo, updateUserBasicInfo, changeState } from "@/api/system";
+
 export default {
   name: "UserInfo",
   components: {
@@ -77,6 +69,10 @@ export default {
           value: "wechat",
         },
         {
+          text: "角色",
+          value: "roleName",
+        },
+        {
           text: "工作时间",
           value: "workYear",
         },
@@ -85,6 +81,10 @@ export default {
           value: "entryTime",
           filter: parseTime,
           filterParams: ["{y}/{m}/{d}"],
+        },
+        {
+          text: "账号状态",
+          render: (...val) => this.createStateTag(...val)
         },
         {
           text: "操作",
@@ -102,7 +102,6 @@ export default {
   },
   methods: {
     update(val) {
-
       this.$refs.AddUserDialog.dialogForm = val.row
       this.$refs.AddUserDialog.type = 0
       this.$refs.AddUserDialog.dialogFormVisibility = true;
@@ -128,6 +127,7 @@ export default {
       const temp = [
         { class: "iconzidingyipoumian", value: "编辑", click: this.update },
         { class: "iconshanchu", value: "删除", click: this.delete },
+        { class: "iconxitong", value: "修改状态", click: this.changeState },
       ];
       return temp;
     },
@@ -142,6 +142,34 @@ export default {
     refresh() {
       this.getList();
     },
+
+    createStateTag(h, row) {
+      const divStyle = 'text-align:center'
+      let type = ''
+      let text = ''
+      if (row.row.state === 1) {
+        type = 'success'
+        text = '启用'
+      } else if (row.row.state === 0) {
+        type = 'danger'
+        text = '禁用'
+      }
+      return (
+        <div style={divStyle}>
+          <el-tag type={type} effect={'plain'}>
+            {text}
+          </el-tag>
+        </div>
+      )
+    },
+
+    changeState(val) {
+      //调用接口
+      changeState(val.row).then((res) => {
+        this.$message(res.data.data)
+        this.getList()
+      })
+    }
   },
 };
 </script>

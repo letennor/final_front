@@ -319,3 +319,32 @@ export function getBatchWorkFlow(param) {
         data: param
     })
 }
+
+//删除角色
+export function deleteRole(param) {
+    return request({
+        url: 'http://localhost:8992/deleteRole',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得所有父级权限
+export function getFatherPrivilege(param) {
+    return request({
+        url: 'http://localhost:8992/getFatherPrivilege',
+        method: 'post',
+        data: param
+    })
+}
+
+//取得不同类型的批次
+export function getTypeBatchInfo(param) {
+    return request({
+        url: 'http://localhost:8992/getTypeBatchInfo',
+        method: 'post',
+        data: param
+    })
+}
+
+
