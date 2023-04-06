@@ -6,14 +6,10 @@
           {{ date | parseTime("{d}") }}
         </p>
 
-        <!-- <template v-if="workFlowInfoObj[data.day]">
-            <strong style="font-size: 10px">{{ workFlowInfoObj[data.day].workName }}</strong>
-        </template> -->
-
         <template v-if="map.get(data.day)">
           <span v-for="item in map.get(data.day)" :key="item.workflowId">
             <template v-if="item.isFinished === 0">
-              {{ item.workName }}
+              <strong>[</strong>{{ item.workName }}<strong>]</strong>
             </template>
 
           </span>
